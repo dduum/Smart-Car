@@ -4,10 +4,8 @@ App_Cpu0 g_AppCpu0; // brief CPU 0 global data
 IfxCpu_mutexLock mutexCpu0InitIsOk = 1;   // CPU0 初始化完成标志位
 volatile char mutexCpu0TFTIsOk=0;         // CPU1 0占用/1释放 TFT
 
-uint8 uart_data;
-int menu_flag1=0;
-int menu_flag2=0;
 CircularBuffer bf;
+extern uint8 data_change_flag;
 
 int core0_main (void)
 {
@@ -35,14 +33,16 @@ int core0_main (void)
     // 切记CPU0,CPU1...不可以同时开启屏幕显示，否则冲突不显示
     mutexCpu0TFTIsOk=0;         // CPU1： 0占用/1释放 TFT
 
-
     while (1)	//主循环
     {
         Menu_Scan();
-        if(CircularBuffer_Read(&bf,&uart_data)){
-            UART_ReceiveData(uart_data);
-//            UART_PutChar(UART1, uart_data);
+        //如果PID的数据发生改变,重新向E2PROM中写入数据
+        if(data_change_flag==1)
+        {
+            data_change_flag=0;
+            E2PROM_Write_PID();
         }
+
     }
 }
 
@@ -75,10 +75,10 @@ void Init_System(void)
 //    CCU6_InitConfig(CCU61, CCU6_Channel0, 10*1000);  //每10ms进入一次中断，用于摄像头处理元素
 //    CCU6_InitConfig(CCU61, CCU6_Channel1, 10*1000);  //每1ms进入一次中断，发送串口数据
 
-    //创建并初始化环形缓冲区
-    CircularBuffer_Init(&bf);
-
     //初始化PID的值
     Set_PID();
+
+    //读取E2PROM中的值
+    E2PROM_Read_PID();
 }
 

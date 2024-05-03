@@ -28,7 +28,7 @@ void Pid_Value(void)
     Motor_Inc_PID2.kp=40;
     Motor_Inc_PID2.ki=0.62;
     Motor_Inc_PID2.kd=0;
-    //
+    //暂时没有用到
     Servo_Loc_PID2.kp=30;
     Servo_Loc_PID2.ki=0;
     Servo_Loc_PID2.kd=0;

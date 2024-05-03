@@ -56,7 +56,7 @@ const uint8 UartIrqPriority[12] = {UART0_RX_PRIORITY, UART0_TX_PRIORITY, UART0_E
 		                           UART2_RX_PRIORITY, UART2_TX_PRIORITY, UART2_ER_PRIORITY, UART3_RX_PRIORITY, UART3_TX_PRIORITY, UART3_ER_PRIORITY};
 
 /** UART锟叫断凤拷锟斤拷锟斤拷锟斤拷址 */
-const void *UartIrqFuncPointer[12] = {&UART0_RX_IRQHandler, &UART0_TX_IRQHandler, &UART0_ER_IRQHandler,
+const void *UartIrqFuncPointer[12] =  {&UART0_RX_IRQHandler, &UART0_TX_IRQHandler, &UART0_ER_IRQHandler,
 									   &UART1_RX_IRQHandler, &UART1_TX_IRQHandler, &UART1_ER_IRQHandler,
 									   &UART2_RX_IRQHandler, &UART2_TX_IRQHandler, &UART2_ER_IRQHandler,
 									   &UART3_RX_IRQHandler, &UART3_TX_IRQHandler, &UART3_ER_IRQHandler,};
@@ -109,11 +109,13 @@ void UART1_RX_IRQHandler(void)
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[1]);
 
 	/* 用户代码 */
-//	UART_PutChar(UART1, UART_GetChar(UART1));
-	uint8 data=UART_GetChar(UART1);
-    if(!CircularBuffer_Write(&bf,data)){
-        //写入失败，缓存满了
-    }
+//	  UART_PutChar(UART1, UART_GetChar(UART1));
+//	uint8 data=UART_GetChar(UART1);
+//    if(!CircularBuffer_Write(&bf,data)){
+//        //写入失败，缓存满了
+//    }
+    uint8 data=UART_GetChar(UART1);
+    UART_ReceiveData(data);
 }
 
 void UART1_TX_IRQHandler(void)
@@ -158,13 +160,6 @@ void UART3_RX_IRQHandler(void)
 
 	/* 锟矫伙拷锟斤拷锟斤拷 */
 //	UART_PutChar(UART3, UART_GetChar(UART3));
-//    uart1_data=UART_GetChar(UART3);
-//    delayus(100);
-//    if(uart1_data==0xAB){
-//        UART_PutChar(UART3, 0x55);
-//    }else{
-//        UART_PutChar(UART3, uart1_data);
-//    }
 }
 
 void UART3_TX_IRQHandler(void)

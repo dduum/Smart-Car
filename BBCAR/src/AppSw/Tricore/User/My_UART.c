@@ -12,6 +12,7 @@ char Txt=0;
 
 uint8 Data_Get[50];
 uint8 data_buf[100];
+uint8 data_change_flag=0;
 unsigned char UART_flag=0;
 
 extern pid_param_t Servo_Loc_PID;
@@ -119,20 +120,20 @@ void Data_Analyse(void)
     }
 
     if(sumcheck != data_buf[flen+6] || addcheck != data_buf[flen+7])
-        return;                     //鏍￠獙澶辫触
+        return;                     //
 
-    if(Data_Get[3]==0xE0)           //鍙傛暟鍛戒护
+    if(Data_Get[3]==0xE0)           //
     {
         uint8 cmd=Data_Get[6];
         uint16 id=Data_Get[7]+(Data_Get[8]<<8);
         uint8 sum_check=Data_Get[9];
-        uint8 add_check=Data_Get[10];       //9.10鏄洜涓簎int8
+        uint8 add_check=Data_Get[10];       //9.10
 
-        if(cmd==0x00){              //璇诲彇璁惧淇℃伅
+        if(cmd==0x00){              //
             UART_SendPar_Cmd00('X');
-        }else if(cmd==0x01){        //璇诲彇鍙傛暟鏁伴噺
-            UART_SendPar_Cmd01(9);  //鍙傛暟鏁伴噺
-        }else if(cmd==0x02){        //璇诲彇鍙傛暟鍊贾�
+        }else if(cmd==0x01){        //
+            UART_SendPar_Cmd01(9);  //
+        }else if(cmd==0x02){        //
             switch(id){
                 case 0x0000:
                     UART_SendPar_Cmd02(id,Servo_Loc_PID.kp);
@@ -162,7 +163,7 @@ void Data_Analyse(void)
                     UART_SendPar_Cmd02(id,Motor_Inc_PID2.kd);
                     break;
             }
-        }else if(cmd==0x03){        //璇诲彇鍙傛暟淇℃伅
+        }else if(cmd==0x03){        //
             switch(id){
                 case 0x0000:
                     UART_SendPar_Cmd03(id,8,"SEP");
@@ -194,9 +195,10 @@ void Data_Analyse(void)
             }
         }else if(cmd==0x10){
             UART_SaveReturn(sum_check,add_check);
+            data_change_flag=1;
         }
     }
-    else if(Data_Get[3]==0xE1)      //鍐欏叆甯�
+    else if(Data_Get[3]==0xE1)      //
     {
         uint16 id=Data_Get[6]+(Data_Get[7]<<8);
 
@@ -209,7 +211,7 @@ void Data_Analyse(void)
         memcpy(&val, byteArray, sizeof(float));
 
         uint8 sum_check=Data_Get[12];
-        uint8 add_check=Data_Get[13];       //float绫诲瀷鍐欏叆
+        uint8 add_check=Data_Get[13];       //
 
         switch(id)
         {

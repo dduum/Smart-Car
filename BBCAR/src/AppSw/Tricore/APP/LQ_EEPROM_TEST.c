@@ -24,6 +24,8 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include <LQ_OLED096.h>
 #include <LQ_EEPROM.h>
+#include <LQ_TFT18.h>
+#include <LQ_PID.h>
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +33,9 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 /////////////////////////////////////////////////////////////////////////////////////
 
 
+extern pid_param_t Servo_Loc_PID;  //
+extern pid_param_t Motor_Inc_PID1; //
+extern pid_param_t Motor_Inc_PID2; //
 
 
 /*************************************************************************
@@ -41,63 +46,159 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 *  修改时间：2020年3月10日
 *  备    注：
 *************************************************************************/
+
 void Test_EEPROM(void)
 {
-	int i;
+    int i;
 
-	OLED_Init();
-	OLED_P6x8Str(0,3,"eeprom");         //字符串
-	unsigned long u32wBuff[24];
-	unsigned long u32rBuff[24];
+//  OLED_Init();
+//  OLED_P6x8Str(0,3,"eeprom");         //字符串
 
-	float f32wBuff[24];
-	float f32rBuff[24];
+    TFTSPI_Init(1);        //LCD初始化  0:横屏  1：竖屏
+    TFTSPI_CLS(u16BLUE);   //蓝色屏幕
+    TFTSPI_P8X16Str(0,0,"eeprom",u16WHITE,u16BLACK);
 
-	/* 赋值 */
-	for(i = 0; i < 24; i++)
-	{
-		u32wBuff[i] = i * 100;
-		f32wBuff[i] = i * 2.5f;
-	}
+//    unsigned long u32wBuff[24];
+//    unsigned long u32rBuff[24];
 
-	EEPROM_EraseSector(0);
-	EEPROM_EraseSector(1);
+//    float f32wBuff[24];
+//    float f32rBuff[24];
 
-	OLED_P6x8Str(0,1,"eeporm u write");
+    /* 赋值 */
+//    for(i = 0; i < 24; i++)
+//    {
+////        u32wBuff[i] = i * 100;
+//        f32wBuff[i] = i * 2.5f;
+//    }
+    float PID_Write[24];
+    float PID_Read[24];
 
-	/* 写入 */
-	EEPROM_Write(0, 0, u32wBuff, 24);
+    PID_Write[0]=Servo_Loc_PID.kp;
+    PID_Write[1]=Servo_Loc_PID.ki;
+    PID_Write[2]=Servo_Loc_PID.kd;
+    PID_Write[3]=Motor_Inc_PID1.kp;
+    PID_Write[4]=Motor_Inc_PID1.ki;
+    PID_Write[5]=Motor_Inc_PID1.kd;
+    PID_Write[6]=Motor_Inc_PID2.kp;
+    PID_Write[7]=Motor_Inc_PID2.ki;
+    PID_Write[8]=Motor_Inc_PID2.kd;
 
-	OLED_P6x8Str(0,2,"eeporm f write");
+    EEPROM_EraseSector(0);
+//    EEPROM_EraseSector(1);
 
-	EEPROM_Write(1, 0, (unsigned long*)f32wBuff, 24);
+//    TFTSPI_P8X16Str(0,1,"eeporm u write",u16WHITE,u16BLACK);
 
-	OLED_P6x8Str(0,3,"eeporm u read");
+    /* 写入 */
+//    EEPROM_Write(0, 0, u32wBuff, 24);
 
-	/* 读出 */
-	EEPROM_Read(0, 0, u32rBuff, 24);
+    TFTSPI_P8X16Str(0,2,"pid write",u16WHITE,u16BLACK);
 
-	OLED_P6x8Str(0,4,"eeporm f read");
+    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 9);
 
-	EEPROM_Read(1, 0, (unsigned long*)f32rBuff, 24);
+//    TFTSPI_P8X16Str(0,3,"eeporm u read",u16WHITE,u16BLACK);
 
-	/* 比较 */
-	for(i = 0; i < 24; i++)
-	{
-		if(u32wBuff[i] != u32rBuff[i])
-		{
-			OLED_P6x8Str(0,5,"u32error");
-		}
-		if(f32wBuff[i] != f32rBuff[i])
-		{
-			OLED_P6x8Str(0,6,"ferror");
-		}
-	}
-	OLED_P6x8Str(0,7,"eeprom is ok");
+    /* 读出 */
+//    EEPROM_Read(0, 0, u32rBuff, 24);
+
+    TFTSPI_P8X16Str(0,4,"pid read",u16WHITE,u16BLACK);
+
+    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 9);
+
+    /* 比较 */
+    for(i = 0; i < 9; i++)
+    {
+//        if(u32wBuff[i] != u32rBuff[i])
+//        {
+//            TFTSPI_P8X16Str(0,5,"u32error",u16WHITE,u16BLACK);
+//        }
+        if(PID_Write[i] != PID_Read[i])
+        {
+            TFTSPI_P8X16Str(0,6,"ferror",u16WHITE,u16BLACK);
+        }
+    }
+    TFTSPI_P8X16Str(0,7,"eeprom is ok",u16WHITE,u16BLACK);
 
 #pragma warning 557         // 屏蔽警告
-	while (1);
+    while (1);
 #pragma warning default     // 打开警告
+}
+
+
+void test_pid(void)
+{
+    TFTSPI_Init(1);        //LCD初始化  0:横屏  1：竖屏
+    TFTSPI_CLS(u16BLUE);   //蓝色屏幕
+    TFTSPI_P8X16Str(0,0,"eeprom",u16WHITE,u16BLACK);
+
+    int i;
+    float PID_Write[9];
+    float PID_Read[9];
+    PID_Write[0]=Servo_Loc_PID.kp;
+    PID_Write[1]=Servo_Loc_PID.ki;
+    PID_Write[2]=Servo_Loc_PID.kd;
+    PID_Write[3]=Motor_Inc_PID1.kp;
+    PID_Write[4]=Motor_Inc_PID1.ki;
+    PID_Write[5]=Motor_Inc_PID1.kd;
+    PID_Write[6]=Motor_Inc_PID2.kp;
+    PID_Write[7]=Motor_Inc_PID2.ki;
+    PID_Write[8]=Motor_Inc_PID2.kd;
+
+    EEPROM_EraseSector(0);
+//
+//    /* 写入 */
+    TFTSPI_P8X16Str(0,2,"pid f write",u16WHITE,u16BLACK);
+
+    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 9);
+
+    /* 读出 */
+    TFTSPI_P8X16Str(0,4,"pid f read",u16WHITE,u16BLACK);
+
+    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 9);
+
+    /* 比较 */
+    for(i = 0; i < 9; i++)
+    {
+        if(abs(PID_Write[i]-PID_Read[i])<0.1)
+        {
+            TFTSPI_P8X16Str(0,0,"cornet",u16WHITE,u16BLACK);
+        }
+    }
+    TFTSPI_P8X16Str(0,7,"eeprom is ok",u16WHITE,u16BLACK);
+
+}
+
+void E2PROM_Read_PID(void)
+{
+    float PID_Read[9];
+    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 9);
+    Servo_Loc_PID.kp=PID_Read[0];
+    Servo_Loc_PID.ki=PID_Read[1];
+    Servo_Loc_PID.kd=PID_Read[2];
+    Motor_Inc_PID1.kp=PID_Read[3];
+    Motor_Inc_PID1.ki=PID_Read[4];
+    Motor_Inc_PID1.kd=PID_Read[5];
+    Motor_Inc_PID2.kp=PID_Read[6];
+    Motor_Inc_PID2.ki=PID_Read[7];
+    Motor_Inc_PID2.kd=PID_Read[8];
+}
+
+void E2PROM_Write_PID(void)
+{
+    float PID_Write[9];
+    //擦除扇区
+    EEPROM_EraseSector(0);
+
+    PID_Write[0]=Servo_Loc_PID.kp;
+    PID_Write[1]=Servo_Loc_PID.ki;
+    PID_Write[2]=Servo_Loc_PID.kd;
+    PID_Write[3]=Motor_Inc_PID1.kp;
+    PID_Write[4]=Motor_Inc_PID1.ki;
+    PID_Write[5]=Motor_Inc_PID1.kd;
+    PID_Write[6]=Motor_Inc_PID2.kp;
+    PID_Write[7]=Motor_Inc_PID2.ki;
+    PID_Write[8]=Motor_Inc_PID2.kd;
+    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 9);
+
 }
 
 

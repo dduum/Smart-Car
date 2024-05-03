@@ -89,9 +89,6 @@ IFX_INTERRUPT(FFT_OUTPUT_IRQHandler, FFT_VECTABNUM, FFT_OUTPUT_PRIORITY)
 
 
 
-
-
-
 /*************************************************************************
 *  函数名称：void FFT_InitConfig(uint32 InDataAddr, uint32 OutDataAddr, IfxFft_Length len)
 *  功能说明：FFT初始化函数
