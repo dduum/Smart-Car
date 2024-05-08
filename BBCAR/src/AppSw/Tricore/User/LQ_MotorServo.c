@@ -50,9 +50,11 @@ uint16 BatVolt = 0;           // 电池电压采集
 #define MOTOR1_P          IfxGtm_ATOM0_6_TOUT42_P23_1_OUT
 #define MOTOR1_N          IfxGtm_ATOM0_5_TOUT40_P32_4_OUT
 
-#define MOTOR2_P          IfxGtm_ATOM0_0_TOUT53_P21_2_OUT
-#define MOTOR2_N          IfxGtm_ATOM0_4_TOUT50_P22_3_OUT
+//#define MOTOR2_P          IfxGtm_ATOM0_0_TOUT53_P21_2_OUT
+//#define MOTOR2_N          IfxGtm_ATOM0_4_TOUT50_P22_3_OUT
 
+#define MOTOR2_P          IfxGtm_ATOM0_0_TOUT53_P21_2_OUT
+#define MOTOR2_N          IfxGtm_ATOM0_1_TOUT54_P21_3_OUT
 
 #define MOTOR3_P          IfxGtm_ATOM0_7_TOUT64_P20_8_OUT
 #define MOTOR3_N          IfxGtm_ATOM0_3_TOUT56_P21_5_OUT
@@ -84,11 +86,13 @@ void MotorInit(void)
 //    ATOM_PWM_InitConfig(MOTOR4_P, 0, MOTOR_FREQUENCY);
 
     PIN_InitConfig(P32_4, PIN_MODE_OUTPUT, 0);
-    PIN_InitConfig(P22_3, PIN_MODE_OUTPUT, 0);
+    PIN_InitConfig(P21_3, PIN_MODE_OUTPUT, 0);
+//    PIN_InitConfig(P32_4, PIN_MODE_OUTPUT, 0);
+//    PIN_InitConfig(P22_3, PIN_MODE_OUTPUT, 0);
 //    PIN_InitConfig(P21_5, PIN_MODE_OUTPUT, 0);
 //    PIN_InitConfig(P21_3, PIN_MODE_OUTPUT, 0);
 
-    MotorCtrl(0, 0);
+    MotorCtrl(1500,1500);
 }
 
 /*************************************************************************
@@ -112,7 +116,7 @@ void EncInit(void)
  @param    motor2   ： 电机2占空比
  *  函数返回：无
  *  修改时间：2020年4月1日
- *  备    注：驱动2个舵机，普通四轮只需要一个舵机即可
+ *  备    注：驱动2个电机，普通四轮只需要一个舵机即可
  *************************************************************************/
 #ifdef USE7843or7971
 void MotorCtrl (sint32 motor1, sint32 motor2)
@@ -131,12 +135,12 @@ void MotorCtrl (sint32 motor1, sint32 motor2)
     if (motor2 > 0)
     {
         ATOM_PWM_SetDuty(MOTOR2_P, motor2, MOTOR_FREQUENCY);
-        IfxPort_setPinLow(&MODULE_P22, 3);
+        IfxPort_setPinLow(&MODULE_P21, 3); //使用的是21.3引脚
     }
     else
     {
         ATOM_PWM_SetDuty(MOTOR2_P, MOTOR_FREQUENCY+motor2, MOTOR_FREQUENCY);
-        IfxPort_setPinHigh(&MODULE_P22, 3);
+        IfxPort_setPinHigh(&MODULE_P21, 3);
     }
 }
 void MotorCtrl4w(sint32 motor1, sint32 motor2,sint32 motor3, sint32 motor4)
@@ -285,23 +289,23 @@ void TestMotor (void)
 
     while (1)
     {
-        if (KEY_Read(KEY0) == 0)      //按下KEY0键，占空比减小
-        {
-            if (duty > -ATOM_PWM_MAX)
-                duty -= 100;
-        }
-        if (KEY_Read(KEY2) == 0)      //按下KEY2键，占空比加大
-        {
-            if (duty < ATOM_PWM_MAX)      //满占空比为12500
-                duty += 100;
-        }
-        if (KEY_Read(KEY1) == 0)      //按下KEY1键，占空比中值
-        {
-            duty = 1500;
-        }
+//        if (KEY_Read(KEY0) == 0)      //按下KEY0键，占空比减小
+//        {
+//            if (duty > -ATOM_PWM_MAX)
+//                duty -= 100;
+//        }
+//        if (KEY_Read(KEY2) == 0)      //按下KEY2键，占空比加大
+//        {
+//            if (duty < ATOM_PWM_MAX)      //满占空比为12500
+//                duty += 100;
+//        }
+//        if (KEY_Read(KEY1) == 0)      //按下KEY1键，占空比中值
+//        {
+//            duty = 1500;
+//        }
 
-        MotorCtrl(duty, 0);
-        //MotorCtrl4w(duty,duty,duty,duty);
+//        MotorCtrl(1500, 1500);
+        MotorCtrl4w(duty,duty,duty,duty);
         sprintf(txt, "PWM: %05d;", duty);
         TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);       //字符串显示
         UART_PutStr(UART0, txt);

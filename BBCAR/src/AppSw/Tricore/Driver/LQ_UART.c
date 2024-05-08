@@ -78,10 +78,9 @@ void UART0_RX_IRQHandler(void)
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[0]);
 
 	/* 用户代码 */
-//	uint8 data=UART_GetChar(UART0);
-//    if(!CircularBuffer_Write(&bf,data)){
-//        //写入失败，缓存满了
-//    }
+	UART_PutChar(UART0, UART_GetChar(UART0));
+//    uint8 data=UART_GetChar(UART0);
+//    UART_ReceiveData(data);
 
 }
 
@@ -89,7 +88,7 @@ void UART0_TX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrTransmit(&g_UartConfig[0]);
 
-	/* 锟矫伙拷锟斤拷锟斤拷 */
+	/* 用户代码 */
 
 }
 
@@ -97,7 +96,7 @@ void UART0_ER_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrError(&g_UartConfig[0]);
 
-	/* 锟矫伙拷锟斤拷锟斤拷 */
+	/* 用户代码 */
 	LED_Ctrl(LED0,RVS);
 
 }
@@ -122,21 +121,21 @@ void UART1_TX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrTransmit(&g_UartConfig[1]);
 
-	/* 锟矫伙拷锟斤拷锟斤拷 */
+	/* 用户代码 */
 }
 
 void UART1_ER_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrError(&g_UartConfig[1]);
 
-	/* 锟矫伙拷锟斤拷锟斤拷 */
+	/* 用户代码 */
 }
 
 void UART2_RX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[2]);
 
-	/* 锟矫伙拷锟斤拷锟斤拷 */
+	/* 用户代码 */
 	UART_PutChar(UART2, UART_GetChar(UART2));
 }
 
@@ -144,7 +143,7 @@ void UART2_TX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrTransmit(&g_UartConfig[2]);
 
-	/* 锟矫伙拷锟斤拷锟斤拷 */
+	/* 用户代码 */
 }
 
 void UART2_ER_IRQHandler(void)

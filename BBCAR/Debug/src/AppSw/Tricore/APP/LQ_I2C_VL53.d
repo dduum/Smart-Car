@@ -990,6 +990,8 @@ src/AppSw/Tricore/APP/LQ_I2C_VL53.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Trico
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
 src/AppSw/Tricore/APP/LQ_I2C_VL53.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
+src/AppSw/Tricore/APP/LQ_I2C_VL53.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
 src/AppSw/Tricore/APP/LQ_I2C_VL53.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h :
 src/AppSw/Tricore/APP/LQ_I2C_VL53.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GTM.h

@@ -5,19 +5,21 @@
  *      Author: Macation
  */
 #include "image1.h"
+
 #define Image_downLine 115
 #define Image_upLine 20
 #define Array_Length MT9V034_IMAGEH/2+MT9V034_IMAGEW/2
 #define Image_Length Image_downLine-Image_upLine
+
 int Left_num=Array_Length;
 int Right_num=Array_Length;
 int dir_left[4];//左边线生长信息
 int dir_right[4];//右边线生长信息
 
 int dir_front[4][2]=   {{0,-1},
-                            {1,0},
-                            {0,1},
-                            {-1,0}};
+                        {1,0},
+                        {0,1},
+                        {-1,0}};
 int dir_frontleft[4][2]=   {{-1,-1},
                             {1,-1},
                             {1,1},
@@ -31,6 +33,7 @@ int Image_Righthand_Line[Array_Length][2];
 unsigned char Image_Line[120][188];  //存放提取边线后的图像数据
 unsigned char Image_centralLine[Image_Length];//中线数组
 int InterPoint[2];
+
 /*************************************************************************
 *  函数名称：int Image_Threshold_Line(int Y)
 *  功能说明：对单行找阈值
@@ -108,7 +111,6 @@ int Image_Threshold_Line(int Y)
 *************************************************************************/
 int Image_Findline_Lefthand(int X,int Y,int num)
 {
-
     int dx,dy;
     int block_size=7;//每一个边线的点用7*7的方块进行自适应二值化
     int clip_value=0;//阈值裁剪量

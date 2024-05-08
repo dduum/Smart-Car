@@ -30,8 +30,10 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 /* 注意 IIC总线规定，IIC空闲时 SCL和SDA都为高电平 最好外部上拉（一定不能下拉） */
 /* 模拟 IIC需要注意，IIC地址左移一位 例如MPU6050 模拟就是地址 0xD0 */
 /* 想换用别的IO 直接修改宏定义 SOFT_IIC_SCL_PIN 、 SOFT_IIC_SDA_PIN 即可 */
-#define SOFT_IIC_SCL_PIN   P13_1   /*!< P13_1  作为 SCL */
-#define SOFT_IIC_SDA_PIN   P13_2   /*!< P13_2  作为 SDA */
+//#define SOFT_IIC_SCL_PIN   P13_1   /*!< P13_1  作为 SCL */
+//#define SOFT_IIC_SDA_PIN   P13_2   /*!< P13_2  作为 SDA */
+#define SOFT_IIC_SCL_PIN   P11_2   /*!< P13_1  作为 SCL */
+#define SOFT_IIC_SDA_PIN   P11_3   /*!< P13_2  作为 SDA */
 
 #define SDA_OUT        PIN_Dir(SOFT_IIC_SDA_PIN, 1);
 #define SDA_IN         PIN_Dir(SOFT_IIC_SDA_PIN, 0);

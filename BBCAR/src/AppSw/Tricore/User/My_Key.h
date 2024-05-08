@@ -11,12 +11,10 @@
 #include <LQ_STM.h>
 #include <LQ_GPIO.h>
 #include <LQ_CCU6.h>
+#include <button.h>
 
 #define GPIO_LOW 0
 #define GPIO_HIGH 1
-#define KEY0_Pin P22_0  //靠近电源的按键
-#define KEY1_Pin P22_1
-#define KEY2_Pin P22_2
 //全是低电平点亮
 
 typedef enum

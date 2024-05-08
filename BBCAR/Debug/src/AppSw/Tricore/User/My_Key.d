@@ -992,3 +992,5 @@ src/AppSw/Tricore/User/My_Key.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/U
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
 src/AppSw/Tricore/User/My_Key.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
+src/AppSw/Tricore/User/My_Key.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :

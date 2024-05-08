@@ -978,6 +978,8 @@ src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/new_menu.h :
 src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
 src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
 src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_MotorServo.h

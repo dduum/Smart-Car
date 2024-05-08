@@ -52,11 +52,13 @@ typedef enum //
     KEYError = 0xFF,
 } KEYdown_e;
 //定义的管脚要对应实际按键
-#define KEY0p      P22_0  //母板上按键0
-#define KEY1p      P22_1  //母板上按键1
-#define KEY2p      P22_2  //母板上按键2
-#define DSW0p      P33_9  //母板上拨码开关0,默认拨到下方是高电平，上方为低电平
-#define DSW1p      P33_11 //母板上拨码开关1
+#define KEY0p      P22_3  //母板上按键1
+#define KEY1p      P22_1  //母板上按键2
+#define KEY2p      P22_2  //母板上按键3
+#define KEY3p      P22_0  //母板上按键4
+#define KEY4p      P33_12 //母板上按键5
+#define DSW0p      P33_9  //母板上拨码开关左,默认拨到下方是高电平，上方为低电平
+#define DSW1p      P33_11 // 母板上拨码开关右,PCB上引脚标错了
 #define REEDp      P15_4  //母板上干簧管
 /*********************** UART功能函数 **************************/
 //初始化
@@ -65,6 +67,7 @@ unsigned char KEY_Read (KEYn_e KEYno);
 unsigned char KEY_Read_All (void);
 void Test_GPIO_KEY (void);
 void Test_ComKEY_Tft (void);
+void test_key(void);
 /*************************************************************************
 *  函数名称：void Reed_Init(void)
 *  功能说明：干簧管GPIO及中断初始化函数

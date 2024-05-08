@@ -47,19 +47,22 @@ void Test_ICM20602(void)
     char  txt[30];
 	short aacx,aacy,aacz;	         //加速度传感器原始数据
 	short gyrox,gyroy,gyroz;        //陀螺仪原始数据
-    OLED_Init();                      //LCD初始化
-    OLED_CLS();                       //LCD清屏
+//    OLED_Init();                      //LCD初始化
+//    OLED_CLS();                       //LCD清屏
+    TFTSPI_Init(0);        //LCD初始化  0:横屏  1：竖屏
+    TFTSPI_CLS(u16BLUE);   //蓝色屏幕
 
-    QSPI_InitConfig(QSPI2_CLK_P15_8, QSPI2_MISO_P15_7, QSPI2_MOSI_P15_5, QSPI2_CS_P15_2, 5000000, 3);
+//    QSPI_InitConfig(QSPI2_CLK_P15_8, QSPI2_MISO_P15_7, QSPI2_MOSI_P15_5, QSPI2_CS_P15_2, 5000000, 3);
 
-
-    OLED_P8x16Str(15,0,"LQ 20602 Test");
+    TFTSPI_P8X16Str(0,1,"LQ 20602 Test",u16WHITE,u16BLACK);       //字符串显示
+//    OLED_P8x16Str(15,0,"LQ 20602 Test");
 
 
     if(ICM20602_Init())
     {
 
-    	OLED_P8x16Str(15,2,"ICM20602 Test Fail");
+//    	OLED_P8x16Str(15,2,"ICM20602 Test Fail");
+    	TFTSPI_P8X16Str(0,2,"ICM20602 Test Fail",u16WHITE,u16BLACK);
 #pragma warning 557         // 屏蔽警告
 		while (1);
 #pragma warning default     // 打开警告
@@ -67,19 +70,24 @@ void Test_ICM20602(void)
 
     while(1)
     {
-        ICM_Get_Raw_data(&aacx,&aacy,&aacz,&gyrox,&gyroy,&gyroz);	//得到加速度传感器数据
+        ICM_Get_Raw_data(&aacx,&aacy,&aacz,&gyrox,&gyroy,&gyroz);   //得到加速度传感器数据
         sprintf((char*)txt,"ax:%06d",aacx);
-        OLED_P6x8Str(0,2,txt);
+//        OLED_P6x8Str(0,2,txt);
+        TFTSPI_P8X16Str(0, 3, txt, u16RED, u16BLUE);
         sprintf((char*)txt,"ay:%06d",aacy);
-        OLED_P6x8Str(0,3,txt);
+//        OLED_P6x8Str(0,3,txt);
+        TFTSPI_P8X16Str(0, 4, txt, u16RED, u16BLUE);
         sprintf((char*)txt,"az:%06d",aacz);
-        OLED_P6x8Str(0,4,txt);
+//        OLED_P6x8Str(0,4,txt);
+        TFTSPI_P8X16Str(0, 5, txt, u16RED, u16BLUE);
         sprintf((char*)txt,"gx:%06d",gyrox);
-        OLED_P6x8Str(0,5,txt);
+//        OLED_P6x8Str(0,5,txt);
+        TFTSPI_P8X16Str(0, 6, txt, u16RED, u16BLUE);
         sprintf((char*)txt,"gy:%06d",gyroy);
-        OLED_P6x8Str(0,6,txt);
+//        OLED_P6x8Str(0,6,txt);
+        TFTSPI_P8X16Str(0, 7, txt, u16RED, u16BLUE);
         sprintf((char*)txt,"gz:%06d",gyroz);
-        OLED_P6x8Str(0,7,txt);
+//        OLED_P6x8Str(0,7,txt);
 
         delayms(500);
 

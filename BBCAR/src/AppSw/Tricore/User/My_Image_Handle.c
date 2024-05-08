@@ -14,7 +14,6 @@ char data_txt[30];
 extern unsigned char Bin_Image[LCDH][LCDW];
 extern int Servo_Loc_error;
 
-
 volatile uint8 Straight_Flag;        //直道标志
 volatile uint8 Curve_Flag;           //弯道标志
 volatile uint8 CrossWay_Flag;          //十字路口标志
@@ -46,8 +45,6 @@ volatile int monotonicity_change_line[2];  //单调变化坐标点
 volatile int Right_Up_Guai[2];
 volatile int island_state_3_up[2];
 volatile float k;
-
-
 //75 20 38
 
 //双最长白列巡线,寻找图像左右边界（采取的是最长白列左右寻找边界的方法)
@@ -138,7 +135,7 @@ void Longest_White_Column(void)
     Search_Stop_Line = Longest_White_Column_Left[0];//搜索截止列选取左或者右区别不大，他们两个理论上是一样的
 //
 //    //异常检测下面for循环Search_Stop_Line-1的目的是防止上述在最低行就检测到零行导致程序死循环，
-//    //如果Search_Stop_Line=0的话会卡死，需要-1
+//    //如果Search_Stop_Line=0的话会卡死，需要-1(图像全黑时)
 //    //bug:在做下面一行的时候就检测到零行
     for (i = LCDH - 1; i >= LCDH-Search_Stop_Line-1; i--)//常规巡线
     {

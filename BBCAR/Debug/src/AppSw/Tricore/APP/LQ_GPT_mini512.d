@@ -910,6 +910,8 @@ src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tr
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
 src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
+src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
 src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h :
 src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GTM.h

@@ -912,6 +912,8 @@ src/AppSw/Tricore/APP/LQ_Atom_Motor.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tri
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
 src/AppSw/Tricore/APP/LQ_Atom_Motor.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
+src/AppSw/Tricore/APP/LQ_Atom_Motor.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
 src/AppSw/Tricore/APP/LQ_Atom_Motor.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GTM.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GTM.h :
 src/AppSw/Tricore/APP/LQ_Atom_Motor.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h

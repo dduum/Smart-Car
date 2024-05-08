@@ -798,6 +798,12 @@ src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h :
 src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_CCU6.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_CCU6.h :
+src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
+src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h :
+src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/new_menu.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/new_menu.h :
 src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h :
 src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GTM.h
@@ -984,10 +990,6 @@ src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
 src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
-src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h :
-src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/new_menu.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/new_menu.h :
 src/AppSw/Tricore/User/new_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
 src/AppSw/Tricore/User/new_menu.o :	../src/AppSw/Tricore/User/My_menu.h
