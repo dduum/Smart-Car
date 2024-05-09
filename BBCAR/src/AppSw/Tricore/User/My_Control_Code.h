@@ -8,29 +8,35 @@
 #ifndef SRC_APPSW_TRICORE_USER_MY_CONTROL_CODE_H_
 #define SRC_APPSW_TRICORE_USER_MY_CONTROL_CODE_H_
 
-#include "My_Key.h"
-
+#include <My_Key.h>
 #include <LQ_PID.h>
 #include <LQ_CAMERA.h>
 #include <LQ_MotorServo.h>
 #include <Platform_Types.h>
+#include <image_Handle.h>
+#include <My_UART.h>
 
-extern int Servo_Loc_error;                 //舵机位置式PID误差
-extern volatile uint8 Servo_openFlag;
-extern volatile uint8 Motor_openFlag;
-extern volatile short Motor_duty1;
-extern volatile short Motor_duty2;
-extern volatile float Target_Speed1;        //左电机目标速度m/s
-extern volatile float Target_Speed2;        //右电机目标速度m/s
-extern volatile uint8 Motor_openFlag;
-extern volatile int Left_Line[LCDH];           //左边界
-extern volatile int Right_Line[LCDH];          //右边界
-extern volatile int Middle_Line[LCDH];         //中边界
+extern uint8 Key_Value;
+extern uint8 Select_PID;
+extern float Motor1_IncPID;
+extern float Motor2_IncPID;                  //
+extern float Motor_DirPId;                   //
+extern float Current_Speed1;        //速度单位m/s
+extern float Current_Speed2;
+extern volatile sint16 LPulse;                 //
+extern volatile sint16 YPulse;                 //
+extern int Servo_duty;
+extern uint8 Motor_openFlag;         //电机启动标志
+extern uint8 Servo_openFlag;         //舵机启动标志
+extern short Motor_duty1;
+extern short Motor_duty2;
+extern float Target_Speed1; //左电机目标速度m/s
+extern float Target_Speed2; //右电机目标速度m/s
 
+void Modify_PID(void);
 void Key_Control(void);
 void Motor_Control(void);
 void Servo_Control(void);
 void Camera_Control(void);
-
 
 #endif /* SRC_APPSW_TRICORE_USER_MY_CONTROL_CODE_H_ */

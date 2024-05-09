@@ -29,8 +29,10 @@ typedef enum
     KEY0 = 0,  //母板上按键0
     KEY1 = 1,
     KEY2 = 2,
-    DSW0 = 3,    //母板上拨码开关0
-    DSW1 = 4,
+    KEY3 = 3,
+    KEY4 = 4,
+    DSW0 = 5,    //母板上拨码开关0
+    DSW1 = 6,
 } KEYn_e;
 
 typedef enum

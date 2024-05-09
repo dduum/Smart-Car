@@ -11,6 +11,8 @@
 #include <LQ_UART.h>
 #include <LQ_PID.h>
 
+extern uint8 data_change_flag;
+
 void UART_hander(void);
 void Data_Analyse(void);
 void UART_ReceiveData(uint8 data);

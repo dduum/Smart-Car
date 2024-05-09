@@ -1,371 +1,189 @@
 /*
  * My_menu.c
  *
- *  Created on: 2023å¹´12æœˆ10æ—¥
+ *  Created on: 2024Äê4ÔÂ29ÈÕ
  *      Author: dduu
  */
-#include "My_menu.h"
+#include <My_menu.h>
 
-char txt[32];
-uint8 ShowPID_Mode=0; //æ˜¾ç¤ºPIDæ¨¡å¼
-uint8 ShowCamera_Mode=0; //æ˜¾ç¤ºCAMERAæ¨¡å¼
-uint8 Key_flag=0;
+//´´½¨Ò»¸ö²Ëµ¥
+sMenu menu = {0,0,0,0};
 
-extern uint8 _sta;
-extern volatile sint16 LPulse;                 //å·¦ç¼–ç å™¨è„‰å†²
-extern volatile sint16 YPulse;                 //å³ç¼–ç å™¨è„‰å†²
-extern volatile uint8 CrossWay_Flag;          //åå­—è·¯å£æ ‡å¿—
-extern volatile uint8 Island_Flag;            //çŽ¯å²›æ ‡å¿—
-extern volatile int Mon_change_Right_Line;     //å³å•è°ƒå˜åŒ–ç‚¹
-extern volatile uint8 Island_State;          //çŽ¯å²›çŠ¶æ€æ•°
-extern unsigned char Camera_Flag;
-extern uint8 Mode;
-extern int Servo_duty;
-extern volatile int Search_Stop_Line;
-extern volatile uint8 Motor_openFlag; //ç”µæœºå¯åŠ¨æ ‡å¿—
-extern volatile uint8 Servo_openFlag;
-extern volatile float Target_Speed1; //å·¦ç”µæœºç›®æ ‡é€Ÿåº¦m/s
-extern volatile float Target_Speed2; //å³ç”µæœºç›®æ ‡é€Ÿåº¦m/s
-extern volatile short Motor_duty1;
-extern volatile short Motor_duty2;
-extern pid_param_t Servo_Loc_PID;
-extern pid_param_t Motor_Inc_PID1;  //ç”µæœº1é€Ÿåº¦çŽ¯PID
-extern pid_param_t Motor_Inc_PID2;  //ç”µæœº2é€Ÿåº¦çŽ¯PID
-extern int Servo_Loc_error;  //èˆµæœºä½ç½®å¼PIDè¯¯å·®
-extern float Motor1_IncPID;
-extern float Motor2_IncPID;  //ç”µæœºé€Ÿåº¦çŽ¯
-extern volatile float Current_Speed1;     //å•ä½m/s
-extern volatile float Current_Speed2;
-extern volatile int Longest_White_Column_Left[];  //å­˜å‚¨å·¦è¾¹æœ€é•¿ç™½åˆ—çš„æ•°é‡å’Œä½ç½®
-extern volatile int Longest_White_Column_Right[]; //å­˜å‚¨å³è¾¹æœ€é•¿ç™½åˆ—çš„æ•°é‡å’Œä½ç½®
-extern volatile int Right_Lost_Time;        //å³ä¸¢çº¿è¡Œæ•°
-extern volatile int Left_Lost_Time;         //å·¦ä¸¢çº¿è¡Œæ•°
-extern volatile int Boundry_Start_Left;     //å·¦è¾¹ç¬¬ä¸€ä¸ªéžä¸¢çº¿ç‚¹
-extern volatile int Boundry_Start_Right;    //å³è¾¹ç¬¬ä¸€ä¸ªéžä¸¢çº¿ç‚¹
-extern volatile int Both_Lost_Time;         //ä¸¤è¾¹åŒæ—¶ä¸¢çº¿æ•°
-
-extern volatile int Right_Down_Find;          //å³ä¸‹æ‹ç‚¹
-extern volatile int Left_Down_Find;           //å·¦ä¸‹æ‹ç‚¹
-extern volatile int Left_Up_Find;             //å·¦ä¸Šæ‹ç‚¹
-extern volatile int Right_Up_Find;            //å³ä¸Šæ‹ç‚¹
-extern volatile int monotonicity_change_line[2];
-
-
-int menu_one(void)
+//·ÅÔÚÖ÷Ñ­»·ÖÐÉ¨Ãè
+void Menu_Scan(void)
 {
-    TFTSPI_CLS(u16BLACK);
-    TFTSPI_P8X16Str(2,0,(char*)"Motor!!!!",u16WHITE,u16BLACK);
-    TFTSPI_P8X16Str(2,1,(char*)"My_Image", u16WHITE,u16BLACK);
-    TFTSPI_P8X16Str(2,2,(char*)"PID_Value",u16WHITE,u16BLACK);
-    TFTSPI_P8X16Str(2,3,(char*)"ADC_Value",u16WHITE,u16BLACK);
-    TFTSPI_P8X16Str(2,4,(char*)"ENC_Value",u16WHITE,u16BLACK);
-    TFTSPI_P8X16Str(2,5,(char*)"MPU_Value",u16WHITE,u16BLACK);
-    TFTSPI_P8X16Str(2,6,(char*)"CAMERA!!!",u16WHITE,u16BLACK);
-    TFTSPI_P8X16Str(2,7,(char*)"Camera_Switch",u16WHITE,u16BLACK);
-
-    while(1)
-    {
-        if(Mode==1)
-        {
-            Mode=0;
-            Key_flag++;
-            if(Key_flag>7){Key_flag=7;}
-        }
-        else if(Mode==2)
-        {
-            Mode=0;
-            Key_flag--;
-            if(Key_flag<0){Key_flag=0;}
-        }
-        else if(Mode==3)
-        {
-            Mode=0;
-            TFTSPI_CLS(u16BLACK);         // æ¸…å±
-            return (Key_flag);
-        }
-        switch(Key_flag)
-        {
-            case 0:
-                TFTSPI_P8X16Str(0,0,(char*)"->",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"  ",u16WHITE,u16BLACK);
-                break;
-            case 1:
-                TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"->",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"  ",u16WHITE,u16BLACK);
-                break;
-            case 2:
-                TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"->",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"  ",u16WHITE,u16BLACK);
-                break;
-            case 3:
-                TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"->",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"  ",u16WHITE,u16BLACK);
-                break;
-            case 4:
-                TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"->",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"  ",u16WHITE,u16BLACK);
-                break;
-            case 5:
-                TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"->",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"  ",u16WHITE,u16BLACK);
-                break;
-            case 6:
-                TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"->",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"  ",u16WHITE,u16BLACK);
-                break;
-            case 7:
-                TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,4,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,5,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,6,(char*)"  ",u16WHITE,u16BLACK);
-                TFTSPI_P8X16Str(0,7,(char*)"->",u16WHITE,u16BLACK);
-                break;
-        }
+    if(switch_flag==1){
+        switch_flag=0;
+        TFTSPI_CLS(u16BLACK);         // ÇåÆÁ
     }
-}
-
-int menu_two(int flag)
-{
-    if(flag==1)
+    switch(menu.mode1)
     {
-        while(1)
-        {
-            TFTSPI_Road(0, 0, LCDH, LCDW, (unsigned char *)Image_Use);
-            if(Mode!=0)  //å¦‚æžœæœ‰æŒ‰é”®æŒ‰ä¸‹
+        /* Ö÷²Ëµ¥£¬Ñ¡Ôñ½øÈë¶ÔÓ¦¶þ¼¶²Ëµ¥ */
+        //½øÈëÖ÷²Ëµ¥Ê±ÏÔÊ¾¡°Ö÷²Ëµ¥¡±£¬²¢²¥±¨Ò»±é
+        case 0: main_menu(); break;
+        /* ¶þ¼¶²Ëµ¥1 Æô¶¯µç»ú¶æ»ú²Ëµ¥*/
+        case 1:
+            switch(menu.mode2)
             {
-                Mode=0;
-                return (flag);
+                /* ¶þ¼¶²Ëµ¥£¬Ñ¡Ôñ½øÈë¶ÔÓ¦Èý¼¶²Ëµ¥  */
+                    //½øÈë¶þ¼¶²Ëµ¥Ê±ÏÔÊ¾¡°¶þ¼¶²Ëµ¥1¡±£¬²¢²¥±¨Ò»±é
+                case 0:menu_ServoMotor();break;
+                /* Èý¼¶²Ëµ¥1£¬½øÈë¿ÉÔËÐÐApp1 Æô¶¯µç»ú¶æ»ú*/
+                case 1:
+                    Motor_openFlag=1;
+                    Servo_openFlag=1;
+                    TFTSPI_P8X16Str(2,1,(char*)"open is OK",u16WHITE,u16BLACK);
+                    break;
+                /* Èý¼¶²Ëµ¥2£¬½øÈë¿ÉÔËÐÐApp2 ¹Ø±Õµç»ú¶æ»ú*/
+                case 2:
+                    Motor_openFlag=0;
+                    Servo_openFlag=0;
+                    TFTSPI_P8X16Str(2,1,(char*)"close is OK",u16WHITE,u16BLACK);
+                    break;
             }
-        }
-    }
-    else if(flag==2)
-    {
-        TFTSPI_CLS(u16BLACK);         // æ¸…å±
-        TFTSPI_P8X16Str(2,0,(char*)"Servo_Loc_PID",u16WHITE,u16BLACK);
-        TFTSPI_P8X16Str(2,1,(char*)"Motor_Inc_PID1",u16WHITE,u16BLACK);
-        TFTSPI_P8X16Str(2,2,(char*)"Motor_Inc_PID2",u16WHITE,u16BLACK);
-        TFTSPI_P8X16Str(2,3,(char*)"Motor_Dir_PID",u16WHITE,u16BLACK);
-        while(1)
-       {
-           if(Mode==1)
-           {
-               Mode=0;
-               ShowPID_Mode++;
-               if(ShowPID_Mode>3){ShowPID_Mode=3;}
-           }
-           else if(Mode==2)
-           {
-               Mode=0;
-               ShowPID_Mode--;
-               if(ShowPID_Mode<0){ShowPID_Mode=0;}
-           }
-           else if(Mode==3)
-           {
-               Mode=0;
-               TFTSPI_CLS(u16BLACK);         // æ¸…å±
-               return (flag);
-           }
-           switch(ShowPID_Mode)
-           {
-               case 0:
-                   TFTSPI_P8X16Str(0,0,(char*)"->",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                   break;
-               case 1:
-                   TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"->",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                   break;
-               case 2:
-                   TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"->",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                   break;
-               case 3:
-                   TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"->",u16WHITE,u16BLACK);
-                   break;
-           }
-       }
-    }
-    else if(flag==6)
-    {
-        TFTSPI_CLS(u16BLACK);         // æ¸…å±
-        TFTSPI_P8X16Str(2,0,(char*)"BaseInfor_One",u16WHITE,u16BLACK);
-        TFTSPI_P8X16Str(2,1,(char*)"BaseInfor_Two",u16WHITE,u16BLACK);
-        TFTSPI_P8X16Str(2,2,(char*)"Element_Flag",u16WHITE,u16BLACK);
-        TFTSPI_P8X16Str(2,3,(char*)"Island_data",u16WHITE,u16BLACK);
-        while(1)
-       {
-           if(Mode==1)
-           {
-               Mode=0;
-               ShowCamera_Mode++;
-               if(ShowCamera_Mode>3){ShowCamera_Mode=3;}
-           }
-           else if(Mode==2)
-           {
-               Mode=0;
-               ShowCamera_Mode--;
-               if(ShowCamera_Mode<0){ShowCamera_Mode=0;}
-           }
-           else if(Mode==3)
-           {
-               Mode=0;
-               TFTSPI_CLS(u16BLACK);         // æ¸…å±
-               return (flag);
-           }
-           switch(ShowCamera_Mode)
-           {
-               case 0:
-                   TFTSPI_P8X16Str(0,0,(char*)"->",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                   break;
-               case 1:
-                   TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"->",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                   break;
-               case 2:
-                   TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"->",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"  ",u16WHITE,u16BLACK);
-                   break;
-               case 3:
-                   TFTSPI_P8X16Str(0,0,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,1,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,2,(char*)"  ",u16WHITE,u16BLACK);
-                   TFTSPI_P8X16Str(0,3,(char*)"->",u16WHITE,u16BLACK);
-                   break;
-
-           }
-       }
-    }
-    else
-    {
-        return (flag);
+            break;
+        /* ¶þ¼¶²Ëµ¥2    ¸÷¸öÍ¼ÏñÊý¾Ý*/
+        case 2:
+            switch(menu.mode2)
+            {
+                /* ¶þ¼¶²Ëµ¥£¬Ñ¡Ôñ½øÈë¶ÔÓ¦Èý¼¶²Ëµ¥  */
+                    //½øÈë¶þ¼¶²Ëµ¥Ê±ÏÔÊ¾¡°¶þ¼¶²Ëµ¥1¡±£¬²¢²¥±¨Ò»±é
+                case 0:menu_image();break;
+                /* Èý¼¶²Ëµ¥1£¬½øÈë¿ÉÔËÐÐApp1 */
+                case 1: TFTSPI_Road(0, 0, LCDH, LCDW, (unsigned char *)Image_Use); break;
+                /* Èý¼¶²Ëµ¥2£¬½øÈë¿ÉÔËÐÐApp2 */
+                case 2:  TFTSPI_BinRoad(0, 0, LCDH, LCDW, (unsigned char *)Bin_Image);break;
+            }
+            break;
+            /* ¶þ¼¶²Ëµ¥2    PIDÖ÷²Ëµ¥*/
+        case 3:
+            switch(menu.mode2)
+            {
+                case 0:
+                    //PIDÖ÷²Ëµ¥
+                    menu_pid();
+                    break;
+                //Èý¼¶²Ëµ¥1APP
+                case 1:
+                    Show_ServoPid();
+                    break;
+                //Èý¼¶²Ëµ¥2APP
+                case 2:
+                    Show_MotorIncPid1();
+                    break;
+                //Èý¼¶²Ëµ¥3APP
+                case 3:
+                    Show_MotorIncPid2();
+                    break;
+            }
+            break;
+        case 4:
+            switch(menu.mode2)
+            {
+                case 0:
+                    //ENC±àÂëÆ÷Ö÷²Ëµ¥
+                    menu_ENC();
+                    break;
+                //Èý¼¶²Ëµ¥1APP
+                case 1:
+                    Show_ENC();
+                    break;
+            }
+            break;
     }
 }
 
-extern uint16 dlen;
-extern uint16 dcnt;
-
-void menu_three(int Key_flag)
+void main_menu(void)
 {
-    while(1)
-    {
-        if(Mode==1)
-        {
-            TFTSPI_CLS(u16BLACK);         // æ¸…å±
-            ShowPID_Mode=0;
-            ShowCamera_Mode=0;
-            return;
-        }
-        switch(Key_flag)
-        {
-            case 0:
-                Motor_openFlag=!Motor_openFlag;
-                Servo_openFlag=!Servo_openFlag;
-                return;
-                break;
-            case 1: //Image
-                TFTSPI_BinRoad(0, 0, LCDH, LCDW, (unsigned char *)Bin_Image);
-                break;
-            case 2: //PID
-                ShowPID();
-                break;
-            case 3:  //ADC
-                TFTSPI_P8X16Str(0, 0, (char *)"ADC:", u16WHITE, u16BLACK);
-                sprintf(txt, "dlen: %4d", dlen);
-                TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-                sprintf(txt, "dcnt: %4d", dcnt);
-                TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-                sprintf(txt, "SP: %3.1f", Servo_Loc_PID.kp);
-                TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-                sprintf(txt, "SI: %3.1f", Servo_Loc_PID.ki);
-                TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-                sprintf(txt, "SD: %3.1f", Servo_Loc_PID.kd);
-                TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-                sprintf(txt, "_sta: %d", _sta);
-                TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
+    switch(chooseBuf){
+        case 1:
+            TFTSPI_P8X16Str(2,0,(char*)"->QIDong!!!",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  My_Image",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,2,(char*)"  PID_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,3,(char*)"  ENC_Value",u16WHITE,u16BLACK);
+            break;
+        case 2:
+            TFTSPI_P8X16Str(2,0,(char*)"  QIDong!!!",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"->My_Image",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,2,(char*)"  PID_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,3,(char*)"  ENC_Value",u16WHITE,u16BLACK);
+            break;
+        case 3:
+            TFTSPI_P8X16Str(2,0,(char*)"  QIDong!!!",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  My_Image",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,2,(char*)"->PID_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,3,(char*)"  ENC_Value",u16WHITE,u16BLACK);
+            break;
+        case 4:
+            TFTSPI_P8X16Str(2,0,(char*)"  QIDong!!!",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  My_Image",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,2,(char*)"  PID_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,3,(char*)"->ENC_Value",u16WHITE,u16BLACK);
+            break;
+    }
+}
 
-                break;
-            case 4:  //ENC
-                Show_ENC();
-                break;
-            case 5:  //MPU
-                TFTSPI_P8X16Str(0, 0, (char *)"MPU:", u16WHITE, u16BLACK);
-                break;
-            case 6:  //Camera
-                ShowCamera();
-                break;
-            case 7: //Switch
-                Camera_Flag=0;
-                return;
-                break;
-            default:
-                break;
-        }
+void menu_ENC(void)
+{
+    switch(chooseBuf){
+        case 1:
+            TFTSPI_P8X16Str(2,0,(char*)"->ALLENC",u16WHITE,u16BLACK);
+            break;
+    }
+}
+
+void menu_ServoMotor(void)
+{
+    switch(chooseBuf){
+        case 1:
+            TFTSPI_P8X16Str(2,0,(char*)"->open",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  close",u16WHITE,u16BLACK);
+            break;
+        case 2:
+            TFTSPI_P8X16Str(2,0,(char*)"  open",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"->close",u16WHITE,u16BLACK);
+            break;
+    }
+}
+
+void menu_image(void)
+{
+    switch(chooseBuf){
+        case 1:
+            TFTSPI_P8X16Str(2,0,(char*)"->No_Handler",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  Do_Handler",u16WHITE,u16BLACK);
+            break;
+        case 2:
+            TFTSPI_P8X16Str(2,0,(char*)"  No_Handler",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"->Do_Handler",u16WHITE,u16BLACK);
+            break;
+    }
+}
+
+void menu_pid(void)
+{
+    switch(chooseBuf){
+        case 1:
+            TFTSPI_P8X16Str(2,0,(char*)"->Servo_Loc_PID",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  Motor_Inc_PID1",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,2,(char*)"  Motor_Inc_PID2",u16WHITE,u16BLACK);
+            break;
+        case 2:
+            TFTSPI_P8X16Str(2,0,(char*)"  Servo_Loc_PID",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"->Motor_Inc_PID1",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,2,(char*)"  Motor_Inc_PID2",u16WHITE,u16BLACK);
+            break;
+        case 3:
+            TFTSPI_P8X16Str(2,0,(char*)"  Servo_Loc_PID",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  Motor_Inc_PID1",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,2,(char*)"->Motor_Inc_PID2",u16WHITE,u16BLACK);
+            break;
     }
 }
 
 void Show_ENC(void)
 {
+    char txt[30];
     TFTSPI_P8X16Str(0, 0, (char *)"ENC:", u16WHITE, u16BLACK);
     sprintf(txt, "LPulse: %4d", LPulse);
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
@@ -381,50 +199,16 @@ void Show_ENC(void)
     TFTSPI_P8X16Str(0, 7, txt, u16WHITE, u16BLACK);
 }
 
-void ShowPID(void)
-{
-    switch(ShowPID_Mode)
-    {
-        case 0:
-            Show_ServoPid();
-            break;
-        case 1:
-            Show_MotorIncPid1();
-            break;
-        case 2:
-            Show_MotorIncPid2();
-            break;
-        case 3:
-            Show_MotorDirPid();
-    }
-}
-
-void ShowCamera(void)
-{
-    switch(ShowCamera_Mode)
-    {
-        case 0:
-            Base_Information_One();
-            break;
-        case 1:
-            Base_Information_Two();
-            break;
-        case 2:
-            Show_CameraElementFlag();
-            break;
-        case 3:
-            Show_Island();
-    }
-}
-
 void Show_ServoPid(void)
 {
-    TFTSPI_P8X16Str(0, 0, (char *)"Servo_Loc_PID:", u16WHITE, u16BLACK);
-    sprintf(txt, "KP=%.2f",Servo_Loc_PID.kp);
+    char txt[30];
+    sprintf(txt, "Select_PID=%1d",Select_PID);
+    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "SP=%.2f",Servo_Loc_PID.kp);
     TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KI=%.2f",Servo_Loc_PID.ki);
+    sprintf(txt, "SI=%.2f",Servo_Loc_PID.ki);
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KD=%.2f",Servo_Loc_PID.kd);
+    sprintf(txt, "SD=%.2f",Servo_Loc_PID.kd);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
     sprintf(txt, "KP_error=%.2f",Servo_Loc_PID.out_p);
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
@@ -438,13 +222,14 @@ void Show_ServoPid(void)
 
 void Show_MotorIncPid1(void)
 {
-    TFTSPI_P8X16Str(0, 0, (char *)"Motor_Inc_PID1:", u16WHITE, u16BLACK);
-
-    sprintf(txt, "KP=%.2f",Motor_Inc_PID1.kp);
+    char txt[30];
+    sprintf(txt, "Select_PID=%1d",Select_PID);
+    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "MP=%.2f",Motor_Inc_PID1.kp);
     TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KI=%.2f",Motor_Inc_PID1.ki);
+    sprintf(txt, "MI=%.2f",Motor_Inc_PID1.ki);
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KD=%.2f",Motor_Inc_PID1.kd);
+    sprintf(txt, "MD=%.2f",Motor_Inc_PID1.kd);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
     sprintf(txt, "KP_error=%.2f",Motor_Inc_PID1.out_p);
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
@@ -456,6 +241,7 @@ void Show_MotorIncPid1(void)
 
 void Show_MotorIncPid2(void)
 {
+    char txt[30];
     TFTSPI_P8X16Str(0, 0, (char *)"Motor_Inc_PID2:", u16WHITE, u16BLACK);
     sprintf(txt, "KP=%.2f",Motor_Inc_PID2.kp);
     TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
@@ -468,93 +254,6 @@ void Show_MotorIncPid2(void)
     sprintf(txt, "Motor_duty2: %4d", Motor_duty2);
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
     sprintf(txt, "Motor2_IncPID: %.2f", Motor2_IncPID);
-    TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
-}
-
-void Show_MotorDirPid(void)
-{
-    TFTSPI_P8X16Str(0, 0, (char *)"MotorDir_PID:", u16WHITE, u16BLACK);
-}
-
-void Base_Information_One(void)
-{
-    sprintf(txt, "Column_Left_L: %3d", Longest_White_Column_Left[0]);
-    TFTSPI_P8X16Str(0, 0 , txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Column_Left_C: %3d", Longest_White_Column_Left[1]);
-    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Column_Right_L: %3d", Longest_White_Column_Right[0]);
-    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Column_Right_C: %3d", Longest_White_Column_Right[1]);
-    TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Start_Left: %3d", Boundry_Start_Left);
-    TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Start_Right: %3d", Boundry_Start_Right);
-    TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Stop_Line: %3d", Search_Stop_Line);
-    TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
-}
-
-void Base_Information_Two(void)
-{
-    sprintf(txt, "L_Lost_Time=%3d",Left_Lost_Time);
-    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "R_Lost_Time=%3d",Right_Lost_Time);
-    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "B_Lost_Time=%3d",Both_Lost_Time);
-    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-
-}
-
-void Show_CameraElementFlag(void)
-{
-    sprintf(txt, "Cross_Flag=%d",CrossWay_Flag);
-    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Island_Flag=%d",Island_Flag);
-    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-}
-
-
-void Show_CrossWay(void)
-{
-    sprintf(txt, "Left_Up=%3d",Left_Up_Find);
-    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Right_Up=%3d",Right_Up_Find);
-    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Left_Down=%3d",Left_Down_Find);
-    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Right_Down=%3d",Right_Down_Find);
-    TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-
-}
-
-void Show_Island(void)
-{
-    sprintf(txt, "Island_State=%d",Island_State);
-    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Right_Down=%3d",Right_Down_Find);
-    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Mon_change_Right=%3d",Mon_change_Right_Line);
-    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Mon_change_line=%3d",monotonicity_change_line[0]);
-    TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Mon_change_Row=%3d",monotonicity_change_line[1]);
-    TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-}
-
-void Show_PIDALL(void)
-{
-    TFTSPI_P8X16Str(0, 0, (char *)"PIDALL:", u16WHITE, u16BLACK);
-    sprintf(txt, "SP=%4.1f",Servo_Loc_PID.kp);
-    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "SI=%4.1f",Servo_Loc_PID.ki);
-    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "SD=%4.1f",Servo_Loc_PID.kd);
-    TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "MP=%4.1f",Motor_Inc_PID1.kp);
-    TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "MI=%4.1f",Motor_Inc_PID1.ki);
-    TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "MD=%4.1f",Motor_Inc_PID1.kd);
     TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
 }
 

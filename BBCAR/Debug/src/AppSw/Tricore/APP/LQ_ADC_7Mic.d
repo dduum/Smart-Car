@@ -876,10 +876,24 @@ src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Trico
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h
@@ -888,30 +902,14 @@ src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Trico
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPT12_ENC.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPT12_ENC.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPIO.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/new_menu.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/new_menu.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
-src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/button.h :
+src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h :
 src/AppSw/Tricore/APP/LQ_ADC_7Mic.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GTM.h

@@ -89,6 +89,14 @@ unsigned char KEY_Read(KEYn_e KEYno)
         return PIN_Read(KEY2p);//母锟斤拷锟较帮拷锟斤拷2
       break;
 
+      case KEY3:
+        return PIN_Read(KEY3p);//母锟斤拷锟较帮拷锟斤拷1
+      break;
+
+      case KEY4:
+        return PIN_Read(KEY4p);//母锟斤拷锟较帮拷锟斤拷2
+      break;
+
       case DSW0:
         return PIN_Read(DSW0p);//姣嶆澘涓婃嫧鐮佸紑鍏�0
       break;

@@ -5,7 +5,6 @@
  *      Author: dduu
  */
 #include "My_Image_Handle.h"
-#include "Image_Handle.h"
 
 #define QianZhan 15
 

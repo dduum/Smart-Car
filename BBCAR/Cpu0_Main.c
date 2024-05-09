@@ -41,9 +41,22 @@ int core0_main (void)
     // 切记CPU0,CPU1...不可以同时开启屏幕显示，否则冲突不显示
     mutexCpu0TFTIsOk=0;         // CPU1： 0占用/1释放 TFT
 
+    int flag=0; //页面切换标志
+
     while (1)	//主循环
     {
-        Menu_Scan();
+        //拨码开关向上为0（ON），向下为1（OFF）
+        if(KEY_Read(DSW0)==0 && KEY_Read(DSW1)==0)   //菜单模式
+        {
+            if(!flag){switch_flag=1;flag=1;}
+            Button_Scan();
+            Menu_Scan();
+        }
+        else if(KEY_Read(DSW0)==0 && KEY_Read(DSW1)==1)  //按键调参模式
+        {
+            if(flag){switch_flag=1;flag=0;}
+            Modify_PID();
+        }
         //如果PID的数据发生改变,重新向E2PROM中写入数据
         if(data_change_flag==1)
         {

@@ -10,17 +10,6 @@ volatile sint16 targetSpeed = 10;
 // 避障标志位
 volatile uint8 evadibleFlage = 0;
 
-volatile uint8 Motor_openFlag=0;         //电机启动标志
-volatile uint8 Servo_openFlag=0;         //舵机启动标志
-
-volatile int ENC_Zuo = 0;
-volatile int ENC_You = 0;
-volatile short Motor_duty1 = 0;
-volatile short Motor_duty2 = 0;
-volatile float Target_Speed1=1; //左电机目标速度m/s
-volatile float Target_Speed2=1; //右电机目标速度m/s
-
-
 int core1_main (void)
 {
     // 开启CPU总中断

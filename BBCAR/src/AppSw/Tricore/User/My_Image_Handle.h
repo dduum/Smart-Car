@@ -12,6 +12,10 @@
 #include <LQ_CAMERA.h>
 #include <LQ_UART.h>
 
+extern volatile int Left_Line[LCDH];           //左边界
+extern volatile int Right_Line[LCDH];          //右边界
+extern volatile int Middle_Line[LCDH];         //中边界
+
 float Err_Sum(void);
 float Cal_Err(void);
 void Longest_White_Column(void);

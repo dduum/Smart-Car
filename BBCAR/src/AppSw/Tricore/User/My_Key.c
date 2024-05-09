@@ -10,7 +10,7 @@
 
 //按键中断服务函数在LQ_CCU6中 定义在 void CCU60_CH0_IRQHandler(void)
 
-key_t Key[3]; //存储Key的状态
+key_t Key[5]; //存储Key的状态
 
 //每20ms进入一次定时中断中，检测按键状态
 void Key_Check(int i, key_t *Key, GPIO_Name_t pin)

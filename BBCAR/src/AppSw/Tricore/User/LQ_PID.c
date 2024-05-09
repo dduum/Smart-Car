@@ -1,9 +1,9 @@
 #include <LQ_PID.h>
 
-pid_param_t Servo_Loc_PID;  //
-pid_param_t Motor_Inc_PID1; //
-pid_param_t Motor_Inc_PID2; //
-pid_param_t Servo_Loc_PID2; //
+pid_param_t Servo_Loc_PID;
+pid_param_t Motor_Inc_PID1;
+pid_param_t Motor_Inc_PID2;
+pid_param_t Servo_Loc_PID2;
 
 void Set_PID(void)
 {

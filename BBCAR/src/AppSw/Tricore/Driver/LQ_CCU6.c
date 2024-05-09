@@ -83,8 +83,7 @@ void CCU60_CH1_IRQHandler (void)
     IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU60, IfxCcu6_InterruptSource_t13PeriodMatch);
 
     /* 用户代码 */
-//    Key_Control();
-    Button_Scan();
+    Key_Control();
 
 }
 

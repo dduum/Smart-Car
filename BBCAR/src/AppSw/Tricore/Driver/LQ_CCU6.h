@@ -42,12 +42,12 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <LQ_GPT12_ENC.h>
 #include <LQ_PID.h>
 #include <LQ_UART.h>
+#include "../User/My_Button.h"
 
 #include "My_Key.h"
 #include "My_UART.h"
 #include "My_Image_Handle.h"
 #include "My_Control_Code.h"
-#include "button.h"
 #include "My_menu.h"
 
 extern volatile sint16 ECPULSE1;          //速度全局变量

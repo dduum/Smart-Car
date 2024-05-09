@@ -5,23 +5,24 @@
 */
 #include "My_Control_Code.h"
 
-extern key_t Key[];
-extern pid_param_t Servo_Loc_PID;           //
-extern pid_param_t Motor_Inc_PID1;          //
-extern pid_param_t Motor_Inc_PID2;          //
-
 uint8 cnt=0;
-uint8 Mode=0;
-char txt_a[30];                         //閿熶茎鎲嬫嫹
+uint8 Key_Value=0;
+uint8 Select_SorM=0;
+uint8 Select_PID=0;
 float Motor1_IncPID=0;
 float Motor2_IncPID=0;                  //
 float Motor_DirPId=0;                   //
-volatile sint16 Battery;                //
-volatile float Current_Speed1=0;        //閿熸枻鎷蜂綅m/s
-volatile float Current_Speed2=0;
+float Current_Speed1=0;        //速度单位m/s
+float Current_Speed2=0;
 volatile sint16 LPulse;                 //
 volatile sint16 YPulse;                 //
 int Servo_duty=Servo_Center_Mid;
+uint8 Motor_openFlag=0;         //电机启动标志
+uint8 Servo_openFlag=0;         //舵机启动标志
+short Motor_duty1 = 0;
+short Motor_duty2 = 0;
+float Target_Speed1=1; //左电机目标速度m/s
+float Target_Speed2=1; //右电机目标速度m/s
 
 void Motor_Control(void)
 {
@@ -169,21 +170,130 @@ void Key_Control(void)
     Key_Check(0,Key,KEY0_Pin);
     Key_Check(1,Key,KEY1_Pin);
     Key_Check(2,Key,KEY2_Pin);
+    Key_Check(3,Key,KEY3_Pin);
+    Key_Check(4,Key,KEY4_Pin);
 
     if(Key[0].keyFlag==1)
     {
         Key[0].keyFlag=0;
-        Mode=1;
+        Key_Value=1;
     }
     else if(Key[1].keyFlag==1)
     {
         Key[1].keyFlag=0;
-        Mode=2;
+        Key_Value=2;
     }
     else if(Key[2].keyFlag==1)
     {
         Key[2].keyFlag=0;
-        Mode=3;
+        Key_Value=3;
     }
+    else if(Key[3].keyFlag==1)
+    {
+        Key[3].keyFlag=0;
+        Key_Value=4;
+    }
+    else if(Key[4].keyFlag==1)
+    {
+        Key[4].keyFlag=0;
+        Key_Value=5;
+    }
+}
+
+void Modify_PID(void)
+{
+    if(Key_Value==1)
+    {
+        Key_Value=0;
+        data_change_flag=1; //修改了参数，需要写进E2PROM
+        if(Select_SorM==0)  //选择Servo
+        {
+            switch(Select_PID)
+            {
+                case 0:  //P
+                    Servo_Loc_PID.kp+=1;
+                    break;
+                case 1:  //I
+                    Servo_Loc_PID.ki+=1;
+                    break;
+                case 2:  //D
+                    Servo_Loc_PID.kd+=1;
+                    break;
+            }
+        }
+        else if(Select_SorM==1) //选择Motor
+        {
+            switch(Select_PID)
+            {
+                case 0:  //P
+                    Motor_Inc_PID1.kp+=1;
+                    break;
+                case 1:  //I
+                    Motor_Inc_PID1.ki+=1;
+                    break;
+                case 2:  //D
+                    Motor_Inc_PID1.kd+=1;
+                    break;
+            }
+        }
+    }
+    else if(Key_Value==2)
+    {
+        Key_Value=0;
+        data_change_flag=1;
+        if(Select_SorM==0)  //选择Servo
+        {
+            switch(Select_PID)
+            {
+                case 0:  //P
+                    Servo_Loc_PID.kp-=1;
+                    break;
+                case 1:  //I
+                    Servo_Loc_PID.ki-=1;
+                    break;
+                case 2:  //D
+                    Servo_Loc_PID.kd-=1;
+                    break;
+            }
+        }
+        else if(Select_SorM==1) //选择Motor
+        {
+            switch(Select_PID)
+            {
+                case 0:  //P
+                    Motor_Inc_PID1.kp-=1;
+                    break;
+                case 1:  //I
+                    Motor_Inc_PID1.ki-=1;
+                    break;
+                case 2:  //D
+                    Motor_Inc_PID1.kd-=1;
+                    break;
+            }
+        }
+    }
+    else if(Key_Value==3)  //选择调P还是I还是D
+    {
+        Key_Value=0;
+        Select_PID++;
+        Select_PID%=3;
+    }
+    else if(Key_Value==4)  //选择调Servo还是Motor
+    {
+        Key_Value=0;
+        Select_PID=0;
+        switch_flag=1; //页面更新标志
+        Select_SorM++;
+        Select_SorM%=2;
+    }
+    else if(Key_Value==5)
+    {
+        Key_Value=0;
+    }
+
+    if(switch_flag==1){switch_flag=0;TFTSPI_CLS(u16BLACK);}  //更新页面
+
+    if(Select_SorM==0){Show_ServoPid();}
+    if(Select_SorM==1){Show_MotorIncPid1();}    //显示调试信息
 }
 
