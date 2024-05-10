@@ -55,7 +55,7 @@ void Menu_Scan(void)
                 case 2:  TFTSPI_BinRoad(0, 0, LCDH, LCDW, (unsigned char *)Bin_Image);break;
             }
             break;
-            /* 二级菜单2    PID主菜单*/
+            /* 二级菜单3    PID主菜单*/
         case 3:
             switch(menu.mode2)
             {
@@ -69,11 +69,7 @@ void Menu_Scan(void)
                     break;
                 //三级菜单2APP
                 case 2:
-                    Show_MotorIncPid1();
-                    break;
-                //三级菜单3APP
-                case 3:
-                    Show_MotorIncPid2();
+                    Show_MotorIncPid();
                     break;
             }
             break;
@@ -165,18 +161,11 @@ void menu_pid(void)
     switch(chooseBuf){
         case 1:
             TFTSPI_P8X16Str(2,0,(char*)"->Servo_Loc_PID",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,1,(char*)"  Motor_Inc_PID1",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,2,(char*)"  Motor_Inc_PID2",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"  Motor_Inc_PID",u16WHITE,u16BLACK);
             break;
         case 2:
             TFTSPI_P8X16Str(2,0,(char*)"  Servo_Loc_PID",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,1,(char*)"->Motor_Inc_PID1",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,2,(char*)"  Motor_Inc_PID2",u16WHITE,u16BLACK);
-            break;
-        case 3:
-            TFTSPI_P8X16Str(2,0,(char*)"  Servo_Loc_PID",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,1,(char*)"  Motor_Inc_PID1",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,2,(char*)"->Motor_Inc_PID2",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(2,1,(char*)"->Motor_Inc_PID",u16WHITE,u16BLACK);
             break;
     }
 }
@@ -189,13 +178,13 @@ void Show_ENC(void)
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
     sprintf(txt, "YPulse: %4d", YPulse);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Cur_Speed1: %.1f; ", Current_Speed1);
+    sprintf(txt, "Cur_Speed1: %.1f", Current_Speed1);
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Cur_Speed2: %.1f; ", Current_Speed2);
+    sprintf(txt, "Cur_Speed2: %.1f", Current_Speed2);
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "TarSpeed12: %.1f,%.1f; ", Target_Speed1,Target_Speed2);
+    sprintf(txt, "TarSpeed: %.1f",Target_Speed);
     TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Motor_openFlag: %d ", Motor_openFlag);
+    sprintf(txt, "Motor_openFlag: %d", Motor_openFlag);
     TFTSPI_P8X16Str(0, 7, txt, u16WHITE, u16BLACK);
 }
 
@@ -220,40 +209,24 @@ void Show_ServoPid(void)
     TFTSPI_P8X16Str(0, 7, txt, u16WHITE, u16BLACK);
 }
 
-void Show_MotorIncPid1(void)
+void Show_MotorIncPid(void)
 {
     char txt[30];
     sprintf(txt, "Select_PID=%1d",Select_PID);
     TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "MP=%.2f",Motor_Inc_PID1.kp);
+    sprintf(txt, "MP=%.2f",Motor_Inc_PID.kp);
     TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "MI=%.2f",Motor_Inc_PID1.ki);
+    sprintf(txt, "MI=%.2f",Motor_Inc_PID.ki);
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "MD=%.2f",Motor_Inc_PID1.kd);
+    sprintf(txt, "MD=%.2f",Motor_Inc_PID.kd);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KP_error=%.2f",Motor_Inc_PID1.out_p);
+    sprintf(txt, "M1_duty=%4d",Motor_duty1);
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Motor_duty1: %4d", Motor_duty1);
+    sprintf(txt, "M2_duty=%4d",Motor_duty2);
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Motor1_IncPID: %.2f", Motor1_IncPID);
+    sprintf(txt, "M1_IncPID: %.2f", Motor1_IncPID);
     TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
-}
-
-void Show_MotorIncPid2(void)
-{
-    char txt[30];
-    TFTSPI_P8X16Str(0, 0, (char *)"Motor_Inc_PID2:", u16WHITE, u16BLACK);
-    sprintf(txt, "KP=%.2f",Motor_Inc_PID2.kp);
-    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KI=%.2f",Motor_Inc_PID2.ki);
-    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KD=%.2f",Motor_Inc_PID2.kd);
-    TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "KP_error=%.2f",Motor_Inc_PID2.out_p);
-    TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Motor_duty2: %4d", Motor_duty2);
-    TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Motor2_IncPID: %.2f", Motor2_IncPID);
-    TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "M2_IncPID: %.2f", Motor2_IncPID);
+    TFTSPI_P8X16Str(0, 7, txt, u16WHITE, u16BLACK);
 }
 

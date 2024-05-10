@@ -784,6 +784,8 @@ Cpu0_Main.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h :
 Cpu0_Main.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+Cpu0_Main.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
 Cpu0_Main.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h :
 Cpu0_Main.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h

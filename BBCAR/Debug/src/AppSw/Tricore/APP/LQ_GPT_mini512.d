@@ -892,6 +892,8 @@ src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tr
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h :
 src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
 src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h :
 src/AppSw/Tricore/APP/LQ_GPT_mini512.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h

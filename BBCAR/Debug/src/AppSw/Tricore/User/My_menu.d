@@ -996,3 +996,5 @@ src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC2
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
 src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h :
+src/AppSw/Tricore/User/My_menu.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :

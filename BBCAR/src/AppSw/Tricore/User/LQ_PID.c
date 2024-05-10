@@ -1,57 +1,44 @@
 #include <LQ_PID.h>
 
 pid_param_t Servo_Loc_PID;
-pid_param_t Motor_Inc_PID1;
-pid_param_t Motor_Inc_PID2;
-pid_param_t Servo_Loc_PID2;
+pid_param_t Motor_Inc_PID;
 
 void Set_PID(void)
 {
     PidInit(&Servo_Loc_PID);
-    PidInit(&Motor_Inc_PID1);
-    PidInit(&Motor_Inc_PID2);
-    PidInit(&Servo_Loc_PID2);
+    PidInit(&Motor_Inc_PID);
     Pid_Value();
 }
 
 void Pid_Value(void)
 {
-    //
+    //舵机转向环
     Servo_Loc_PID.kp=20.5;
     Servo_Loc_PID.ki=10.5;
-    Servo_Loc_PID.kd=5.5; //1
-    //
-    Motor_Inc_PID1.kp=40;
-    Motor_Inc_PID1.ki=0.62;
-    Motor_Inc_PID1.kd=0;
-    //
-    Motor_Inc_PID2.kp=40;
-    Motor_Inc_PID2.ki=0.62;
-    Motor_Inc_PID2.kd=0;
-    //暂时没有用到
-    Servo_Loc_PID2.kp=30;
-    Servo_Loc_PID2.ki=0;
-    Servo_Loc_PID2.kd=0;
-
+    Servo_Loc_PID.kd=5.5;   //1
+    //电机速度环
+    Motor_Inc_PID.kp=40;
+    Motor_Inc_PID.ki=0.62;
+    Motor_Inc_PID.kd=0;
 }
 
 /*************************************************************************
- *  锟斤拷锟斤拷锟斤拷锟狡ｏ拷float constrain_float(float amt, float low, float high)
- *  锟斤拷锟斤拷说锟斤拷锟斤拷锟睫凤拷锟斤拷锟斤拷
- *  锟斤拷锟斤拷说锟斤拷锟斤拷
-  * @param    amt   锟斤拷 锟斤拷锟斤拷
-  * @param    low   锟斤拷 锟斤拷锟街�
-  * @param    high  锟斤拷 锟斤拷锟街�
- *  锟斤拷锟斤拷锟斤拷锟截ｏ拷锟斤拷
- *  锟睫革拷时锟戒：2020锟斤拷4锟斤拷1锟斤拷
- *  锟斤拷    注锟斤拷
+ *  函数名称：float constrain_float(float amt, float low, float high)
+ *  功能说明：限幅函数
+ *  参数说明：
+  * @param    amt   ： 参数
+  * @param    low   ： 最低值
+  * @param    high  ： 最高值
+ *  函数返回：无
+ *  修改时间：2020年4月1日
+ *  备    注：
  *************************************************************************/
 float constrain_float(float amt, float low, float high)
 {
 	return ((amt)<(low)?(low):((amt)>(high)?(high):(amt)));
 }
 
-// pid锟斤拷锟斤拷锟斤拷始锟斤拷锟斤拷锟斤拷
+// pid参数初始化函数
 void PidInit(pid_param_t * pid)
 {
     pid->kp        = 0;
@@ -70,21 +57,21 @@ void PidInit(pid_param_t * pid)
 
 
 /*************************************************************************
- *  锟斤拷锟斤拷锟斤拷锟狡ｏ拷float constrain_float(float amt, float low, float high)
- *  锟斤拷锟斤拷说锟斤拷锟斤拷pid位锟斤拷式锟斤拷锟斤拷锟斤拷锟斤拷锟�
- *  锟斤拷锟斤拷说锟斤拷锟斤拷
-  * @param    pid     pid锟斤拷锟斤拷
-  * @param    error   pid锟斤拷锟斤拷锟斤拷锟�
- *  锟斤拷锟斤拷锟斤拷锟截ｏ拷PID锟斤拷锟斤拷锟斤拷
- *  锟睫革拷时锟戒：2020锟斤拷4锟斤拷1锟斤拷
- *  锟斤拷    注锟斤拷位锟斤拷式锟斤拷锟斤拷锟斤拷锟�
+ *  函数名称：float constrain_float(float amt, float low, float high)
+ *  功能说明：pid位置式控制器输出
+ *  参数说明：
+  * @param    pid     pid参数
+  * @param    error   pid输入误差
+ *  函数返回：PID输出结果
+ *  修改时间：2020年4月1日
+ *  备    注：位置式舵机方向环
  *************************************************************************/
 float PidLocCtrl(pid_param_t * pid, float error)
 {
-	/* 锟桔伙拷锟斤拷锟� */
+    /* 累积误差 */
 	pid->integrator += error;
 
-	/* 锟斤拷锟斤拷薹锟� */
+    /* 误差限幅 */
 	constrain_float(pid->integrator, -pid->imax, pid->imax);
 
 	pid->out_p = pid->kp * error;
@@ -100,14 +87,14 @@ float PidLocCtrl(pid_param_t * pid, float error)
 
 
 /*************************************************************************
- *  锟斤拷锟斤拷锟斤拷锟狡ｏ拷float constrain_float(float amt, float low, float high)
- *  锟斤拷锟斤拷说锟斤拷锟斤拷pid锟斤拷锟斤拷式锟斤拷锟斤拷锟斤拷锟斤拷锟�
- *  锟斤拷锟斤拷说锟斤拷锟斤拷
-  * @param    pid     pid锟斤拷锟斤拷
-  * @param    error   pid锟斤拷锟斤拷锟斤拷锟�
- *  锟斤拷锟斤拷锟斤拷锟截ｏ拷PID锟斤拷锟斤拷锟斤拷   注锟斤拷锟斤拷锟斤拷锟斤拷锟窖撅拷锟斤拷锟斤拷锟斤拷锟较次斤拷锟�
- *  锟睫革拷时锟戒：2020锟斤拷4锟斤拷1锟斤拷
- *  锟斤拷    注锟斤拷
+ *  函数名称：float constrain_float(float amt, float low, float high)
+ *  功能说明：pid增量式控制器输出
+ *  参数说明：
+  * @param    pid     pid参数
+  * @param    error   pid输入误差
+ *  函数返回：PID输出结果   注意输出结果已经包涵了上次结果
+ *  修改时间：2020年4月1日
+ *  备    注：
  *************************************************************************/
 float PidIncCtrl(pid_param_t * pid, float error)
 {

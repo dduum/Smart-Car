@@ -864,6 +864,8 @@ src/AppSw/Tricore/User/image1.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/A
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
 src/AppSw/Tricore/User/image1.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_UART.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_UART.h :
+src/AppSw/Tricore/User/image1.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
 src/AppSw/Tricore/User/image1.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Atom_Motor.h :
 src/AppSw/Tricore/User/image1.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GTM.h

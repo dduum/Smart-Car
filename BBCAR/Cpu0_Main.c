@@ -5,8 +5,6 @@ IfxCpu_mutexLock mutexCpu0InitIsOk = 1;   // CPU0 初始化完成标志位
 volatile char mutexCpu0TFTIsOk=0;         // CPU1 0占用/1释放 TFT
 
 CircularBuffer bf;
-extern uint8 data_change_flag;
-
 
 /* 母板修改
  * 按键从上往下为1~5，按键1：22.3，按键2：22.1，按键3：22.2，按键4：22.0，按键5：33.12

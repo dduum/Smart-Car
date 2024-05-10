@@ -5,7 +5,6 @@
 */
 #include "My_Control_Code.h"
 
-uint8 cnt=0;
 uint8 Key_Value=0;
 uint8 Select_SorM=0;
 uint8 Select_PID=0;
@@ -21,20 +20,18 @@ uint8 Motor_openFlag=0;         //电机启动标志
 uint8 Servo_openFlag=0;         //舵机启动标志
 short Motor_duty1 = 0;
 short Motor_duty2 = 0;
-float Target_Speed1=1; //左电机目标速度m/s
-float Target_Speed2=1; //右电机目标速度m/s
+
+float Target_Speed=1; //目标速度m/s
 
 void Motor_Control(void)
 {
-    cnt++;  //配置串口发送中断
-
     //控制电机同样是5ms
     /* 获取编码器值 */
     LPulse = -ENC_GetCounter(ENC4_InPut_P02_8); // 左电机，小车前进为负值
     YPulse = ENC_GetCounter(ENC2_InPut_P33_7);  // 右电机，小车前进为正值
 
-    Current_Speed1=LPulse/1024.0*9.3258/100.0/0.005;        //编译器旋转一圈，小车移动30/50*4.95*3.14=9.3258cm
-    Current_Speed2=YPulse/1024.0*9.3258/100.0/0.005;        //
+    Current_Speed1=LPulse/1024.0*12.0576/100.0/0.01/1.357;        //编译器旋转一圈，小车移动30/50*4.95*3.14=9.3258cm
+    Current_Speed2=YPulse/1024.0*12.0576/100.0/0.01/1.357;        //
 
     //转向环PID
 //    if(StraightWay_flag)
@@ -50,51 +47,29 @@ void Motor_Control(void)
 
     if(Motor_openFlag==1)
     {
-        //速度环PID
-        Motor1_IncPID+=PidIncCtrl(&Motor_Inc_PID1,(float)(Target_Speed1-Current_Speed1));
-        Motor2_IncPID+=PidIncCtrl(&Motor_Inc_PID2,(float)(Target_Speed2-Current_Speed2));
-        //去除电机死区
-//        if(Motor_duty1 > 0 && Motor_duty1 < 800) Motor_duty1 = 800;
-//        if(Motor_duty1 < 0 && Motor_duty1 > -800) Motor_duty1 = -800;
-//        if(Motor_duty2 > 0 && Motor_duty2 < 800) Motor_duty2 = 800;
-//        if(Motor_duty2 < 0 && Motor_duty2 > -800) Motor_duty2 = -800;
+        Target_Speed=1;
     }
     else if(Motor_openFlag==0)
     {
-        //速度环PID
-        Motor1_IncPID+=PidIncCtrl(&Motor_Inc_PID1,(float)(0-Current_Speed1));
-        Motor2_IncPID+=PidIncCtrl(&Motor_Inc_PID2,(float)(0-Current_Speed2));
+        Target_Speed=0;
     }
+    //速度环PID
+    Motor1_IncPID+=PidIncCtrl(&Motor_Inc_PID,(float)(Target_Speed-Current_Speed1));
+    Motor2_IncPID+=PidIncCtrl(&Motor_Inc_PID,(float)(Target_Speed-Current_Speed2));
 
     //电机限幅
     if(Motor1_IncPID > 2000)Motor1_IncPID = 2000;else if(Motor1_IncPID < -2000)Motor1_IncPID = -2000;
-    if(Motor_Inc_PID1.out > 2000)Motor_Inc_PID1.out = 2000;else if(Motor_Inc_PID1.out < -2000)Motor_Inc_PID1.out = -2000;
-
     if(Motor2_IncPID > 2000)Motor2_IncPID = 2000;else if(Motor2_IncPID < -2000)Motor2_IncPID = -2000;
-    if(Motor_Inc_PID2.out > 2000)Motor_Inc_PID2.out = 2000;else if(Motor_Inc_PID2.out < -2000)Motor_Inc_PID2.out = -2000;
+    if(Motor_Inc_PID.out > 2000)Motor_Inc_PID.out = 2000;else if(Motor_Inc_PID.out < -2000)Motor_Inc_PID.out = -2000;
 
     //转向和电机驱动融合并限幅
-    Motor_duty1=(int)Motor1_IncPID-(int)Motor_DirPId;
-    Motor_duty2=(int)Motor2_IncPID+(int)Motor_DirPId;
+    Motor_duty1=(int)Motor1_IncPID+(int)Motor_DirPId;
+    Motor_duty2=(int)Motor2_IncPID-(int)Motor_DirPId;
     if(Motor_duty1 > 2000)Motor_duty1 = 2000;else if(Motor_duty1 < 0)Motor_duty1 = 0;
     if(Motor_duty2 > 2000)Motor_duty2 = 2000;else if(Motor_duty2 < 0)Motor_duty2 = 0;
-    //给电机PWM信号
-    MotorCtrl(Motor_duty2,Motor_duty1);
 
-    if(cnt>=10)    //每20ms串口发送duty的值
-    {
-        cnt=0;
-//        sprintf(txt_a, "{Motor_duty12}%d,%d\r\n", Motor_duty1,Motor_duty2);
-//        UART_PutStr(UART0, txt_a);
-//        sprintf(txt_a, "{Servo_Loc_error}%d\r\n", Servo_Loc_error);
-//        UART_PutStr(UART0, txt_a);
-//        sprintf(txt_a, "{Motor_DirPId}%.2f\r\n", Motor_DirPId);
-//        UART_PutStr(UART0, txt_a);
-//        sprintf(txt_a, "{Cur_S1,Tar_S1}%.2f,%.2f\r\n", Current_Speed1,Target_Speed1);
-//        UART_PutStr(UART0, txt_a);
-//        sprintf(txt_a, "{Cur_S2,Tar_S2}%.2f,%.2f\r\n", Current_Speed2,Target_Speed2);
-//        UART_PutStr(UART0, txt_a);
-    }
+    //给电机PWM信号
+    MotorCtrl(Motor_duty2,Motor_duty1);  //该函数第一个形参是右轮M2，第二个形参是左轮M1
 }
 
 void Servo_Control(void)
@@ -226,13 +201,13 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID1.kp+=1;
+                    Motor_Inc_PID.kp+=1;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID1.ki+=1;
+                    Motor_Inc_PID.ki+=1;
                     break;
                 case 2:  //D
-                    Motor_Inc_PID1.kd+=1;
+                    Motor_Inc_PID.kd+=1;
                     break;
             }
         }
@@ -261,13 +236,13 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID1.kp-=1;
+                    Motor_Inc_PID.kp-=1;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID1.ki-=1;
+                    Motor_Inc_PID.ki-=1;
                     break;
                 case 2:  //D
-                    Motor_Inc_PID1.kd-=1;
+                    Motor_Inc_PID.kd-=1;
                     break;
             }
         }
@@ -294,6 +269,6 @@ void Modify_PID(void)
     if(switch_flag==1){switch_flag=0;TFTSPI_CLS(u16BLACK);}  //更新页面
 
     if(Select_SorM==0){Show_ServoPid();}
-    if(Select_SorM==1){Show_MotorIncPid1();}    //显示调试信息
+    if(Select_SorM==1){Show_MotorIncPid();}    //显示调试信息
 }
 

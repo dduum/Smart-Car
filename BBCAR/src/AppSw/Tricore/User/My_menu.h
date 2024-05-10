@@ -14,6 +14,7 @@
 #include <LQ_PID.h>
 #include <Platform_Types.h>
 #include "My_Button.h"
+#include "My_Control_Code.h"
 
 
 typedef struct Menu
@@ -34,8 +35,7 @@ void menu_image(void);
 void menu_ServoMotor(void);
 void Show_ENC(void);
 void Show_ServoPid(void);
-void Show_MotorIncPid1(void);
-void Show_MotorIncPid2(void);
+void Show_MotorIncPid(void);
 
 
 #endif /* SRC_APPSW_TRICORE_USER_MY_MENU_H_ */

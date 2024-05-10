@@ -15,11 +15,6 @@ uint8 data_buf[100];
 uint8 data_change_flag=0;
 unsigned char UART_flag=0;
 
-extern pid_param_t Servo_Loc_PID;
-extern pid_param_t Motor_Inc_PID1;
-extern pid_param_t Motor_Inc_PID2;
-
-
 uint8 gp=10;
 uint8 gi=50;
 uint8 gd=100;
@@ -30,10 +25,6 @@ int kasi=0;
 
 uint16 dlen;
 uint16 dcnt;
-
-extern pid_param_t Servo_Loc_PID;
-extern pid_param_t Motor_Inc_PID1;
-extern pid_param_t Motor_Inc_PID2;
 
 void UART_ReceiveData(uint8 data)
 {
@@ -145,22 +136,13 @@ void Data_Analyse(void)
                     UART_SendPar_Cmd02(id,Servo_Loc_PID.kd);
                     break;
                 case 0x0003:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID1.kp);
+                    UART_SendPar_Cmd02(id,Motor_Inc_PID.kp);
                     break;
                 case 0x0004:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID1.ki);
+                    UART_SendPar_Cmd02(id,Motor_Inc_PID.ki);
                     break;
                 case 0x0005:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID1.kd);
-                    break;
-                case 0x0006:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID2.kp);
-                    break;
-                case 0x0007:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID2.ki);
-                    break;
-                case 0x0008:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID2.kd);
+                    UART_SendPar_Cmd02(id,Motor_Inc_PID.kd);
                     break;
             }
         }else if(cmd==0x03){        //
@@ -182,15 +164,6 @@ void Data_Analyse(void)
                     break;
                 case 0x0005:
                     UART_SendPar_Cmd03(id,8,"LMD");
-                    break;
-                case 0x0006:
-                    UART_SendPar_Cmd03(id,8,"RMP");
-                    break;
-                case 0x0007:
-                    UART_SendPar_Cmd03(id,8,"RMI");
-                    break;
-                case 0x0008:
-                    UART_SendPar_Cmd03(id,8,"RMD");
                     break;
             }
         }else if(cmd==0x10){
@@ -228,27 +201,15 @@ void Data_Analyse(void)
                 UART_WriteReturn(sum_check,add_check);
                 break;
             case 0x0003:
-                Motor_Inc_PID1.kp=val;
+                Motor_Inc_PID.kp=val;
                 UART_WriteReturn(sum_check,add_check);
                 break;
             case 0x0004:
-                Motor_Inc_PID1.ki=val;
+                Motor_Inc_PID.ki=val;
                 UART_WriteReturn(sum_check,add_check);
                 break;
             case 0x0005:
-                Motor_Inc_PID1.kd=val;
-                UART_WriteReturn(sum_check,add_check);
-                break;
-            case 0x0006:
-                Motor_Inc_PID2.kp=val;
-                UART_WriteReturn(sum_check,add_check);
-                break;
-            case 0x0007:
-                Motor_Inc_PID2.ki=val;
-                UART_WriteReturn(sum_check,add_check);
-                break;
-            case 0x0008:
-                Motor_Inc_PID2.kd=val;
+                Motor_Inc_PID.kd=val;
                 UART_WriteReturn(sum_check,add_check);
                 break;
         }

@@ -30,8 +30,7 @@ extern uint8 Motor_openFlag;         //电机启动标志
 extern uint8 Servo_openFlag;         //舵机启动标志
 extern short Motor_duty1;
 extern short Motor_duty2;
-extern float Target_Speed1; //左电机目标速度m/s
-extern float Target_Speed2; //右电机目标速度m/s
+extern float Target_Speed;
 
 void Modify_PID(void);
 void Key_Control(void);

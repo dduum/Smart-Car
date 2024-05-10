@@ -974,6 +974,8 @@ src/AppSw/Tricore/APP/LQ_I2C_9AX.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricor
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h :
 src/AppSw/Tricore/APP/LQ_I2C_9AX.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+src/AppSw/Tricore/APP/LQ_I2C_9AX.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
 src/AppSw/Tricore/APP/LQ_I2C_9AX.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h :
 src/AppSw/Tricore/APP/LQ_I2C_9AX.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h

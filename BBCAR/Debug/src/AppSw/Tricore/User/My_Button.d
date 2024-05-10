@@ -954,10 +954,20 @@ src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/T
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
 src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h :
-src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h :
+src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
 src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_MotorServo.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_MotorServo.h :
+src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
+d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
+src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h :
+src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
+src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h :
 src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h :
 src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h
@@ -972,14 +982,6 @@ src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricor
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h :
 src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Control_Code.h :
-src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
-src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_MotorServo.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_MotorServo.h :
-src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
-d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
-src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h :
 src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h :
 src/AppSw/Tricore/User/My_Button.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_menu.h

@@ -32,12 +32,6 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 //////////////////////////////////以下部分为功能测试/////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-
-extern pid_param_t Servo_Loc_PID;  //
-extern pid_param_t Motor_Inc_PID1; //
-extern pid_param_t Motor_Inc_PID2; //
-
-
 /*************************************************************************
 *  函数名称：void Test_EEPROM(void)
 *  功能说明：测试演示
@@ -58,65 +52,41 @@ void Test_EEPROM(void)
     TFTSPI_CLS(u16BLUE);   //蓝色屏幕
     TFTSPI_P8X16Str(0,0,"eeprom",u16WHITE,u16BLACK);
 
-//    unsigned long u32wBuff[24];
-//    unsigned long u32rBuff[24];
+    unsigned long u32wBuff[24];
+    unsigned long u32rBuff[24];
 
-//    float f32wBuff[24];
+    float f32wBuff[24];
 //    float f32rBuff[24];
 
     /* 赋值 */
-//    for(i = 0; i < 24; i++)
-//    {
-////        u32wBuff[i] = i * 100;
-//        f32wBuff[i] = i * 2.5f;
-//    }
-    float PID_Write[24];
-    float PID_Read[24];
-
-    PID_Write[0]=Servo_Loc_PID.kp;
-    PID_Write[1]=Servo_Loc_PID.ki;
-    PID_Write[2]=Servo_Loc_PID.kd;
-    PID_Write[3]=Motor_Inc_PID1.kp;
-    PID_Write[4]=Motor_Inc_PID1.ki;
-    PID_Write[5]=Motor_Inc_PID1.kd;
-    PID_Write[6]=Motor_Inc_PID2.kp;
-    PID_Write[7]=Motor_Inc_PID2.ki;
-    PID_Write[8]=Motor_Inc_PID2.kd;
+    for(i = 0; i < 24; i++)
+    {
+        u32wBuff[i] = i * 100;
+        f32wBuff[i] = i * 2.5f;
+    }
 
     EEPROM_EraseSector(0);
-//    EEPROM_EraseSector(1);
+    EEPROM_EraseSector(1);
 
-//    TFTSPI_P8X16Str(0,1,"eeporm u write",u16WHITE,u16BLACK);
+    TFTSPI_P8X16Str(0,1,"eeporm u write",u16WHITE,u16BLACK);
 
     /* 写入 */
-//    EEPROM_Write(0, 0, u32wBuff, 24);
+    EEPROM_Write(0, 0, u32wBuff, 24);
 
-    TFTSPI_P8X16Str(0,2,"pid write",u16WHITE,u16BLACK);
-
-    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 9);
-
-//    TFTSPI_P8X16Str(0,3,"eeporm u read",u16WHITE,u16BLACK);
+    TFTSPI_P8X16Str(0,3,"eeporm u read",u16WHITE,u16BLACK);
 
     /* 读出 */
-//    EEPROM_Read(0, 0, u32rBuff, 24);
+    EEPROM_Read(0, 0, u32rBuff, 24);
 
-    TFTSPI_P8X16Str(0,4,"pid read",u16WHITE,u16BLACK);
-
-    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 9);
 
     /* 比较 */
     for(i = 0; i < 9; i++)
     {
-//        if(u32wBuff[i] != u32rBuff[i])
-//        {
-//            TFTSPI_P8X16Str(0,5,"u32error",u16WHITE,u16BLACK);
-//        }
-        if(PID_Write[i] != PID_Read[i])
+        if(u32wBuff[i] != u32rBuff[i])
         {
-            TFTSPI_P8X16Str(0,6,"ferror",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,5,"u32error",u16WHITE,u16BLACK);
         }
     }
-    TFTSPI_P8X16Str(0,7,"eeprom is ok",u16WHITE,u16BLACK);
 
 #pragma warning 557         // 屏蔽警告
     while (1);
@@ -131,32 +101,29 @@ void test_pid(void)
     TFTSPI_P8X16Str(0,0,"eeprom",u16WHITE,u16BLACK);
 
     int i;
-    float PID_Write[9];
-    float PID_Read[9];
+    float PID_Write[6];
+    float PID_Read[6];
     PID_Write[0]=Servo_Loc_PID.kp;
     PID_Write[1]=Servo_Loc_PID.ki;
     PID_Write[2]=Servo_Loc_PID.kd;
-    PID_Write[3]=Motor_Inc_PID1.kp;
-    PID_Write[4]=Motor_Inc_PID1.ki;
-    PID_Write[5]=Motor_Inc_PID1.kd;
-    PID_Write[6]=Motor_Inc_PID2.kp;
-    PID_Write[7]=Motor_Inc_PID2.ki;
-    PID_Write[8]=Motor_Inc_PID2.kd;
+    PID_Write[3]=Motor_Inc_PID.kp;
+    PID_Write[4]=Motor_Inc_PID.ki;
+    PID_Write[5]=Motor_Inc_PID.kd;
 
     EEPROM_EraseSector(0);
-//
+
 //    /* 写入 */
     TFTSPI_P8X16Str(0,2,"pid f write",u16WHITE,u16BLACK);
 
-    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 9);
+    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 6);
 
     /* 读出 */
     TFTSPI_P8X16Str(0,4,"pid f read",u16WHITE,u16BLACK);
 
-    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 9);
+    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 6);
 
     /* 比较 */
-    for(i = 0; i < 9; i++)
+    for(i = 0; i < 6; i++)
     {
         if(abs(PID_Write[i]-PID_Read[i])<0.1)
         {
@@ -169,36 +136,30 @@ void test_pid(void)
 
 void E2PROM_Read_PID(void)
 {
-    float PID_Read[9];
-    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 9);
+    float PID_Read[6];
+    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 6);
     Servo_Loc_PID.kp=PID_Read[0];
     Servo_Loc_PID.ki=PID_Read[1];
     Servo_Loc_PID.kd=PID_Read[2];
-    Motor_Inc_PID1.kp=PID_Read[3];
-    Motor_Inc_PID1.ki=PID_Read[4];
-    Motor_Inc_PID1.kd=PID_Read[5];
-    Motor_Inc_PID2.kp=PID_Read[6];
-    Motor_Inc_PID2.ki=PID_Read[7];
-    Motor_Inc_PID2.kd=PID_Read[8];
+    Motor_Inc_PID.kp=PID_Read[3];
+    Motor_Inc_PID.ki=PID_Read[4];
+    Motor_Inc_PID.kd=PID_Read[5];
+
 }
 
 void E2PROM_Write_PID(void)
 {
-    float PID_Write[9];
+    float PID_Write[6];
     //擦除扇区
     EEPROM_EraseSector(0);
 
     PID_Write[0]=Servo_Loc_PID.kp;
     PID_Write[1]=Servo_Loc_PID.ki;
     PID_Write[2]=Servo_Loc_PID.kd;
-    PID_Write[3]=Motor_Inc_PID1.kp;
-    PID_Write[4]=Motor_Inc_PID1.ki;
-    PID_Write[5]=Motor_Inc_PID1.kd;
-    PID_Write[6]=Motor_Inc_PID2.kp;
-    PID_Write[7]=Motor_Inc_PID2.ki;
-    PID_Write[8]=Motor_Inc_PID2.kd;
-    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 9);
-
+    PID_Write[3]=Motor_Inc_PID.kp;
+    PID_Write[4]=Motor_Inc_PID.ki;
+    PID_Write[5]=Motor_Inc_PID.kd;
+    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 6);
 }
 
 
