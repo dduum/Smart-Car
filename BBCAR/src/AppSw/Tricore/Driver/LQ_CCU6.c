@@ -64,7 +64,7 @@ void CCU60_CH0_IRQHandler (void)
 
     /* 用户代码 */
     Motor_Control();
-    Servo_Control();
+//    Servo_Control();
 }
 
 /*************************************************************************
@@ -125,6 +125,7 @@ void CCU61_CH1_IRQHandler (void)
     IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU61, IfxCcu6_InterruptSource_t13PeriodMatch);
 
     /* 用户代码 */
+//    UART_SendData(Current_Speed1,Current_Speed2,Current_Speed);
 
 }
 

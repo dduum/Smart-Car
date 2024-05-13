@@ -36,10 +36,10 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void GPIO_LED_Init(void)
 {
     // 鍒濆鍖�,杈撳叆鍙ｏ紝楂樼數骞�
-    PIN_InitConfig(LED0p, PIN_MODE_OUTPUT, 0);
-    PIN_InitConfig(LED1p, PIN_MODE_OUTPUT, 0);
-    PIN_InitConfig(LED2p, PIN_MODE_OUTPUT, 0);
-    PIN_InitConfig(LED3p, PIN_MODE_OUTPUT, 0);
+    PIN_InitConfig(LED0p, PIN_MODE_OUTPUT, 1);
+    PIN_InitConfig(LED1p, PIN_MODE_OUTPUT, 1);
+    PIN_InitConfig(LED2p, PIN_MODE_OUTPUT, 1);
+    PIN_InitConfig(LED3p, PIN_MODE_OUTPUT, 1);
 }
 
 

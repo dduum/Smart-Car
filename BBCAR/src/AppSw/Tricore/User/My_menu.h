@@ -35,6 +35,7 @@ void menu_image(void);
 void menu_ServoMotor(void);
 void Show_ENC(void);
 void Show_ServoPid(void);
+void Show_Motor(void);
 void Show_MotorIncPid(void);
 
 

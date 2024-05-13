@@ -11,6 +11,7 @@
 #include <LQ_CAMERA.h>
 
 extern int Servo_Loc_error;
+extern uint8 StraightWay_flag;
 
 int ABS(int A);
 uint8 min(uint8 A,uint8 B);

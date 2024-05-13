@@ -123,7 +123,7 @@ void Data_Analyse(void)
         if(cmd==0x00){              //
             UART_SendPar_Cmd00('X');
         }else if(cmd==0x01){        //
-            UART_SendPar_Cmd01(9);  //
+            UART_SendPar_Cmd01(6);  //参数个数
         }else if(cmd==0x02){        //
             switch(id){
                 case 0x0000:
@@ -218,7 +218,6 @@ void Data_Analyse(void)
 }
 
 
-
 void UART_WriteReturn(uint8 sum,uint8 add)
 {
     unsigned char  _cnt=0;
@@ -253,23 +252,39 @@ void UART_WriteReturn(uint8 sum,uint8 add)
     UART_PutBuff(USER_UART, data_buf, _cnt);
 }
 
-void UART_SendData(uint8 data1, uint8 data2, uint8 data3)
+void UART_SendData(float data1, float data2, float data3)
 {
   unsigned char  _cnt=0;
 
   data_buf[_cnt++] = 0xAB;
-  data_buf[_cnt++] = 0xFD;
+  data_buf[_cnt++] = 0xFF;
   data_buf[_cnt++] = 0xFE;
   data_buf[_cnt++] = 0xF1;
 
-  data_buf[_cnt++] = 0x03;
+  data_buf[_cnt++] = 0x0B;
   data_buf[_cnt++] = 0x00;
 
-  data_buf[_cnt++]=(unsigned char)(data1);
+  unsigned char byteArray1[sizeof(float)];
+  memcpy(byteArray1, &data1, sizeof(float));
+  unsigned char byteArray2[sizeof(float)];
+  memcpy(byteArray2, &data2, sizeof(float));
+  unsigned char byteArray3[sizeof(float)];
+  memcpy(byteArray3, &data3, sizeof(float));
 
-  data_buf[_cnt++]=(unsigned char)(data2);
+  data_buf[_cnt++]= byteArray1[0];
+  data_buf[_cnt++]= byteArray1[1];
+  data_buf[_cnt++]= byteArray1[2];
+  data_buf[_cnt++]= byteArray1[3];
 
-  data_buf[_cnt++]=(unsigned char)(data3);
+  data_buf[_cnt++]= byteArray2[0];
+  data_buf[_cnt++]= byteArray2[1];
+  data_buf[_cnt++]= byteArray2[2];
+  data_buf[_cnt++]= byteArray2[3];
+
+  data_buf[_cnt++]= byteArray3[0];
+  data_buf[_cnt++]= byteArray3[1];
+  data_buf[_cnt++]= byteArray3[2];
+  data_buf[_cnt++]= byteArray3[3];
 
   uint8 sumcheck = 0;
   uint8 addcheck = 0;

@@ -200,8 +200,6 @@ src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Irq/IfxCpu_Irq.h :
 src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Port/Std/IfxPort.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Port/Std/IfxPort.h :
-src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_GPIO_LED.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_GPIO_LED.h :
 src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_UART.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_UART.h :
 src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_UART.h
@@ -256,6 +254,8 @@ src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Irq/IfxCpu_Irq.h :
 src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Scu/Std/IfxScuCcu.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Scu/Std/IfxScuCcu.h :
+src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_GPIO_LED.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_GPIO_LED.h :
 src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Main/Main.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Main/Main.h :
 src/AppSw/Tricore/User/My_Image_Handle.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/include.h

@@ -8,6 +8,7 @@ void Set_PID(void)
     PidInit(&Servo_Loc_PID);
     PidInit(&Motor_Inc_PID);
     Pid_Value();
+    E2PROM_Write_PID();
 }
 
 void Pid_Value(void)
@@ -17,8 +18,8 @@ void Pid_Value(void)
     Servo_Loc_PID.ki=10.5;
     Servo_Loc_PID.kd=5.5;   //1
     //电机速度环
-    Motor_Inc_PID.kp=40;
-    Motor_Inc_PID.ki=0.62;
+    Motor_Inc_PID.kp=12.5;
+    Motor_Inc_PID.ki=1.3;
     Motor_Inc_PID.kd=0;
 }
 

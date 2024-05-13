@@ -21,29 +21,8 @@ void Menu_Scan(void)
         /* 主菜单，选择进入对应二级菜单 */
         //进入主菜单时显示“主菜单”，并播报一遍
         case 0: main_menu(); break;
-        /* 二级菜单1 启动电机舵机菜单*/
+        /* 二级菜单1    各个图像数据*/
         case 1:
-            switch(menu.mode2)
-            {
-                /* 二级菜单，选择进入对应三级菜单  */
-                    //进入二级菜单时显示“二级菜单1”，并播报一遍
-                case 0:menu_ServoMotor();break;
-                /* 三级菜单1，进入可运行App1 启动电机舵机*/
-                case 1:
-                    Motor_openFlag=1;
-                    Servo_openFlag=1;
-                    TFTSPI_P8X16Str(2,1,(char*)"open is OK",u16WHITE,u16BLACK);
-                    break;
-                /* 三级菜单2，进入可运行App2 关闭电机舵机*/
-                case 2:
-                    Motor_openFlag=0;
-                    Servo_openFlag=0;
-                    TFTSPI_P8X16Str(2,1,(char*)"close is OK",u16WHITE,u16BLACK);
-                    break;
-            }
-            break;
-        /* 二级菜单2    各个图像数据*/
-        case 2:
             switch(menu.mode2)
             {
                 /* 二级菜单，选择进入对应三级菜单  */
@@ -55,8 +34,8 @@ void Menu_Scan(void)
                 case 2:  TFTSPI_BinRoad(0, 0, LCDH, LCDW, (unsigned char *)Bin_Image);break;
             }
             break;
-            /* 二级菜单3    PID主菜单*/
-        case 3:
+            /* 二级菜单2    PID主菜单*/
+        case 2:
             switch(menu.mode2)
             {
                 case 0:
@@ -73,7 +52,7 @@ void Menu_Scan(void)
                     break;
             }
             break;
-        case 4:
+        case 3:
             switch(menu.mode2)
             {
                 case 0:
@@ -93,28 +72,19 @@ void main_menu(void)
 {
     switch(chooseBuf){
         case 1:
-            TFTSPI_P8X16Str(2,0,(char*)"->QIDong!!!",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,1,(char*)"  My_Image",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,2,(char*)"  PID_Value",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,3,(char*)"  ENC_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,0,(char*)"->My_Image",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,1,(char*)"  PID_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,2,(char*)"  ENC_Value",u16WHITE,u16BLACK);
             break;
         case 2:
-            TFTSPI_P8X16Str(2,0,(char*)"  QIDong!!!",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,1,(char*)"->My_Image",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,2,(char*)"  PID_Value",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,3,(char*)"  ENC_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,0,(char*)"  My_Image",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,1,(char*)"->PID_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,2,(char*)"  ENC_Value",u16WHITE,u16BLACK);
             break;
         case 3:
-            TFTSPI_P8X16Str(2,0,(char*)"  QIDong!!!",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,1,(char*)"  My_Image",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,2,(char*)"->PID_Value",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,3,(char*)"  ENC_Value",u16WHITE,u16BLACK);
-            break;
-        case 4:
-            TFTSPI_P8X16Str(2,0,(char*)"  QIDong!!!",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,1,(char*)"  My_Image",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,2,(char*)"  PID_Value",u16WHITE,u16BLACK);
-            TFTSPI_P8X16Str(2,3,(char*)"->ENC_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,0,(char*)"  My_Image",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,1,(char*)"  PID_Value",u16WHITE,u16BLACK);
+            TFTSPI_P8X16Str(0,2,(char*)"->ENC_Value",u16WHITE,u16BLACK);
             break;
     }
 }
@@ -178,9 +148,9 @@ void Show_ENC(void)
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
     sprintf(txt, "YPulse: %4d", YPulse);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Cur_Speed1: %.1f", Current_Speed1);
+    sprintf(txt, "Cur_Speed1: %d", Current_Speed1);
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Cur_Speed2: %.1f", Current_Speed2);
+    sprintf(txt, "Cur_Speed2: %d", Current_Speed2);
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
     sprintf(txt, "TarSpeed: %.1f",Target_Speed);
     TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
@@ -224,9 +194,18 @@ void Show_MotorIncPid(void)
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
     sprintf(txt, "M2_duty=%4d",Motor_duty2);
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "M1_IncPID: %.2f", Motor1_IncPID);
+    sprintf(txt, "M_IncPID: %6.2f", Motor_IncPID);
     TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "M2_IncPID: %.2f", Motor2_IncPID);
-    TFTSPI_P8X16Str(0, 7, txt, u16WHITE, u16BLACK);
+}
+
+void Show_Motor(void)
+{
+    char txt[30];
+    sprintf(txt, "speed=%.1f",Current_Speed);
+    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "speed1=%d",Current_Speed1);
+    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "speed2=%d",Current_Speed2);
+    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
 }
 

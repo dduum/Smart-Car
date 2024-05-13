@@ -73,71 +73,16 @@ void Button_Scan(void)
                     chooseBuf=1;
             }else if(isBtnN()){    //右键
                 switch_flag=1;
-                if(chooseBuf<4)
+                if(chooseBuf<3)
                     chooseBuf++;
                 else
-                    chooseBuf=4;
+                    chooseBuf=3;
             }
             break;
         /*
-         * 二级菜单1  电机舵机启动
+         * 二级菜单1摄像头
          */
         case 1:
-            switch(menu.mode2)
-            {
-                /*
-                 * 二级菜单选择 电机舵机启动关闭
-                 */
-                case 0:
-                    if(isBtnE()){        //确认键
-                        switch_flag=1;
-                        menu.mode2 = chooseBuf; chooseBuf = 1;
-                    }else if(isBtnR()){  //返回键
-                        switch_flag=1;
-                        chooseBuf = 1; menu.mode2 = 0; menu.mode1 = 0;
-                    }else if(isBtnP()){  //左键
-                        switch_flag=1;
-                        if(chooseBuf>1)
-                            chooseBuf--;
-                        else
-                            chooseBuf=1;
-                    }else if(isBtnN()){  //右键
-                        switch_flag=1;
-                        if(chooseBuf<2) chooseBuf++;
-                        else    chooseBuf=2;
-                    }
-                    break;
-                /*
-                 * 三级菜单1  App1
-                 */
-                case 1:
-                    if(isBtnE()){         //确认键（App1中不需要确认键）
-                    }else if(isBtnR()){   //返回键
-                        switch_flag=1;
-                        menu.mode2 = 0;
-                    }else if(isBtnP()){   //左键（App1中不需要左键）
-                    }else if(isBtnN()){   //右键（App1中不需要右键）
-                    }
-                    break;
-                /*
-                 * 三级菜单2  App2
-                 */
-                case 2:
-                    if(isBtnE()){         //确认键（App1中不需要确认键）
-                        switch_flag=1;
-                    }else if(isBtnR()){   //返回键
-                        switch_flag=1;
-                        menu.mode2 = 0;
-                    }else if(isBtnP()){   //左键（App1中不需要左键）
-                    }else if(isBtnN()){   //右键（App1中不需要右键）
-                    }
-                    break;
-            }
-            break;
-        /*
-         * 二级菜单2
-         */
-        case 2:
             switch(menu.mode2)
             {
                 /*
@@ -191,9 +136,9 @@ void Button_Scan(void)
             }
             break;
         /*
-         * 二级菜单3    PID
+         * 二级菜单2    PID
          */
-        case 3:
+        case 2:
             switch(menu.mode2)
             {
                 /*
@@ -245,9 +190,9 @@ void Button_Scan(void)
             }
             break;
             /*
-         * 二级菜单4    ENC
+         * 二级菜单3    ENC
          */
-        case 4:
+        case 3:
             switch(menu.mode2)
             {
                 /*

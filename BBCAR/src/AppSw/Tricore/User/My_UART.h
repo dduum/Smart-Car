@@ -18,7 +18,7 @@ void Data_Analyse(void);
 void UART_ReceiveData(uint8 data);
 void UART_WriteReturn(uint8 sum,uint8 add);
 void UART_SaveReturn(uint8 sum,uint8 add);
-void UART_SendData(uint8 data1, uint8 data2, uint8 data3);
+void UART_SendData(float data1, float data2, float data3);
 void UART_SendPar_Cmd00(char name);                         //
 void UART_SendPar_Cmd01(uint16 val);                        //
 void UART_SendPar_Cmd02(uint16 id , float val);

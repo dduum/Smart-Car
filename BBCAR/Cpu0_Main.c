@@ -55,6 +55,16 @@ int core0_main (void)
             if(flag){switch_flag=1;flag=0;}
             Modify_PID();
         }
+        if(Key_Value==5)
+        {
+            Key_Value=0;
+            Motor_openFlag=!Motor_openFlag;
+            Servo_openFlag=!Servo_openFlag;
+            if(Motor_openFlag && Servo_openFlag)
+                LED_Ctrl(LED2,ON);
+            else
+                LED_Ctrl(LED2,OFF);
+        }
         //如果PID的数据发生改变,重新向E2PROM中写入数据
         if(data_change_flag==1)
         {
@@ -62,6 +72,9 @@ int core0_main (void)
             E2PROM_Write_PID();
         }
 
+        char txt[70];
+        sprintf(txt, "%.1f,%d,%d,%.1f,%.1f\n",Current_Speed,Current_Speed1,Current_Speed2,Target_Speed,Motor_IncPID);
+        UART_PutStr(UART1,txt);
     }
 }
 
@@ -86,13 +99,13 @@ void Init_System(void)
     ENC_InitConfig(ENC2_InPut_P33_7, ENC2_Dir_P33_6); //左轮编码器
     ENC_InitConfig(ENC4_InPut_P02_8, ENC4_Dir_P33_5); //右轮编码器
 
-    UART_InitConfig(UART0_RX_P14_1,UART0_TX_P14_0, 115200);
+//    UART_InitConfig(UART0_RX_P14_1,UART0_TX_P14_0, 115200);
     UART_InitConfig(UART1_RX_P20_9,UART1_TX_P15_0, 115200); //串口初始化
 
     CCU6_InitConfig(CCU60, CCU6_Channel0, 10*1000);  //每10ms进入一次中断，处理电机舵机的事件
     CCU6_InitConfig(CCU60, CCU6_Channel1, 20*1000);  //每20ms进入一次定时中断中，检测按键状态以及ADC
     CCU6_InitConfig(CCU61, CCU6_Channel0, 10*1000);  //每10ms进入一次中断，用于摄像头处理元素
-//    CCU6_InitConfig(CCU61, CCU6_Channel1, 10*1000);  //每1ms进入一次中断，发送串口数据
+//    CCU6_InitConfig(CCU61, CCU6_Channel1, 100*1000);  //每10ms进入一次中断，发送串口数据
 
     //初始化PID的值
     Set_PID();

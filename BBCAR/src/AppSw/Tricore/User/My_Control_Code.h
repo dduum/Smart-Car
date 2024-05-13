@@ -18,11 +18,11 @@
 
 extern uint8 Key_Value;
 extern uint8 Select_PID;
-extern float Motor1_IncPID;
-extern float Motor2_IncPID;                  //
+extern float Motor_IncPID;
 extern float Motor_DirPId;                   //
-extern float Current_Speed1;        //速度单位m/s
-extern float Current_Speed2;
+extern int Current_Speed1;        //速度单位m/s
+extern int Current_Speed2;
+extern float Current_Speed;
 extern volatile sint16 LPulse;                 //
 extern volatile sint16 YPulse;                 //
 extern int Servo_duty;
@@ -37,5 +37,6 @@ void Key_Control(void);
 void Motor_Control(void);
 void Servo_Control(void);
 void Camera_Control(void);
+int Low_Pass_Filter(int encinput,int* Feedback_enc,long int* Feedback_enc_tmp);
 
 #endif /* SRC_APPSW_TRICORE_USER_MY_CONTROL_CODE_H_ */

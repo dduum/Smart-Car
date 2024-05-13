@@ -8,11 +8,13 @@
 uint8 Key_Value=0;
 uint8 Select_SorM=0;
 uint8 Select_PID=0;
-float Motor1_IncPID=0;
-float Motor2_IncPID=0;                  //
+float Motor_IncPID=0;
 float Motor_DirPId=0;                   //
-float Current_Speed1=0;        //速度单位m/s
-float Current_Speed2=0;
+float Current_Speed=0;
+int Current_Speed1=0;        //速度单位m/s
+long int Current_Tmp_Speed1=0;        //速度单位m/s
+int Current_Speed2=0;
+long int Current_Tmp_Speed2=0;        //速度单位m/s
 volatile sint16 LPulse;                 //
 volatile sint16 YPulse;                 //
 int Servo_duty=Servo_Center_Mid;
@@ -21,55 +23,67 @@ uint8 Servo_openFlag=0;         //舵机启动标志
 short Motor_duty1 = 0;
 short Motor_duty2 = 0;
 
-float Target_Speed=1; //目标速度m/s
+float Target_Speed=0; //目标速度m/s
 
 void Motor_Control(void)
 {
-    //控制电机同样是5ms
-    /* 获取编码器值 */
-    LPulse = -ENC_GetCounter(ENC4_InPut_P02_8); // 左电机，小车前进为负值
-    YPulse = ENC_GetCounter(ENC2_InPut_P33_7);  // 右电机，小车前进为正值
+        LPulse = -ENC_GetCounter(ENC4_InPut_P02_8); // 左电机，小车前进为负值
+        YPulse = ENC_GetCounter(ENC2_InPut_P33_7);  // 右电机，小车前进为正值
 
-    Current_Speed1=LPulse/1024.0*12.0576/100.0/0.01/1.357;        //编译器旋转一圈，小车移动30/50*4.95*3.14=9.3258cm
-    Current_Speed2=YPulse/1024.0*12.0576/100.0/0.01/1.357;        //
+        //控制电机同样是5ms
+        /* 获取编码器值 */
 
-    //转向环PID
-//    if(StraightWay_flag)
-//    {
-//        Motor_DirPId=(float)10*Servo_Loc_error;
-//    }
-//    else
-//    {
-//        Motor_DirPId=(float)0.4*Servo_Loc_error;
-//    }
-    //没加差速
-    Motor_DirPId=0.0;
+//        Current_Speed1=LPulse*0.87;        //编译器旋转一圈，小车移动30/50*4.95*3.14=9.3258cm  速度*100   原本为0.0087，目前100的速度相当于1m/s
+//        Current_Speed2=YPulse*0.87;      //YPulse/1024.0*12.0576/100.0/0.01/1.357 编码器的值*100
+        Low_Pass_Filter((int)LPulse*0.87, &Current_Speed1, &Current_Tmp_Speed1);
+        Low_Pass_Filter((int)YPulse*0.87, &Current_Speed2, &Current_Tmp_Speed2);
+        Current_Speed=(Current_Speed1+Current_Speed2)/2.0;
 
-    if(Motor_openFlag==1)
-    {
-        Target_Speed=1;
-    }
-    else if(Motor_openFlag==0)
-    {
-        Target_Speed=0;
-    }
-    //速度环PID
-    Motor1_IncPID+=PidIncCtrl(&Motor_Inc_PID,(float)(Target_Speed-Current_Speed1));
-    Motor2_IncPID+=PidIncCtrl(&Motor_Inc_PID,(float)(Target_Speed-Current_Speed2));
+        //转向环PID
+//        if(StraightWay_flag)
+//        {
+//           Motor_DirPId=(float)10*Servo_Loc_error;
+//        }
+//        else
+//        {
+//           Motor_DirPId=(float)0.4*Servo_Loc_error;
+//        }
 
-    //电机限幅
-    if(Motor1_IncPID > 2000)Motor1_IncPID = 2000;else if(Motor1_IncPID < -2000)Motor1_IncPID = -2000;
-    if(Motor2_IncPID > 2000)Motor2_IncPID = 2000;else if(Motor2_IncPID < -2000)Motor2_IncPID = -2000;
-    if(Motor_Inc_PID.out > 2000)Motor_Inc_PID.out = 2000;else if(Motor_Inc_PID.out < -2000)Motor_Inc_PID.out = -2000;
+        Motor_DirPId=(float)0.4*Servo_Loc_error;
+        //没加差速
+        Motor_DirPId=0.0;
 
-    //转向和电机驱动融合并限幅
-    Motor_duty1=(int)Motor1_IncPID+(int)Motor_DirPId;
-    Motor_duty2=(int)Motor2_IncPID-(int)Motor_DirPId;
-    if(Motor_duty1 > 2000)Motor_duty1 = 2000;else if(Motor_duty1 < 0)Motor_duty1 = 0;
-    if(Motor_duty2 > 2000)Motor_duty2 = 2000;else if(Motor_duty2 < 0)Motor_duty2 = 0;
+        //速度环PID
+        Motor_IncPID=PidIncCtrl(&Motor_Inc_PID,(float)(Target_Speed-Current_Speed));
 
-    //给电机PWM信号
-    MotorCtrl(Motor_duty2,Motor_duty1);  //该函数第一个形参是右轮M2，第二个形参是左轮M1
+        //电机限幅
+        if(Motor_IncPID > 4000)Motor_IncPID = 4000;else if(Motor_IncPID < 0)Motor_IncPID = 0;
+        if(Motor_Inc_PID.out > 4000)Motor_Inc_PID.out = 4000;else if(Motor_Inc_PID.out < 0)Motor_Inc_PID.out = 0;
+
+        //转向和电机驱动融合并限幅
+//        Motor_IncPID=2500;
+        Motor_duty1=(int)(Motor_IncPID+Motor_DirPId)*0.94;  //0.94
+        Motor_duty2=(int)(Motor_IncPID-Motor_DirPId)*1.06;  //1.06
+        if(Motor_duty1 > 4000)Motor_duty1 = 4000;else if(Motor_duty1 < 0)Motor_duty1 = 0;
+        if(Motor_duty2 > 4000)Motor_duty2 = 4000;else if(Motor_duty2 < 0)Motor_duty2 = 0;
+
+        //给电机PWM信号
+        MotorCtrl(Motor_duty2,Motor_duty1);  //该函数第一个形参是右轮M2，第二个形参是左轮M1
+        if(Motor_openFlag==1)
+        {
+            Target_Speed=150;
+        }
+        else if(Motor_openFlag==0)
+        {
+//            Motor_Inc_PID.out=0;
+//            Motor_Inc_PID.last_derivative=0;
+//            Motor_Inc_PID.last_error=0;
+//            Current_Tmp_Speed1=0;  //低通滤波积分项清零
+//            Current_Tmp_Speed2=0;
+            Target_Speed=0;
+        }
+
+    MotorCtrl(Motor_duty2,Motor_duty1);
 }
 
 void Servo_Control(void)
@@ -115,7 +129,7 @@ void Camera_Control(void)
 //    if(++LED1_Time == 50)   //10*50 = 500ms
 //    {
 //        LED1_Time = 0;
-//        LED_Ctrl(LED1,RVS);     // LED閿熸枻鎷风儊 鎸囩ず閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鐘舵��
+//        LED_Ctrl(LED1,RVS);     // LED
 //    }
 
 //        Cross_Detect();
@@ -201,10 +215,10 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID.kp+=1;
+                    Motor_Inc_PID.kp+=0.5;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID.ki+=1;
+                    Motor_Inc_PID.ki+=0.1;
                     break;
                 case 2:  //D
                     Motor_Inc_PID.kd+=1;
@@ -221,10 +235,10 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Servo_Loc_PID.kp-=1;
+                    Servo_Loc_PID.kp-=0.5;
                     break;
                 case 1:  //I
-                    Servo_Loc_PID.ki-=1;
+                    Servo_Loc_PID.ki-=0.1;
                     break;
                 case 2:  //D
                     Servo_Loc_PID.kd-=1;
@@ -236,10 +250,10 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID.kp-=1;
+                    Motor_Inc_PID.kp-=0.5;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID.ki-=1;
+                    Motor_Inc_PID.ki-=0.1;
                     break;
                 case 2:  //D
                     Motor_Inc_PID.kd-=1;
@@ -259,16 +273,30 @@ void Modify_PID(void)
         Select_PID=0;
         switch_flag=1; //页面更新标志
         Select_SorM++;
-        Select_SorM%=2;
-    }
-    else if(Key_Value==5)
-    {
-        Key_Value=0;
+        Select_SorM%=3;
     }
 
     if(switch_flag==1){switch_flag=0;TFTSPI_CLS(u16BLACK);}  //更新页面
 
     if(Select_SorM==0){Show_ServoPid();}
     if(Select_SorM==1){Show_MotorIncPid();}    //显示调试信息
+    if(Select_SorM==2){Show_Motor();}
+
+}
+
+
+int Low_Pass_Filter(int encinput,int* Feedback_enc,long int* Feedback_enc_tmp)
+{
+    int Feedback_enc_Now = 0;
+    int tmp = 5;
+    int tmp2=tmp*0.5;
+    int tmp7;
+    Feedback_enc_Now=encinput;                     //编码器当前值
+    *Feedback_enc_tmp+=Feedback_enc_Now- *Feedback_enc; //编码器读数差求积
+    Feedback_enc_Now=*Feedback_enc_tmp/tmp;                 //取1/20使编码器数值平滑
+    tmp7=*Feedback_enc_tmp%tmp;
+    if(tmp7>=tmp2)  *Feedback_enc = Feedback_enc_Now + 1;                  //速度值四舍五入
+    if(tmp7<=-tmp2) *Feedback_enc = Feedback_enc_Now - 1;
+    return *Feedback_enc;                                 //反馈滤波后的速度
 }
 
