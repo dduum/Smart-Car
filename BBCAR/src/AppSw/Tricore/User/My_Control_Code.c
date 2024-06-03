@@ -36,13 +36,18 @@ void Motor_Control(void)
     //控制电机是100ms
     LPulse=ECPULSE1*5;
     YPulse=ECPULSE2*5;   //ECPULSE1的值20ms读的，比较小，在100ms中断里面需要*5
-    //mini车 YPulse/1024.0*30/58*4.95*3.14(cm)/100(m)/0.1(t:ms)  单位m/s  在乘100扩大100倍，相当于Target=100即为1m/s  0.0911
-    //C车    YPulse/1024.0*12.0576/100.0/0.01/1.357
-    Current_Speed1=LPulse*7.8511/100;        //编译器旋转一圈
-    Current_Speed2=YPulse*7.8511/100;        //YPulse/1024.0*12.0576/100.0/0.01/1.357
 
-//        Low_Pass_Filter((int)ECPULSE1*0.87, &Current_Speed1, &Current_Tmp_Speed1);
-//        Low_Pass_Filter((int)ECPULSE2*0.87, &Current_Speed2, &Current_Tmp_Speed2);  //滤波函数
+
+    //mini车 YPulse/1024.0*30/58*4.95*3.14(cm)/100(m)/0.1(t:ms)  单位m/s  在乘100扩大100倍，相当于Target=100即为1m/s  0.0911
+    Current_Speed1=LPulse*7.8511/100;
+    Current_Speed2=YPulse*7.8511/100;
+
+    //C车    YPulse/1024.0*30/50*64(mm)/1000(m)/0.1    直径64mm
+    //Current_Speed1=LPulse*3.75/100;
+    //Current_Speed2=YPulse*3.75/100;
+
+    //Low_Pass_Filter((int)ECPULSE1*0.87, &Current_Speed1, &Current_Tmp_Speed1);
+    //Low_Pass_Filter((int)ECPULSE2*0.87, &Current_Speed2, &Current_Tmp_Speed2);  //滤波函数
 
     //速度环PID
     if(Motor_openFlag)
