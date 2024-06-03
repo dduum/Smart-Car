@@ -6,7 +6,7 @@
  */
 #include "My_UART.h"
 
-#define USER_UART UART1
+#define USER_UART UART0
 
 char Txt=0;
 
@@ -25,6 +25,84 @@ int kasi=0;
 
 uint16 dlen;
 uint16 dcnt;
+
+void UART_AnalyseData(uint8 data)
+{
+    switch(data)
+    {
+        case 'A':
+            Motor_openFlag=!Motor_openFlag;
+            Servo_openFlag=!Servo_openFlag;
+            if(!Motor_openFlag)
+            {
+                MotorCtrl(0,0);
+            }
+            break;
+        case 'B':
+            Target_Speed=100;
+            break;
+        case 'C':
+            Target_Speed+=10;
+            break;
+        case 'D':
+            Target_Speed-=10;
+            break;
+        default:
+            break;
+    }
+}
+
+uint8 Data_Get_Test[4];
+void UART_ReceiveData_Test(uint8 data)
+{
+    static uint8 test_sta=0;
+    if(test_sta==0)
+    {
+        test_sta=1;
+        Data_Get_Test[0]=data;
+    }
+    else if(test_sta==1)
+    {
+        test_sta=2;
+        Data_Get_Test[1]=data;
+    }
+    else if(test_sta==2)
+    {
+        Data_Get_Test[2]=data;
+        Data_Get_Test[3]='\0';
+        Data_Analyse_Test();
+        memset(Data_Get_Test,0,sizeof(Data_Get_Test));
+        test_sta=0;
+    }
+}
+
+void Data_Analyse_Test(void)
+{
+    if(strcmp((char*)Data_Get_Test,"P1+")==0)
+    {
+        Motor_Inc_PID1.kp+=0.1;
+    }
+    else if(strcmp((char*)Data_Get_Test,"I1+")==0)
+    {
+        Motor_Inc_PID1.ki+=0.1;
+    }
+    else if(strcmp((char*)Data_Get_Test,"D1+")==0)
+    {
+        Motor_Inc_PID1.kd+=0.1;
+    }
+    else if(strcmp((char*)Data_Get_Test,"P1-")==0)
+    {
+        Motor_Inc_PID1.kp-=0.1;
+    }
+    else if(strcmp((char*)Data_Get_Test,"I1-")==0)
+    {
+        Motor_Inc_PID1.ki-=0.1;
+    }
+    else if(strcmp((char*)Data_Get_Test,"D1-")==0)
+    {
+        Motor_Inc_PID1.kd-=0.1;
+    }
+}
 
 void UART_ReceiveData(uint8 data)
 {
@@ -136,13 +214,13 @@ void Data_Analyse(void)
                     UART_SendPar_Cmd02(id,Servo_Loc_PID.kd);
                     break;
                 case 0x0003:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID.kp);
+                    UART_SendPar_Cmd02(id,Motor_Inc_PID1.kp);
                     break;
                 case 0x0004:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID.ki);
+                    UART_SendPar_Cmd02(id,Motor_Inc_PID1.ki);
                     break;
                 case 0x0005:
-                    UART_SendPar_Cmd02(id,Motor_Inc_PID.kd);
+                    UART_SendPar_Cmd02(id,Motor_Inc_PID1.kd);
                     break;
             }
         }else if(cmd==0x03){        //
@@ -201,15 +279,15 @@ void Data_Analyse(void)
                 UART_WriteReturn(sum_check,add_check);
                 break;
             case 0x0003:
-                Motor_Inc_PID.kp=val;
+                Motor_Inc_PID1.kp=val;
                 UART_WriteReturn(sum_check,add_check);
                 break;
             case 0x0004:
-                Motor_Inc_PID.ki=val;
+                Motor_Inc_PID1.ki=val;
                 UART_WriteReturn(sum_check,add_check);
                 break;
             case 0x0005:
-                Motor_Inc_PID.kd=val;
+                Motor_Inc_PID1.kd=val;
                 UART_WriteReturn(sum_check,add_check);
                 break;
         }

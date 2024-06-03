@@ -1,7 +1,5 @@
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	../src/AppSw/Tricore/Driver/LQ_SOFTI2C.c
 ../src/AppSw/Tricore/Driver/LQ_SOFTI2C.c :
-src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
-d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	../src/AppSw/Tricore/Driver/LQ_SOFTI2C.h
 ../src/AppSw/Tricore/Driver/LQ_SOFTI2C.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
@@ -12,8 +10,6 @@ src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Softward/Infineon/AURIX-Studio-1.9.20
 d:/Softward/Infineon/AURIX-Studio-1.9.20/tools/Compilers/Tasking_1.1r8/ctc/include/typeinfo.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	../src/AppSw/Tricore/Driver/LQ_GPIO.h
 ../src/AppSw/Tricore/Driver/LQ_GPIO.h :
-src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
-d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Port/Std/IfxPort.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Port/Std/IfxPort.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/_Impl/IfxPort_cfg.h
@@ -30,10 +26,14 @@ src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/Inf
 d:/Project/AURIX/BBBCAR-V3/Libraries/Infra/Platform/Tricore/Compilers/CompilerTasking.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Softward/Infineon/AURIX-Studio-1.9.20/tools/Compilers/Tasking_1.1r8/ctc/include/stddef.h
 d:/Softward/Infineon/AURIX-Studio-1.9.20/tools/Compilers/Tasking_1.1r8/ctc/include/stddef.h :
+src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
+d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Ifx_TypesTasking.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Ifx_TypesTasking.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_IntrinsicsTasking.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_IntrinsicsTasking.h :
+src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Ifx_Types.h
+d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Ifx_Types.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/Infra/Sfr/TC26B/_Reg/IfxPort_reg.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/Infra/Sfr/TC26B/_Reg/IfxPort_reg.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/Infra/Sfr/TC26B/_Reg/IfxPort_regdef.h
@@ -58,10 +58,14 @@ src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLL
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Scu/Std/IfxScuWdt.asm.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Ifx_Types.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Ifx_Types.h :
+src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_Intrinsics.h
+d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_Intrinsics.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/_Impl/IfxCpu_cfg.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/_Impl/IfxCpu_cfg.h :
+src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_Intrinsics.h
+d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_Intrinsics.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/Infra/Sfr/TC26B/_Reg/IfxCpu_reg.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/Infra/Sfr/TC26B/_Reg/IfxCpu_reg.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/Infra/Sfr/TC26B/_Reg/IfxCpu_regdef.h
@@ -102,6 +106,8 @@ src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLL
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Src/Std/IfxSrc.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/_Impl/IfxSrc_cfg.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/_Impl/IfxSrc_cfg.h :
+src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_Intrinsics.h
+d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/IfxCpu_Intrinsics.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/_PinMap/IfxScu_PinMap.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/_PinMap/IfxScu_PinMap.h :
 src/AppSw/Tricore/Driver/LQ_SOFTI2C.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Scu/Std/IfxScuEru.h

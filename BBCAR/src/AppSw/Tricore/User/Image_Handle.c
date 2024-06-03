@@ -34,7 +34,6 @@ uint8 QIANZHAN=15;
 uint8 YUAN,ZHONG,JIN;
 
 uint8 Servo_QZ_ERR=0; //前瞻误差
-int Servo_Loc_error=0; //车身横向误差
 
 uint8 StraightWay_flag=0; //0为弯道，1为直道
 

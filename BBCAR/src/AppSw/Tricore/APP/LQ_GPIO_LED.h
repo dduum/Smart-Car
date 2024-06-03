@@ -23,6 +23,8 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef __LQ_LED_H_
 #define __LQ_LED_H_
 
+#define Beep_on PIN_Write(P33_8,1)
+#define Beep_off PIN_Write(P33_8,0)
 
 //¶¨ÒåÄ£¿éºÅ
 typedef enum

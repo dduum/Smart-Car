@@ -5,6 +5,8 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/AppSw/Tricore/User/CircularBuffer.c \
+../src/AppSw/Tricore/User/Element_handle.c \
+../src/AppSw/Tricore/User/FuzzyPID.c \
 ../src/AppSw/Tricore/User/Image_Handle.c \
 ../src/AppSw/Tricore/User/LQ_ImageProcess.c \
 ../src/AppSw/Tricore/User/LQ_Inductor.c \
@@ -20,6 +22,8 @@ C_SRCS += \
 
 COMPILED_SRCS += \
 ./src/AppSw/Tricore/User/CircularBuffer.src \
+./src/AppSw/Tricore/User/Element_handle.src \
+./src/AppSw/Tricore/User/FuzzyPID.src \
 ./src/AppSw/Tricore/User/Image_Handle.src \
 ./src/AppSw/Tricore/User/LQ_ImageProcess.src \
 ./src/AppSw/Tricore/User/LQ_Inductor.src \
@@ -35,6 +39,8 @@ COMPILED_SRCS += \
 
 C_DEPS += \
 ./src/AppSw/Tricore/User/CircularBuffer.d \
+./src/AppSw/Tricore/User/Element_handle.d \
+./src/AppSw/Tricore/User/FuzzyPID.d \
 ./src/AppSw/Tricore/User/Image_Handle.d \
 ./src/AppSw/Tricore/User/LQ_ImageProcess.d \
 ./src/AppSw/Tricore/User/LQ_Inductor.d \
@@ -50,6 +56,8 @@ C_DEPS += \
 
 OBJS += \
 ./src/AppSw/Tricore/User/CircularBuffer.o \
+./src/AppSw/Tricore/User/Element_handle.o \
+./src/AppSw/Tricore/User/FuzzyPID.o \
 ./src/AppSw/Tricore/User/Image_Handle.o \
 ./src/AppSw/Tricore/User/LQ_ImageProcess.o \
 ./src/AppSw/Tricore/User/LQ_Inductor.o \
@@ -84,7 +92,7 @@ src/AppSw/Tricore/User/%.o: ./src/AppSw/Tricore/User/%.src src/AppSw/Tricore/Use
 clean: clean-src-2f-AppSw-2f-Tricore-2f-User
 
 clean-src-2f-AppSw-2f-Tricore-2f-User:
-	-$(RM) ./src/AppSw/Tricore/User/CircularBuffer.d ./src/AppSw/Tricore/User/CircularBuffer.o ./src/AppSw/Tricore/User/CircularBuffer.src ./src/AppSw/Tricore/User/Image_Handle.d ./src/AppSw/Tricore/User/Image_Handle.o ./src/AppSw/Tricore/User/Image_Handle.src ./src/AppSw/Tricore/User/LQ_ImageProcess.d ./src/AppSw/Tricore/User/LQ_ImageProcess.o ./src/AppSw/Tricore/User/LQ_ImageProcess.src ./src/AppSw/Tricore/User/LQ_Inductor.d ./src/AppSw/Tricore/User/LQ_Inductor.o ./src/AppSw/Tricore/User/LQ_Inductor.src ./src/AppSw/Tricore/User/LQ_MotorServo.d ./src/AppSw/Tricore/User/LQ_MotorServo.o ./src/AppSw/Tricore/User/LQ_MotorServo.src ./src/AppSw/Tricore/User/LQ_PID.d ./src/AppSw/Tricore/User/LQ_PID.o ./src/AppSw/Tricore/User/LQ_PID.src ./src/AppSw/Tricore/User/My_Button.d ./src/AppSw/Tricore/User/My_Button.o ./src/AppSw/Tricore/User/My_Button.src ./src/AppSw/Tricore/User/My_Control_Code.d ./src/AppSw/Tricore/User/My_Control_Code.o ./src/AppSw/Tricore/User/My_Control_Code.src ./src/AppSw/Tricore/User/My_Image_Handle.d ./src/AppSw/Tricore/User/My_Image_Handle.o ./src/AppSw/Tricore/User/My_Image_Handle.src ./src/AppSw/Tricore/User/My_Key.d ./src/AppSw/Tricore/User/My_Key.o ./src/AppSw/Tricore/User/My_Key.src ./src/AppSw/Tricore/User/My_UART.d ./src/AppSw/Tricore/User/My_UART.o ./src/AppSw/Tricore/User/My_UART.src ./src/AppSw/Tricore/User/My_menu.d ./src/AppSw/Tricore/User/My_menu.o ./src/AppSw/Tricore/User/My_menu.src ./src/AppSw/Tricore/User/image1.d ./src/AppSw/Tricore/User/image1.o ./src/AppSw/Tricore/User/image1.src
+	-$(RM) ./src/AppSw/Tricore/User/CircularBuffer.d ./src/AppSw/Tricore/User/CircularBuffer.o ./src/AppSw/Tricore/User/CircularBuffer.src ./src/AppSw/Tricore/User/Element_handle.d ./src/AppSw/Tricore/User/Element_handle.o ./src/AppSw/Tricore/User/Element_handle.src ./src/AppSw/Tricore/User/FuzzyPID.d ./src/AppSw/Tricore/User/FuzzyPID.o ./src/AppSw/Tricore/User/FuzzyPID.src ./src/AppSw/Tricore/User/Image_Handle.d ./src/AppSw/Tricore/User/Image_Handle.o ./src/AppSw/Tricore/User/Image_Handle.src ./src/AppSw/Tricore/User/LQ_ImageProcess.d ./src/AppSw/Tricore/User/LQ_ImageProcess.o ./src/AppSw/Tricore/User/LQ_ImageProcess.src ./src/AppSw/Tricore/User/LQ_Inductor.d ./src/AppSw/Tricore/User/LQ_Inductor.o ./src/AppSw/Tricore/User/LQ_Inductor.src ./src/AppSw/Tricore/User/LQ_MotorServo.d ./src/AppSw/Tricore/User/LQ_MotorServo.o ./src/AppSw/Tricore/User/LQ_MotorServo.src ./src/AppSw/Tricore/User/LQ_PID.d ./src/AppSw/Tricore/User/LQ_PID.o ./src/AppSw/Tricore/User/LQ_PID.src ./src/AppSw/Tricore/User/My_Button.d ./src/AppSw/Tricore/User/My_Button.o ./src/AppSw/Tricore/User/My_Button.src ./src/AppSw/Tricore/User/My_Control_Code.d ./src/AppSw/Tricore/User/My_Control_Code.o ./src/AppSw/Tricore/User/My_Control_Code.src ./src/AppSw/Tricore/User/My_Image_Handle.d ./src/AppSw/Tricore/User/My_Image_Handle.o ./src/AppSw/Tricore/User/My_Image_Handle.src ./src/AppSw/Tricore/User/My_Key.d ./src/AppSw/Tricore/User/My_Key.o ./src/AppSw/Tricore/User/My_Key.src ./src/AppSw/Tricore/User/My_UART.d ./src/AppSw/Tricore/User/My_UART.o ./src/AppSw/Tricore/User/My_UART.src ./src/AppSw/Tricore/User/My_menu.d ./src/AppSw/Tricore/User/My_menu.o ./src/AppSw/Tricore/User/My_menu.src ./src/AppSw/Tricore/User/image1.d ./src/AppSw/Tricore/User/image1.o ./src/AppSw/Tricore/User/image1.src
 
 .PHONY: clean-src-2f-AppSw-2f-Tricore-2f-User
 

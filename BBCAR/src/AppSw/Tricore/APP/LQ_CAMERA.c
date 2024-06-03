@@ -124,7 +124,7 @@ void Test_CAMERA (void)
             OLED_Road(LCDH, LCDW, (unsigned char *)Bin_Image);
 #else
 
-#if 0       //显示原始图像
+#if 1       //显示原始图像
             //TFT1.8动态显示摄像头图像
             TFTSPI_Road(0, 0, LCDH, LCDW, (unsigned char *)Image_Use);
 

@@ -1,14 +1,14 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 【平    台】北京龙邱智能科技TC264DA核心板
-【编    写】ZYF/chiusir
-【E-mail  】chiusir@163.com
-【软件版本】V1.1 版权所有，单位使用请先联系授权
-【最后更新】2020年10月28日
+【编    写】chiusir
+【E-mail】chiusir@163.com
+【软件版本】V1.2 版权所有，单位使用请先联系授权
+【最后更新】2023年6月6日
 【相关信息参考下列地址】
 【网    站】http://www.lqist.cn
 【淘宝店铺】http://longqiu.taobao.com
 ------------------------------------------------
-【dev.env.】AURIX Development Studio1.2.2及以上版本
+【dev.env.】AURIX Development Studio1.6版本
 【Target 】 TC264DA/TC264D
 【Crystal】 20.000Mhz
 【SYS PLL】 200MHz
@@ -21,8 +21,8 @@ ________________________________________________________________
 工程下\Libraries\iLLD\TC26B\Tricore\Cpu\CStart\IfxCpu_CStart0.c第164行左右。
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
-#include <Platform_Types.h>
 #include "LQ_SOFTI2C.h"
+
 
 /*************************************************************************
 *  函数名称：IIC延时
@@ -70,7 +70,7 @@ void IIC_Init(void)
 *************************************************************************/
 void IIC_Start(void)
 {
-	SDA_OUT;   //sda线输出 
+	SDA_OUT;   //sda线输出
 	IIC_SDA_H;	
 	IIC_SCL_H;
 	iic_delay();
@@ -82,7 +82,7 @@ void IIC_Start(void)
 	iic_delay();
 	iic_delay();
 	iic_delay();
-	IIC_SCL_L; //钳住I2C总线，准备发送或接收数据 
+	IIC_SCL_L; //钳住I2C总线，准备发送或接收数据
 }
 
 
@@ -122,7 +122,7 @@ void IIC_Stop(void)
 unsigned char IIC_WaitAck(void)
 {
 	unsigned char  ucErrTime=0;
-	SDA_IN; //SDA设置为输入  （从机给一个低电平做为应答） 
+	SDA_IN; //SDA设置为输入  （从机给一个低电平做为应答）
 	IIC_SDA_H;iic_delay();	   
 	IIC_SCL_H;iic_delay();	 
 	while(IIC_SDA_READ)
@@ -134,7 +134,7 @@ unsigned char IIC_WaitAck(void)
 			return 1;
 		}
 	}
-	IIC_SCL_L; //时钟输出0 	   
+	IIC_SCL_L; //时钟输出0
 	return 0;  
 } 
 
@@ -247,9 +247,9 @@ unsigned char IIC_ReadByte(unsigned char ack)
         iic_delay();
     }					 
     if(ack)
-        IIC_Ack(); //发送ACK 
+        IIC_Ack(); //发送ACK
     else
-        IIC_NAck(); //发送nACK  
+        IIC_NAck(); //发送nACK
     return receive;
 }
 
@@ -277,7 +277,7 @@ unsigned char IIC_ReadByteFromSlave(unsigned char I2C_Addr,unsigned char reg,uns
 	IIC_WaitAck();	  
 	
 	IIC_Start();
-	IIC_SendByte(I2C_Addr+1); //进入接收模式			   
+	IIC_SendByte(I2C_Addr+1); //进入接收模式
 	IIC_WaitAck();
 	*buf=IIC_ReadByte(0);	   
     IIC_Stop(); //产生一个停止条件
@@ -345,7 +345,7 @@ unsigned char IIC_ReadMultByteFromSlave(unsigned char dev, unsigned char reg, un
 	IIC_SendByte(reg); //发送寄存器地址
     IIC_WaitAck();	  
 	IIC_Start();
-	IIC_SendByte(dev+1); //进入接收模式	
+	IIC_SendByte(dev+1); //进入接收模式
 	IIC_WaitAck();
     for(count=0;count<length;count++)
 	{
@@ -400,5 +400,75 @@ unsigned char IIC_WriteMultByteToSlave(unsigned char dev, unsigned char reg, uns
 	return 0;
 }
 
+/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+【函数名】 int LQ_I2C_Write(unsigned char addr, unsigned char reg, unsigned int len, unsigned char *dat)
+【功  能】 模拟SPI读写数据及长度
+* @param    addr   标设备地址
+* @param    reg    目标寄存器
+* @param    len    写入长度
+* @param    *dat   存放写入数据
+【返回值】 1失败 0成功
+【作  者】 L Q
+【最后更新】 2021年4月3日
+【软件版本】 V1.1
+【调用样例】 LQ_I2C_Write(0x68, 0x38, 1, tmp)
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+int LQ_I2C_Write(unsigned char addr, unsigned char reg, unsigned int len, unsigned char *dat)
+{
+  unsigned int i = 0;
 
+  IIC_Start();
+  IIC_SendByte(addr << 1);
+  IIC_WaitAck();
+
+  IIC_SendByte(reg);
+  IIC_WaitAck();
+
+  for (i = 0; i < len; i++)
+  {
+      IIC_SendByte(dat[i]);
+      IIC_WaitAck();
+  }
+  IIC_Stop();
+  return 0;
+}
+
+/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+【函数名】 int LQ_I2C_Read(unsigned char addr, unsigned char reg, unsigned int len, unsigned char *buf)
+【功  能】 模拟SPI读写数据及长度
+* @param    addr   标设备地址
+* @param    reg    目标寄存器
+* @param    len    写入长度
+* @param    *buf   存放写入数据
+【返回值】 1失败 0成功
+【作  者】 L Q
+【最后更新】 2021年4月3日
+【软件版本】 V1.1
+【调用样例】 LQ_I2C_Write(0x68, 0x38, 1, tmp)
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+int LQ_I2C_Read(unsigned char addr, unsigned char reg, unsigned int len, unsigned char *buf)
+{
+    IIC_Start();
+    IIC_SendByte(addr << 1);
+    IIC_WaitAck();
+
+  IIC_SendByte(reg);
+  IIC_WaitAck();
+  iic_delay();
+  IIC_Start();
+
+  IIC_SendByte((addr << 1)+1);
+  IIC_WaitAck();
+  while (len)
+  {
+    if (len == 1)
+      *buf = IIC_ReadByte(0);
+    else
+      *buf = IIC_ReadByte(1);
+    buf++;
+    len--;
+  }
+  IIC_Stop();
+  return 0;
+}
 

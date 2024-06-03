@@ -9,8 +9,8 @@
 #define SRC_APPSW_TRICORE_USER_IMAGE_HANDLE_H_
 
 #include <LQ_CAMERA.h>
+#include "image1.h"
 
-extern int Servo_Loc_error;
 extern uint8 StraightWay_flag;
 
 int ABS(int A);

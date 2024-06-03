@@ -6,6 +6,8 @@
  */
 #include <CircularBuffer.h>
 
+CircularBuffer bf;
+
 // 初始化环形缓冲区
 void CircularBuffer_Init(CircularBuffer* cb) {
     cb->head = 0;

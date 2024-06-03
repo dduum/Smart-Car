@@ -25,6 +25,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <LQ_GPIO_LED.h>
 #include <LQ_STM.h>
 
+
 /*************************************************************************
 *  鍑芥暟鍚嶇О锛歷oid LED_Init(void)
 *  鍔熻兘璇存槑锛欸PIO鍒濆鍖栧嚱鏁� LED鐏墍鐢≒10.6銆丳10.5銆丳15.4鍜孭15.6鍒濆鍖�
@@ -40,6 +41,7 @@ void GPIO_LED_Init(void)
     PIN_InitConfig(LED1p, PIN_MODE_OUTPUT, 1);
     PIN_InitConfig(LED2p, PIN_MODE_OUTPUT, 1);
     PIN_InitConfig(LED3p, PIN_MODE_OUTPUT, 1);
+    PIN_InitConfig(P33_8, PIN_MODE_OUTPUT, 0);
 }
 
 

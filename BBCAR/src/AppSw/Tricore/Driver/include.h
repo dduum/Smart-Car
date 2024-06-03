@@ -92,6 +92,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "LQ_QSPI.h"
 #include "LQ_EMEM.h"
 #include "LQ_GPSR.h"
+#include "LQ_SOFTSPI.h"
 /////////////用户应用实例//////////////////////////////////////////////////
 //#include "..\APP\LQ_CAM.h"
 #include "..\APP\LQ_ADC_7Mic.h"

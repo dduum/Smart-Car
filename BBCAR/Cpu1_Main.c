@@ -25,12 +25,11 @@ int core1_main (void)
     // 程序配套视频地址：https://space.bilibili.com/95313236
     while(1)//主循环
     {
-        if(Camera_Flag == 2)
+        if(Camera_Flag == 2)   //图像处理时间大约为2ms
         {
             Get_Use_Image();             /* 提取部分使用的数据 */
-            Get_Bin_Image(0);            /* 二值化 */
-            Bin_Image_Filter();
-            Longest_White_Column();
+            Image_Frameprocessing();
+            Image_SeedGrowing();        //区域生长爬线
             Camera_Flag = 0;             /* 清除摄像头采集完成标志位  如果不清除，则不会再次采集数据 */
         }
     }

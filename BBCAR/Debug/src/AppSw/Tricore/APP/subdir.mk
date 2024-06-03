@@ -18,6 +18,8 @@ C_SRCS += \
 ../src/AppSw/Tricore/APP/LQ_I2C_VL53.c \
 ../src/AppSw/Tricore/APP/LQ_ICM20602.c \
 ../src/AppSw/Tricore/APP/LQ_IIC_Gyro.c \
+../src/AppSw/Tricore/APP/LQ_LSM6DSR.c \
+../src/AppSw/Tricore/APP/LQ_MPU6050_DMP.c \
 ../src/AppSw/Tricore/APP/LQ_MT9V034.c \
 ../src/AppSw/Tricore/APP/LQ_OLED096.c \
 ../src/AppSw/Tricore/APP/LQ_RDA5807.c \
@@ -26,9 +28,6 @@ C_SRCS += \
 ../src/AppSw/Tricore/APP/LQ_Tim_InputCature.c \
 ../src/AppSw/Tricore/APP/LQ_Tom_Servo.c \
 ../src/AppSw/Tricore/APP/LQ_UART_Bluetooth.c 
-
-O_SRCS += \
-../src/AppSw/Tricore/APP/LQ_MPU6050_DMP.o 
 
 COMPILED_SRCS += \
 ./src/AppSw/Tricore/APP/LQ_ADC_7Mic.src \
@@ -45,6 +44,8 @@ COMPILED_SRCS += \
 ./src/AppSw/Tricore/APP/LQ_I2C_VL53.src \
 ./src/AppSw/Tricore/APP/LQ_ICM20602.src \
 ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.src \
+./src/AppSw/Tricore/APP/LQ_LSM6DSR.src \
+./src/AppSw/Tricore/APP/LQ_MPU6050_DMP.src \
 ./src/AppSw/Tricore/APP/LQ_MT9V034.src \
 ./src/AppSw/Tricore/APP/LQ_OLED096.src \
 ./src/AppSw/Tricore/APP/LQ_RDA5807.src \
@@ -69,6 +70,8 @@ C_DEPS += \
 ./src/AppSw/Tricore/APP/LQ_I2C_VL53.d \
 ./src/AppSw/Tricore/APP/LQ_ICM20602.d \
 ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.d \
+./src/AppSw/Tricore/APP/LQ_LSM6DSR.d \
+./src/AppSw/Tricore/APP/LQ_MPU6050_DMP.d \
 ./src/AppSw/Tricore/APP/LQ_MT9V034.d \
 ./src/AppSw/Tricore/APP/LQ_OLED096.d \
 ./src/AppSw/Tricore/APP/LQ_RDA5807.d \
@@ -93,6 +96,8 @@ OBJS += \
 ./src/AppSw/Tricore/APP/LQ_I2C_VL53.o \
 ./src/AppSw/Tricore/APP/LQ_ICM20602.o \
 ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.o \
+./src/AppSw/Tricore/APP/LQ_LSM6DSR.o \
+./src/AppSw/Tricore/APP/LQ_MPU6050_DMP.o \
 ./src/AppSw/Tricore/APP/LQ_MT9V034.o \
 ./src/AppSw/Tricore/APP/LQ_OLED096.o \
 ./src/AppSw/Tricore/APP/LQ_RDA5807.o \
@@ -123,7 +128,7 @@ src/AppSw/Tricore/APP/%.o: ./src/AppSw/Tricore/APP/%.src src/AppSw/Tricore/APP/s
 clean: clean-src-2f-AppSw-2f-Tricore-2f-APP
 
 clean-src-2f-AppSw-2f-Tricore-2f-APP:
-	-$(RM) ./src/AppSw/Tricore/APP/LQ_ADC_7Mic.d ./src/AppSw/Tricore/APP/LQ_ADC_7Mic.o ./src/AppSw/Tricore/APP/LQ_ADC_7Mic.src ./src/AppSw/Tricore/APP/LQ_Atom_Motor.d ./src/AppSw/Tricore/APP/LQ_Atom_Motor.o ./src/AppSw/Tricore/APP/LQ_Atom_Motor.src ./src/AppSw/Tricore/APP/LQ_CAMERA.d ./src/AppSw/Tricore/APP/LQ_CAMERA.o ./src/AppSw/Tricore/APP/LQ_CAMERA.src ./src/AppSw/Tricore/APP/LQ_CCU6_Timer.d ./src/AppSw/Tricore/APP/LQ_CCU6_Timer.o ./src/AppSw/Tricore/APP/LQ_CCU6_Timer.src ./src/AppSw/Tricore/APP/LQ_EEPROM_TEST.d ./src/AppSw/Tricore/APP/LQ_EEPROM_TEST.o ./src/AppSw/Tricore/APP/LQ_EEPROM_TEST.src ./src/AppSw/Tricore/APP/LQ_FFT_TEST.d ./src/AppSw/Tricore/APP/LQ_FFT_TEST.o ./src/AppSw/Tricore/APP/LQ_FFT_TEST.src ./src/AppSw/Tricore/APP/LQ_GPIO_ExInt.d ./src/AppSw/Tricore/APP/LQ_GPIO_ExInt.o ./src/AppSw/Tricore/APP/LQ_GPIO_ExInt.src ./src/AppSw/Tricore/APP/LQ_GPIO_KEY.d ./src/AppSw/Tricore/APP/LQ_GPIO_KEY.o ./src/AppSw/Tricore/APP/LQ_GPIO_KEY.src ./src/AppSw/Tricore/APP/LQ_GPIO_LED.d ./src/AppSw/Tricore/APP/LQ_GPIO_LED.o ./src/AppSw/Tricore/APP/LQ_GPIO_LED.src ./src/AppSw/Tricore/APP/LQ_GPT_mini512.d ./src/AppSw/Tricore/APP/LQ_GPT_mini512.o ./src/AppSw/Tricore/APP/LQ_GPT_mini512.src ./src/AppSw/Tricore/APP/LQ_I2C_9AX.d ./src/AppSw/Tricore/APP/LQ_I2C_9AX.o ./src/AppSw/Tricore/APP/LQ_I2C_9AX.src ./src/AppSw/Tricore/APP/LQ_I2C_VL53.d ./src/AppSw/Tricore/APP/LQ_I2C_VL53.o ./src/AppSw/Tricore/APP/LQ_I2C_VL53.src ./src/AppSw/Tricore/APP/LQ_ICM20602.d ./src/AppSw/Tricore/APP/LQ_ICM20602.o ./src/AppSw/Tricore/APP/LQ_ICM20602.src ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.d ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.o ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.src ./src/AppSw/Tricore/APP/LQ_MT9V034.d ./src/AppSw/Tricore/APP/LQ_MT9V034.o ./src/AppSw/Tricore/APP/LQ_MT9V034.src ./src/AppSw/Tricore/APP/LQ_OLED096.d ./src/AppSw/Tricore/APP/LQ_OLED096.o ./src/AppSw/Tricore/APP/LQ_OLED096.src ./src/AppSw/Tricore/APP/LQ_RDA5807.d ./src/AppSw/Tricore/APP/LQ_RDA5807.o ./src/AppSw/Tricore/APP/LQ_RDA5807.src ./src/AppSw/Tricore/APP/LQ_STM_Timer.d ./src/AppSw/Tricore/APP/LQ_STM_Timer.o ./src/AppSw/Tricore/APP/LQ_STM_Timer.src ./src/AppSw/Tricore/APP/LQ_TFT18.d ./src/AppSw/Tricore/APP/LQ_TFT18.o ./src/AppSw/Tricore/APP/LQ_TFT18.src ./src/AppSw/Tricore/APP/LQ_Tim_InputCature.d ./src/AppSw/Tricore/APP/LQ_Tim_InputCature.o ./src/AppSw/Tricore/APP/LQ_Tim_InputCature.src ./src/AppSw/Tricore/APP/LQ_Tom_Servo.d ./src/AppSw/Tricore/APP/LQ_Tom_Servo.o ./src/AppSw/Tricore/APP/LQ_Tom_Servo.src ./src/AppSw/Tricore/APP/LQ_UART_Bluetooth.d ./src/AppSw/Tricore/APP/LQ_UART_Bluetooth.o ./src/AppSw/Tricore/APP/LQ_UART_Bluetooth.src
+	-$(RM) ./src/AppSw/Tricore/APP/LQ_ADC_7Mic.d ./src/AppSw/Tricore/APP/LQ_ADC_7Mic.o ./src/AppSw/Tricore/APP/LQ_ADC_7Mic.src ./src/AppSw/Tricore/APP/LQ_Atom_Motor.d ./src/AppSw/Tricore/APP/LQ_Atom_Motor.o ./src/AppSw/Tricore/APP/LQ_Atom_Motor.src ./src/AppSw/Tricore/APP/LQ_CAMERA.d ./src/AppSw/Tricore/APP/LQ_CAMERA.o ./src/AppSw/Tricore/APP/LQ_CAMERA.src ./src/AppSw/Tricore/APP/LQ_CCU6_Timer.d ./src/AppSw/Tricore/APP/LQ_CCU6_Timer.o ./src/AppSw/Tricore/APP/LQ_CCU6_Timer.src ./src/AppSw/Tricore/APP/LQ_EEPROM_TEST.d ./src/AppSw/Tricore/APP/LQ_EEPROM_TEST.o ./src/AppSw/Tricore/APP/LQ_EEPROM_TEST.src ./src/AppSw/Tricore/APP/LQ_FFT_TEST.d ./src/AppSw/Tricore/APP/LQ_FFT_TEST.o ./src/AppSw/Tricore/APP/LQ_FFT_TEST.src ./src/AppSw/Tricore/APP/LQ_GPIO_ExInt.d ./src/AppSw/Tricore/APP/LQ_GPIO_ExInt.o ./src/AppSw/Tricore/APP/LQ_GPIO_ExInt.src ./src/AppSw/Tricore/APP/LQ_GPIO_KEY.d ./src/AppSw/Tricore/APP/LQ_GPIO_KEY.o ./src/AppSw/Tricore/APP/LQ_GPIO_KEY.src ./src/AppSw/Tricore/APP/LQ_GPIO_LED.d ./src/AppSw/Tricore/APP/LQ_GPIO_LED.o ./src/AppSw/Tricore/APP/LQ_GPIO_LED.src ./src/AppSw/Tricore/APP/LQ_GPT_mini512.d ./src/AppSw/Tricore/APP/LQ_GPT_mini512.o ./src/AppSw/Tricore/APP/LQ_GPT_mini512.src ./src/AppSw/Tricore/APP/LQ_I2C_9AX.d ./src/AppSw/Tricore/APP/LQ_I2C_9AX.o ./src/AppSw/Tricore/APP/LQ_I2C_9AX.src ./src/AppSw/Tricore/APP/LQ_I2C_VL53.d ./src/AppSw/Tricore/APP/LQ_I2C_VL53.o ./src/AppSw/Tricore/APP/LQ_I2C_VL53.src ./src/AppSw/Tricore/APP/LQ_ICM20602.d ./src/AppSw/Tricore/APP/LQ_ICM20602.o ./src/AppSw/Tricore/APP/LQ_ICM20602.src ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.d ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.o ./src/AppSw/Tricore/APP/LQ_IIC_Gyro.src ./src/AppSw/Tricore/APP/LQ_LSM6DSR.d ./src/AppSw/Tricore/APP/LQ_LSM6DSR.o ./src/AppSw/Tricore/APP/LQ_LSM6DSR.src ./src/AppSw/Tricore/APP/LQ_MPU6050_DMP.d ./src/AppSw/Tricore/APP/LQ_MPU6050_DMP.o ./src/AppSw/Tricore/APP/LQ_MPU6050_DMP.src ./src/AppSw/Tricore/APP/LQ_MT9V034.d ./src/AppSw/Tricore/APP/LQ_MT9V034.o ./src/AppSw/Tricore/APP/LQ_MT9V034.src ./src/AppSw/Tricore/APP/LQ_OLED096.d ./src/AppSw/Tricore/APP/LQ_OLED096.o ./src/AppSw/Tricore/APP/LQ_OLED096.src ./src/AppSw/Tricore/APP/LQ_RDA5807.d ./src/AppSw/Tricore/APP/LQ_RDA5807.o ./src/AppSw/Tricore/APP/LQ_RDA5807.src ./src/AppSw/Tricore/APP/LQ_STM_Timer.d ./src/AppSw/Tricore/APP/LQ_STM_Timer.o ./src/AppSw/Tricore/APP/LQ_STM_Timer.src ./src/AppSw/Tricore/APP/LQ_TFT18.d ./src/AppSw/Tricore/APP/LQ_TFT18.o ./src/AppSw/Tricore/APP/LQ_TFT18.src ./src/AppSw/Tricore/APP/LQ_Tim_InputCature.d ./src/AppSw/Tricore/APP/LQ_Tim_InputCature.o ./src/AppSw/Tricore/APP/LQ_Tim_InputCature.src ./src/AppSw/Tricore/APP/LQ_Tom_Servo.d ./src/AppSw/Tricore/APP/LQ_Tom_Servo.o ./src/AppSw/Tricore/APP/LQ_Tom_Servo.src ./src/AppSw/Tricore/APP/LQ_UART_Bluetooth.d ./src/AppSw/Tricore/APP/LQ_UART_Bluetooth.o ./src/AppSw/Tricore/APP/LQ_UART_Bluetooth.src
 
 .PHONY: clean-src-2f-AppSw-2f-Tricore-2f-APP
 

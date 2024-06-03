@@ -63,8 +63,23 @@ void CCU60_CH0_IRQHandler (void)
     IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU60, IfxCcu6_InterruptSource_t12PeriodMatch);
 
     /* 用户代码 */
-    Motor_Control();
-//    Servo_Control();
+    static int count20ms=0;
+
+    count20ms++;
+    Key_Control();
+
+    //获取编码器的值
+    ECPULSE1 = ENC_GetCounter(ENC4_InPut_P02_8); // 左电机，小车前进为负值
+    ECPULSE2 = -ENC_GetCounter(ENC2_InPut_P33_7);  // 右电机，小车前进为正值
+
+    Calcu_Pulse();                    //计算元素脉冲
+    Servo_Control_Fuzzy();            //20ms控制一次方向环，模糊处理时间大约为100us
+
+    if(count20ms>=5)
+    {
+        count20ms=0;
+        Motor_Control();              //100ms控制一次速度环
+    }
 }
 
 /*************************************************************************
@@ -83,7 +98,6 @@ void CCU60_CH1_IRQHandler (void)
     IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU60, IfxCcu6_InterruptSource_t13PeriodMatch);
 
     /* 用户代码 */
-    Key_Control();
 
 }
 
@@ -105,7 +119,7 @@ void CCU61_CH0_IRQHandler (void)
     IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU61, IfxCcu6_InterruptSource_t12PeriodMatch);
 
     /* 用户代码 */
-    Camera_Control();
+
 }
 
 /*************************************************************************

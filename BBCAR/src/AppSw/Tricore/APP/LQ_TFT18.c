@@ -372,10 +372,10 @@ void TFTSPI_Write_Word(unsigned short dat)
 
   for(i=0;i<16;i++)
   {
-    TFTSPI_SCK_L;//tft18delay_1us(1);	// SCK=0  ILI9163_SCK=0;
+    TFTSPI_SCK_L;tft18delay_1us(1);	// SCK=0  ILI9163_SCK=0;
     if(dat&0x8000){ TFTSPI_SDI_H;}// SDI=1
     else{TFTSPI_SDI_L;}// SDI=0
-    TFTSPI_SCK_H;//tft18delay_1us(1);	// SCK=1  ILI9163_SCK=1;
+    TFTSPI_SCK_H;tft18delay_1us(1);	// SCK=1  ILI9163_SCK=1;
     dat<<=1;
   }
 }

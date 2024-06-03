@@ -7,6 +7,9 @@ C_SRCS += \
 ../Cpu0_Main.c \
 ../Cpu1_Main.c 
 
+O_SRCS += \
+../LQ_MPU6050_DMP.o 
+
 COMPILED_SRCS += \
 ./Cpu0_Main.src \
 ./Cpu1_Main.src 

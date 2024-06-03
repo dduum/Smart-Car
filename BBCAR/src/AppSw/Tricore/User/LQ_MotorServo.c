@@ -92,7 +92,7 @@ void MotorInit(void)
 //    PIN_InitConfig(P21_5, PIN_MODE_OUTPUT, 0);
 //    PIN_InitConfig(P21_3, PIN_MODE_OUTPUT, 0);
 
-    MotorCtrl(1500,1500);
+    MotorCtrl(0,0);
 }
 
 /*************************************************************************
@@ -324,6 +324,7 @@ void TestMotor (void)
  *************************************************************************/
 void ServoInit (void)
 {
+    FuzzyPID_Init(&Fpid1);
     ATOM_PWM_InitConfig(ATOMSERVO1, Servo_Center_Mid, 100);  //舵机频率为100HZ，初始值为1.5ms中值
     //ATOM_PWM_InitConfig(ATOMSERVO2, Servo_Center_Mid, 100);  //舵机理论范围为：0.5ms--2.5ms，大多舵机实际比这个范围小
 }

@@ -16,6 +16,7 @@ C_SRCS += \
 ../src/AppSw/Tricore/Driver/LQ_GTM.c \
 ../src/AppSw/Tricore/Driver/LQ_QSPI.c \
 ../src/AppSw/Tricore/Driver/LQ_SOFTI2C.c \
+../src/AppSw/Tricore/Driver/LQ_SOFTSPI.c \
 ../src/AppSw/Tricore/Driver/LQ_SPI.c \
 ../src/AppSw/Tricore/Driver/LQ_STM.c \
 ../src/AppSw/Tricore/Driver/LQ_UART.c 
@@ -33,6 +34,7 @@ COMPILED_SRCS += \
 ./src/AppSw/Tricore/Driver/LQ_GTM.src \
 ./src/AppSw/Tricore/Driver/LQ_QSPI.src \
 ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.src \
+./src/AppSw/Tricore/Driver/LQ_SOFTSPI.src \
 ./src/AppSw/Tricore/Driver/LQ_SPI.src \
 ./src/AppSw/Tricore/Driver/LQ_STM.src \
 ./src/AppSw/Tricore/Driver/LQ_UART.src 
@@ -50,6 +52,7 @@ C_DEPS += \
 ./src/AppSw/Tricore/Driver/LQ_GTM.d \
 ./src/AppSw/Tricore/Driver/LQ_QSPI.d \
 ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.d \
+./src/AppSw/Tricore/Driver/LQ_SOFTSPI.d \
 ./src/AppSw/Tricore/Driver/LQ_SPI.d \
 ./src/AppSw/Tricore/Driver/LQ_STM.d \
 ./src/AppSw/Tricore/Driver/LQ_UART.d 
@@ -67,6 +70,7 @@ OBJS += \
 ./src/AppSw/Tricore/Driver/LQ_GTM.o \
 ./src/AppSw/Tricore/Driver/LQ_QSPI.o \
 ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.o \
+./src/AppSw/Tricore/Driver/LQ_SOFTSPI.o \
 ./src/AppSw/Tricore/Driver/LQ_SPI.o \
 ./src/AppSw/Tricore/Driver/LQ_STM.o \
 ./src/AppSw/Tricore/Driver/LQ_UART.o 
@@ -92,7 +96,7 @@ src/AppSw/Tricore/Driver/%.o: ./src/AppSw/Tricore/Driver/%.src src/AppSw/Tricore
 clean: clean-src-2f-AppSw-2f-Tricore-2f-Driver
 
 clean-src-2f-AppSw-2f-Tricore-2f-Driver:
-	-$(RM) ./src/AppSw/Tricore/Driver/LQ_ADC.d ./src/AppSw/Tricore/Driver/LQ_ADC.o ./src/AppSw/Tricore/Driver/LQ_ADC.src ./src/AppSw/Tricore/Driver/LQ_CCU6.d ./src/AppSw/Tricore/Driver/LQ_CCU6.o ./src/AppSw/Tricore/Driver/LQ_CCU6.src ./src/AppSw/Tricore/Driver/LQ_DMA.d ./src/AppSw/Tricore/Driver/LQ_DMA.o ./src/AppSw/Tricore/Driver/LQ_DMA.src ./src/AppSw/Tricore/Driver/LQ_EEPROM.d ./src/AppSw/Tricore/Driver/LQ_EEPROM.o ./src/AppSw/Tricore/Driver/LQ_EEPROM.src ./src/AppSw/Tricore/Driver/LQ_EMEM.d ./src/AppSw/Tricore/Driver/LQ_EMEM.o ./src/AppSw/Tricore/Driver/LQ_EMEM.src ./src/AppSw/Tricore/Driver/LQ_FFT.d ./src/AppSw/Tricore/Driver/LQ_FFT.o ./src/AppSw/Tricore/Driver/LQ_FFT.src ./src/AppSw/Tricore/Driver/LQ_GPIO.d ./src/AppSw/Tricore/Driver/LQ_GPIO.o ./src/AppSw/Tricore/Driver/LQ_GPIO.src ./src/AppSw/Tricore/Driver/LQ_GPSR.d ./src/AppSw/Tricore/Driver/LQ_GPSR.o ./src/AppSw/Tricore/Driver/LQ_GPSR.src ./src/AppSw/Tricore/Driver/LQ_GPT12_ENC.d ./src/AppSw/Tricore/Driver/LQ_GPT12_ENC.o ./src/AppSw/Tricore/Driver/LQ_GPT12_ENC.src ./src/AppSw/Tricore/Driver/LQ_GTM.d ./src/AppSw/Tricore/Driver/LQ_GTM.o ./src/AppSw/Tricore/Driver/LQ_GTM.src ./src/AppSw/Tricore/Driver/LQ_QSPI.d ./src/AppSw/Tricore/Driver/LQ_QSPI.o ./src/AppSw/Tricore/Driver/LQ_QSPI.src ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.d ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.o ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.src ./src/AppSw/Tricore/Driver/LQ_SPI.d ./src/AppSw/Tricore/Driver/LQ_SPI.o ./src/AppSw/Tricore/Driver/LQ_SPI.src ./src/AppSw/Tricore/Driver/LQ_STM.d ./src/AppSw/Tricore/Driver/LQ_STM.o ./src/AppSw/Tricore/Driver/LQ_STM.src ./src/AppSw/Tricore/Driver/LQ_UART.d ./src/AppSw/Tricore/Driver/LQ_UART.o ./src/AppSw/Tricore/Driver/LQ_UART.src
+	-$(RM) ./src/AppSw/Tricore/Driver/LQ_ADC.d ./src/AppSw/Tricore/Driver/LQ_ADC.o ./src/AppSw/Tricore/Driver/LQ_ADC.src ./src/AppSw/Tricore/Driver/LQ_CCU6.d ./src/AppSw/Tricore/Driver/LQ_CCU6.o ./src/AppSw/Tricore/Driver/LQ_CCU6.src ./src/AppSw/Tricore/Driver/LQ_DMA.d ./src/AppSw/Tricore/Driver/LQ_DMA.o ./src/AppSw/Tricore/Driver/LQ_DMA.src ./src/AppSw/Tricore/Driver/LQ_EEPROM.d ./src/AppSw/Tricore/Driver/LQ_EEPROM.o ./src/AppSw/Tricore/Driver/LQ_EEPROM.src ./src/AppSw/Tricore/Driver/LQ_EMEM.d ./src/AppSw/Tricore/Driver/LQ_EMEM.o ./src/AppSw/Tricore/Driver/LQ_EMEM.src ./src/AppSw/Tricore/Driver/LQ_FFT.d ./src/AppSw/Tricore/Driver/LQ_FFT.o ./src/AppSw/Tricore/Driver/LQ_FFT.src ./src/AppSw/Tricore/Driver/LQ_GPIO.d ./src/AppSw/Tricore/Driver/LQ_GPIO.o ./src/AppSw/Tricore/Driver/LQ_GPIO.src ./src/AppSw/Tricore/Driver/LQ_GPSR.d ./src/AppSw/Tricore/Driver/LQ_GPSR.o ./src/AppSw/Tricore/Driver/LQ_GPSR.src ./src/AppSw/Tricore/Driver/LQ_GPT12_ENC.d ./src/AppSw/Tricore/Driver/LQ_GPT12_ENC.o ./src/AppSw/Tricore/Driver/LQ_GPT12_ENC.src ./src/AppSw/Tricore/Driver/LQ_GTM.d ./src/AppSw/Tricore/Driver/LQ_GTM.o ./src/AppSw/Tricore/Driver/LQ_GTM.src ./src/AppSw/Tricore/Driver/LQ_QSPI.d ./src/AppSw/Tricore/Driver/LQ_QSPI.o ./src/AppSw/Tricore/Driver/LQ_QSPI.src ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.d ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.o ./src/AppSw/Tricore/Driver/LQ_SOFTI2C.src ./src/AppSw/Tricore/Driver/LQ_SOFTSPI.d ./src/AppSw/Tricore/Driver/LQ_SOFTSPI.o ./src/AppSw/Tricore/Driver/LQ_SOFTSPI.src ./src/AppSw/Tricore/Driver/LQ_SPI.d ./src/AppSw/Tricore/Driver/LQ_SPI.o ./src/AppSw/Tricore/Driver/LQ_SPI.src ./src/AppSw/Tricore/Driver/LQ_STM.d ./src/AppSw/Tricore/Driver/LQ_STM.o ./src/AppSw/Tricore/Driver/LQ_STM.src ./src/AppSw/Tricore/Driver/LQ_UART.d ./src/AppSw/Tricore/Driver/LQ_UART.o ./src/AppSw/Tricore/Driver/LQ_UART.src
 
 .PHONY: clean-src-2f-AppSw-2f-Tricore-2f-Driver
 

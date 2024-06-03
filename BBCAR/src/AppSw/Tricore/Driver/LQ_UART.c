@@ -79,8 +79,12 @@ void UART0_RX_IRQHandler(void)
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[0]);
 
 	/* 用户代码 */
-	UART_PutChar(UART0, UART_GetChar(UART0));
-//    uint8 data=UART_GetChar(UART0);
+    uint8 data=UART_GetChar(UART0);
+    UART_AnalyseData(data);
+//  UART_PutChar(UART0, UART_GetChar(UART0));
+//    if(!CircularBuffer_Write(&bf,data)){
+//        //写入失败，缓存满了
+//    }
 //    UART_ReceiveData(data);
 
 }

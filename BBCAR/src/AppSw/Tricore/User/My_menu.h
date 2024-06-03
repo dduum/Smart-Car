@@ -15,7 +15,8 @@
 #include <Platform_Types.h>
 #include "My_Button.h"
 #include "My_Control_Code.h"
-
+#include "image1.h"
+#include <Element_handle.h>
 
 typedef struct Menu
 {
@@ -34,9 +35,12 @@ void menu_ENC(void);
 void menu_image(void);
 void menu_ServoMotor(void);
 void Show_ENC(void);
+void Show_Pulse(void);
 void Show_ServoPid(void);
+void Show_ServoFuzzy(void);
 void Show_Motor(void);
-void Show_MotorIncPid(void);
+void Show_MotorIncPid1(void);
+void Show_MotorIncPid2(void);
 
 
 #endif /* SRC_APPSW_TRICORE_USER_MY_MENU_H_ */

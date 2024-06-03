@@ -51,19 +51,10 @@
 #define PROPERTY_ENABLE (1U)        //
 #define PROPERTY_DISABLE (0U)       //
 
-
-
-
-
-
-
-
-
 unsigned char LQ_IIC_LSM60DSR_GetID(unsigned char dev, unsigned char reg);
 void LQ_IIC_LSM60DSR_Init(void);
 void LQ_IIC_LSM60DSR_Read(signed short *ax,signed short *ay,signed short *az,signed short *gx,signed short *gy,signed short *gz);
 void Test_IIC_LQLSM6DSR(void);
-
 
 unsigned char LQ_SPI_LSM60DSR_GetID(unsigned char reg);
 void LQ_SPI_LSM60DSR_Init(void);

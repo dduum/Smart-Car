@@ -11,7 +11,6 @@
 char data_txt[30];
 
 extern unsigned char Bin_Image[LCDH][LCDW];
-extern int Servo_Loc_error;
 
 volatile uint8 Straight_Flag;        //直道标志
 volatile uint8 Curve_Flag;           //弯道标志

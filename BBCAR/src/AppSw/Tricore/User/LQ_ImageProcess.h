@@ -17,6 +17,10 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef SRC_APPSW_TRICORE_USER_LQ_IMAGEPROCESS_H_
 #define SRC_APPSW_TRICORE_USER_LQ_IMAGEPROCESS_H_
 
+extern volatile sint16 ECPULSE1;          // 速度全局变量
+extern volatile sint16 ECPULSE2;          // 速度全局变量
+extern volatile sint32 RAllPulse;         // 速度全局变量
+
 void CameraCar(void);
 void TFT_Show_Camera_Info(void);
 uint8 UpdownSideGet(uint8 imageInput[LCDH][LCDW], uint8 imageOut[2][LCDW]);

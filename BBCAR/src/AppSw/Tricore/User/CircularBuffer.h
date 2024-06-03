@@ -20,6 +20,8 @@ typedef struct {
   uint16 tail;
 } CircularBuffer;
 
+extern CircularBuffer bf;
+
 void CircularBuffer_Init(CircularBuffer* cb);
 int CircularBuffer_IsFull(const CircularBuffer* cb);
 int CircularBuffer_IsEmpty(const CircularBuffer* cb);

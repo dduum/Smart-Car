@@ -1,12 +1,14 @@
 #include <LQ_PID.h>
 
 pid_param_t Servo_Loc_PID;
-pid_param_t Motor_Inc_PID;
+pid_param_t Motor_Inc_PID1;
+pid_param_t Motor_Inc_PID2;
 
 void Set_PID(void)
 {
     PidInit(&Servo_Loc_PID);
-    PidInit(&Motor_Inc_PID);
+    PidInit(&Motor_Inc_PID1);
+    PidInit(&Motor_Inc_PID2);
     Pid_Value();
     E2PROM_Write_PID();
 }
@@ -14,13 +16,19 @@ void Set_PID(void)
 void Pid_Value(void)
 {
     //舵机转向环
-    Servo_Loc_PID.kp=20.5;
-    Servo_Loc_PID.ki=10.5;
-    Servo_Loc_PID.kd=5.5;   //1
+    Servo_Loc_PID.kp=0;
+    Servo_Loc_PID.ki=0;
+    Servo_Loc_PID.kd=0;   //1
+    Servo_Loc_PID.kp2=0;
+    Servo_Loc_PID.kd2=0;
     //电机速度环
-    Motor_Inc_PID.kp=12.5;
-    Motor_Inc_PID.ki=1.3;
-    Motor_Inc_PID.kd=0;
+    Motor_Inc_PID1.kp=27.5;   //21  2.5 0.5   //2.5 8 2
+    Motor_Inc_PID1.ki=5.7;
+    Motor_Inc_PID1.kd=2.5;
+
+    Motor_Inc_PID2.kp=20;
+    Motor_Inc_PID2.ki=4.5;
+    Motor_Inc_PID2.kd=1;
 }
 
 /*************************************************************************
@@ -84,6 +92,27 @@ float PidLocCtrl(pid_param_t * pid, float error)
 	pid->out = pid->out_p + pid->out_i + pid->out_d;
 
 	return pid->out;
+}
+
+float absfloat(float num)
+{
+    return num<0?(-num):num;
+}
+
+
+float Servo_PidLocCtrl(pid_param_t * pid, float error)
+{
+    pid->out_p = pid->kp * error;
+    pid->out_d = pid->kd * (error - pid->last_error);
+
+    pid->last_error = error;
+
+    pid->out_p2 = absfloat(error)*error * pid->kp2;
+
+    pid->out = pid->out_p + pid->out_d + pid->out_p2 ;
+            //+ Yaw * pid->kd2
+
+    return pid->out;
 }
 
 

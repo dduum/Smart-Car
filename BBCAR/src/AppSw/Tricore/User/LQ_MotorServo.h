@@ -34,9 +34,9 @@
 #define Servo_Delta 150
 
 #define Servo_Delta 150            //舵机左右转动的差值，与舵机型号，拉杆和舵机臂长有关
-#define Servo_Center_Mid 1520      //舵机直行中值，
-#define Servo_Left_Max   1700     //舵机左转极限值(Servo_Center_Mid+Servo_Delta)
-#define Servo_Right_Min  1370      //舵机右转极限值，此值跟舵机放置方式有关，立式(Servo_Center_Mid-Servo_Delta)
+#define Servo_Center_Mid 1460      //舵机直行中值，
+#define Servo_Left_Max   1550     //舵机左转极限值(Servo_Center_Mid+Servo_Delta)
+#define Servo_Right_Min  1350      //舵机右转极限值，此值跟舵机放置方式有关，立式(Servo_Center_Mid-Servo_Delta)
 
 #define MtTargetDuty  4200  //电机占空比值得最大值，实际需要减去电池电压，编码器，赛道曲率，达不到该值
 
