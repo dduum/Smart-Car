@@ -23,7 +23,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef __LQ_VL53_H_
 #define __LQ_VL53_H_
 
-
+#include <Platform_Types.h>
 
 #define VL53L0X_REG_IDENTIFICATION_MODEL_ID         0xc0
 #define VL53L0X_REG_IDENTIFICATION_REVISION_ID      0xc2
@@ -36,6 +36,9 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define VL53L0X_REG_I2C_SLAVE_DEVICE_ADDRESS        0x8a
 #define VL53ADDR                                    0x29    //0x52   ƒ¨»œµÿ÷∑
 #define VL53NEWADDR                                 0x30
+
+extern uint16 Distance;
+extern uint16 Last_Distance;
 
 /**
   * @brief    ≤‚ ‘VL53
@@ -91,5 +94,7 @@ void VL53_Write_Byte(unsigned char dev, unsigned char reg, unsigned char data);
   */
 void VL53_Read_nByte(unsigned char dev, unsigned char reg, unsigned char length, unsigned char* data);
 
+void VL53_Init(void);
+void Read_VL53(void);
 
 #endif

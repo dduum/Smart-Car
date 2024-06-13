@@ -102,25 +102,25 @@ void Test_ADC_TFT(void)
   TFTSPI_CLS(u16BLUE);   //À¶É«ÆÁÄ»
   while(1)
   {
-    vbat=ADC_Read(ADC0);
-    vbat = vbat * 2 / 25;  // x/4095*3.3*100*5.7
-    sprintf(txt, "Bat:%d.%02dV ", vbat / 100, vbat % 100);  // *3.3/4095*3
-    TFTSPI_P8X16Str(3, 3, txt, u16PURPLE, u16BLACK);   // ×Ö·û´®ÏÔÊ¾
+//    vbat=ADC_Read(ADC0);
+//    vbat = vbat * 2 / 25;  // x/4095*3.3*100*5.7
+//    sprintf(txt, "Bat:%d.%02dV ", vbat / 100, vbat % 100);  // *3.3/4095*3
+//    TFTSPI_P8X16Str(3, 3, txt, u16PURPLE, u16BLACK);   // ×Ö·û´®ÏÔÊ¾
+//
+//
+//    vbat=ADC_Read(ADC1);
+//    vbat = vbat * 2 / 25;  // x/4095*3.3*100
+//    sprintf(txt, "ch4:%d.%02dV ", vbat / 100, vbat % 100);  // *3.3/4095
+//    TFTSPI_P8X16Str(3, 4, txt, u16PURPLE, u16BLACK);   // ×Ö·û´®ÏÔÊ¾
+//
+//
+//    vbat=ADC_Read(ADC2);
+//    vbat = vbat * 2 / 25;  // x/4095*3.3*100
+//    sprintf(txt, "ch5:%d.%02dV ", vbat / 100, vbat % 100);  // *3.3/4095
+//    TFTSPI_P8X16Str(3, 5, txt, u16PURPLE, u16BLACK);   // ×Ö·û´®ÏÔÊ¾
 
-
-    vbat=ADC_Read(ADC1);
-    vbat = vbat * 2 / 25;  // x/4095*3.3*100
-    sprintf(txt, "ch4:%d.%02dV ", vbat / 100, vbat % 100);  // *3.3/4095
-    TFTSPI_P8X16Str(3, 4, txt, u16PURPLE, u16BLACK);   // ×Ö·û´®ÏÔÊ¾
-
-
-    vbat=ADC_Read(ADC2);
-    vbat = vbat * 2 / 25;  // x/4095*3.3*100
-    sprintf(txt, "ch5:%d.%02dV ", vbat / 100, vbat % 100);  // *3.3/4095
-    TFTSPI_P8X16Str(3, 5, txt, u16PURPLE, u16BLACK);   // ×Ö·û´®ÏÔÊ¾
-
-    vbat=ADC_Read(ADC3);
-    vbat = vbat * 2 / 25;  // x/4095*3.3*100
+    vbat=ADC_Read(ADC7);
+    vbat = vbat * 2 / 25 * 1.9;  // x/4095*3.3*100
     sprintf(txt, "ch5:%d.%02dV ", vbat / 100, vbat % 100);  // *3.3/4095
     TFTSPI_P8X16Str(3, 6, txt, u16PURPLE, u16BLACK);   // ×Ö·û´®ÏÔÊ¾
 

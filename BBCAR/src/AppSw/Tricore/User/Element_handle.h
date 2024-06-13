@@ -73,6 +73,8 @@ typedef struct
 extern Image_element Element1;
 extern Image_Identify Identify1;
 extern Pulse_Param_t ALLPULSE;
+extern float Angle_in;//进圆环时的角度
+extern float Angle_delta;//角度变化值
 
 void Set_NULLflag(void);
 void Calcu_Pulse(void);

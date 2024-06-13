@@ -100,20 +100,20 @@ void Fuzzy_Get_grad_membership(Fuzzy_param_t * pid,float erro,float erro_c)
         }
         else
         {       //如果误差小于论域范围或者超过论域范围
-              if (erro <= e_membership_values[0])
-        {
-            pid->e_gradmembership[0] = 1;
-            pid->e_gradmembership[1] = 0;
-            pid->e_grad_index[0] = 0;
-            pid->e_grad_index[1] = -1;
-        }
-                else if (erro >= e_membership_values[6])
-        {
-            pid->e_gradmembership[0] = 1;
-            pid->e_gradmembership[1] = 0;
-            pid->e_grad_index[0] = 6;
-            pid->e_grad_index[1] = -1;
-        }
+             if (erro <= e_membership_values[0])
+            {
+                pid->e_gradmembership[0] = 1;
+                pid->e_gradmembership[1] = 0;
+                pid->e_grad_index[0] = 0;
+                pid->e_grad_index[1] = -1;
+            }
+            else if (erro >= e_membership_values[6])
+            {
+                pid->e_gradmembership[0] = 1;
+                pid->e_gradmembership[1] = 0;
+                pid->e_grad_index[0] = 6;
+                pid->e_grad_index[1] = -1;
+            }
         }
         //误差导数的隶属度
         if (erro_c > ec_membership_values[0] && erro_c < ec_membership_values[6])
@@ -185,11 +185,11 @@ void Fuzzy_GetSumGrad(Fuzzy_param_t * pid)
 
               pid->KpgradSums[indexKp] = pid->KpgradSums[indexKp] + (pid->e_gradmembership[i] * pid->ec_gradmembership[j]);
               pid->KigradSums[indexKi] = pid->KigradSums[indexKi] + (pid->e_gradmembership[i] * pid->ec_gradmembership[j]);
-              pid->KdgradSums[indexKd] = pid->KdgradSums[indexKd] + (pid->e_gradmembership[i] * pid->ec_gradmembership[j]);
+              pid->KdgradSums[indexKd] = pid->KdgradSums[indexKd] + (pid->e_gradmembership[i] * pid->ec_gradmembership[j]);  //这里+=的原因是因为可能有多少频率相同对应同一个P,在规则表中对应同一个
              }
              else
              {
-               continue;
+              continue;
              }
         }
      }
@@ -309,6 +309,10 @@ float Fuzzy_Controller(Fuzzy_param_t * pid,float e_max, float e_min, float ec_ma
     //积分限幅
     if(pid->integrator>100)pid->integrator=100;
     else if(pid->integrator<-100)pid->integrator=-100;
+
+    //纯P控制
+//    pid->kd=0;
+
     //pd控制
     pid->kp_error = pid->kp * erro;
     pid->kd_error = pid->kd * erro_c;
@@ -347,7 +351,8 @@ int Fuzzy_get_KP_Initial(int type)
 *  备    注：
 *************************************************************************/
 int Fuzzy_get_KD_Initial(int type)
-{   int num=0;
+{
+    int num=0;
     if(type==0)
     {
         num=1;

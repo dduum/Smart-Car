@@ -214,7 +214,7 @@ void Show_ServoFuzzy(void)
     TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
     sprintf(txt, "Fzkd=%3.1f",Fpid1.kd);
     TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Fzout=%.2f",Fpid1.output);
+    sprintf(txt, "Fzout=%4d",(int)Fpid1.output);
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
     sprintf(txt, "KP_error=%4.1f",Fpid1.kp_error);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
@@ -222,9 +222,9 @@ void Show_ServoFuzzy(void)
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
     sprintf(txt, "Servo_duty=%4d ",Servo_duty);              //1350~1550
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "kp_max=%3.1f ",Image_kp);
+    sprintf(txt, "pmax=%3.1f   dmax=%3.1f",Image_kp,Image_kd);
     TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "kd_min=%3.1f",Image_kd);              //1350~1550
+    sprintf(txt, "Dir_out=%4d",Dir_out);
     TFTSPI_P8X16Str(0, 7, txt, u16WHITE, u16BLACK);
 }
 
@@ -263,12 +263,22 @@ void Show_MotorIncPid1(void)
     TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
     sprintf(txt, "MD1=%.2f",Motor_Inc_PID1.kd);
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
+
+//    sprintf(txt, "MP=%.2f",Motor_Inc_PID.kp);
+//    TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
+//    sprintf(txt, "MI=%.2f",Motor_Inc_PID.ki);
+//    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
+//    sprintf(txt, "MD=%.2f",Motor_Inc_PID.kd);
+//    TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
+
     sprintf(txt, "M1_duty=%4d",Motor_duty1);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
     sprintf(txt, "M2_duty=%4d",Motor_duty2);
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
     sprintf(txt, "M_IncPID1: %6.2f", Motor_IncPID1);
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
+//    sprintf(txt, "M_IncPID: %6.2f", Motor_IncPID);
+//    TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
 
 }
 
@@ -298,17 +308,24 @@ void Show_Motor(void)
     char txt[30];
     sprintf(txt, "%1d",Select_PID);
     TFTSPI_P8X16Str(18, 0, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "%3d",Servo_Loc_error);
+    TFTSPI_P8X16Str(17, 1, txt, u16WHITE, u16BLACK);
+
     sprintf(txt, "Look_Line=%3d",Look_Line);
     TFTSPI_P8X16Str(0, 0, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "FOUT=%4d",(int)Fpid1.output);
+    TFTSPI_P8X16Str(0, 1, txt, u16WHITE, u16BLACK);
     sprintf(txt, "threshold=%3d",threshold);
     TFTSPI_P8X16Str(0, 2, txt, u16WHITE, u16BLACK);
     sprintf(txt, "YAW=%4.1f",Yaw);
     TFTSPI_P8X16Str(0, 3, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "Servo_error=%3d",Servo_Loc_error);
+    sprintf(txt, "Servo_er ror=%3d",Servo_Loc_error);
     TFTSPI_P8X16Str(0, 4, txt, u16WHITE, u16BLACK);
     sprintf(txt, "Servo_duty=%4d ",Servo_duty);              //1350~1550
     TFTSPI_P8X16Str(0, 5, txt, u16WHITE, u16BLACK);
-    sprintf(txt, "change_count=%2d ",change_count);              //1350~1550
+//    sprintf(txt, "Dis=%5d ",Distance);              //1350~1550
+//    TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
+    sprintf(txt, "K_Dir=%3.1f",K_Dir);              //1350~1550
     TFTSPI_P8X16Str(0, 6, txt, u16WHITE, u16BLACK);
     sprintf(txt, "Tar_Speed=%3d ",Target_Speed);              //1350~1550
     TFTSPI_P8X16Str(0, 7, txt, u16WHITE, u16BLACK);

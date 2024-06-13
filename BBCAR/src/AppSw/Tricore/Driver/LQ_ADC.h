@@ -1,14 +1,14 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 【平    台】北京龙邱智能科技TC264DA核心板
-【编    写】ZYF/chiusir
-【E-mail  】chiusir@163.com
-【软件版本】V1.1 版权所有，单位使用请先联系授权
-【最后更新】2020年10月28日
+【编    写】chiusir
+【E-mail】chiusir@163.com
+【软件版本】V1.2 版权所有，单位使用请先联系授权
+【最后更新】2023年6月6日
 【相关信息参考下列地址】
 【网    站】http://www.lqist.cn
 【淘宝店铺】http://longqiu.taobao.com
 ------------------------------------------------
-【dev.env.】AURIX Development Studio1.2.2及以上版本
+【dev.env.】AURIX Development Studio1.6版本
 【Target 】 TC264DA/TC264D
 【Crystal】 20.000Mhz
 【SYS PLL】 200MHz
@@ -40,13 +40,13 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
  */
 typedef enum
 {
-	ADC0 = 0x0000, ADC1 = 0x0101, ADC2 = 0x0202, ADC3 = 0x0303, ADC4 = 0x0404, ADC5 = 0x0505, ADC6 = 0x0606, ADC7 = 0x0707,
-	ADC8 = 0x0808, ADC10= 0x0A09, ADC11= 0x0B0A, ADC12= 0x0C0B, ADC13= 0x0D0C,
+    ADC0 = 0x0000, ADC1 = 0x0101, ADC2 = 0x0202, ADC3 = 0x0303, ADC4 = 0x0404, ADC5 = 0x0505, ADC6 = 0x0606, ADC7 = 0x0707,
+    ADC8 = 0x0808, ADC10= 0x0A09, ADC11= 0x0B0A, ADC12= 0x0C0B, ADC13= 0x0D0C,
 
-	ADC16= 0x100D, ADC17= 0x110E, ADC20= 0x140F, ADC25= 0x1910,
+    ADC16= 0x100D, ADC17= 0x110E, ADC20= 0x140F, ADC25= 0x1910,
 
-	ADC35= 0x2311, ADC36= 0x2412, ADC37= 0x2513, ADC38= 0x2614, ADC39= 0x2715, ADC44= 0x2A16, ADC45= 0x2B17, ADC46= 0x2C18,
-	ADC47= 0x2D19, ADC48= 0x2E1A, ADC49= 0x2F1B
+    ADC35= 0x2311, ADC36= 0x2412, ADC37= 0x2513, ADC38= 0x2614, ADC39= 0x2715, ADC44= 0x2A16, ADC45= 0x2B17, ADC46= 0x2C18,
+    ADC47= 0x2D19, ADC48= 0x2E1A, ADC49= 0x2F1B
 }ADC_Channel_t;
 
 /* 获取ADC对应组 */

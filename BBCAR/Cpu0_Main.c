@@ -30,7 +30,6 @@ int core0_main (void)
 
     //初始化外设
     Init_System();
-
     // 开启CPU总中断
     IfxCpu_enableInterrupts();
 
@@ -40,11 +39,10 @@ int core0_main (void)
     mutexCpu0TFTIsOk=0;         // CPU1： 0占用/1释放 TFT
 
     int flag=0; //页面切换标志
+    uint8 angle_flag=0;
 
     while (1)	//主循环
     {
-        LQ_DMP_Read();
-
         //拨码开关向上为0（ON），向下为1（OFF）
         if(KEY_Read(DSW0)==0 && KEY_Read(DSW1)==0)   //菜单模式
         {
@@ -63,14 +61,27 @@ int core0_main (void)
             Motor_openFlag=!Motor_openFlag;
             Servo_openFlag=!Servo_openFlag;
         }
-        //测距，距离太近关电机
+
         if(PIN_Read(P15_8)==0)
         {
-//            Motor_openFlag=0;
-//            Servo_openFlag=0;
-//            MotorCtrl(0,0);
-//            ATOM_PWM_InitConfig(ATOMSERVO1, Servo_Center_Mid, 100);
-            ALLPULSE.Circle_Left_Pulse_Key=1;
+            Motor_openFlag=0;
+            Servo_openFlag=0;
+            MotorCtrl(0,0);
+            ATOM_PWM_InitConfig(ATOMSERVO1, Servo_Center_Mid, 100);
+//            ALLPULSE.Circle_Left_Pulse_Key=1;
+//            My_PulseKey(&ALLPULSE,1,1);
+        }
+
+        if(angle_flag)
+        {
+            Angle_delta=Yaw-Angle_in;
+            if(Angle_delta>180 || Angle_delta<-180)
+            {
+                angle_flag=0;
+                Angle_delta=0;
+//                Motor_openFlag=1;
+//                Servo_openFlag=1;
+            }
         }
         //如果PID的数据发生改变,重新向E2PROM中写入数据
         if(data_change_flag==1)
@@ -79,11 +90,26 @@ int core0_main (void)
             E2PROM_Write_PID();
         }
 
-//        char txt[70];
-//        sprintf(txt, "%d,%.1f,%.1f,%.1f,%.1f\n",Target_Speed,Current_Speed1,Motor_IncPID1,Current_Speed2,Motor_IncPID2);
+        char txt[70];
+//        sprintf(txt, "%d,%.1f,%.1f,%.1f,%.1f\n",Target_Speed,Current_Speed1,Current_Speed2,Current_Speed,Motor_IncPID);
 //        UART_PutStr(UART0,txt);
-//        sprintf(txt, "%d\n",err_d);
+//        sprintf(txt, "%d,%f\n",Dir_out,Tmp_FuzzyOut);
 //        UART_PutStr(UART0,txt);
+//        sprintf(txt, "%f,%f,%f\n",Fpid1.kp_error,Fpid1.kd_error,Fpid1.output);
+//        UART_PutStr(UART0,txt);
+//        sprintf(txt, "%f,%d,%f,%d\n",Motor_IncPID1,Motor_duty1,Motor_IncPID2,Motor_duty2);
+        //便于确定当前速度下模糊err,err_d的值域
+//        sprintf(txt, "%d,%d\n",Test_err,Test_err_d);
+//        UART_PutStr(UART0,txt);
+        sprintf(txt, "%f,%f\n",Fpid1.kp,Fpid1.kd);
+        UART_PutStr(UART0,txt);
+
+//        if(image_flag)
+//        {
+//            image_flag=0;
+//            sprintf(txt, "%d,%d,%d,%d,%d,%d\n",image_error[0],image_error[1],image_error[2],image_error[3],image_error[4],image_error[5]);
+//            UART_PutStr(UART0,txt);
+//        }
 
         if(CircularBuffer_Read(&bf,&rx_data)){
             UART_AnalyseData(rx_data);
@@ -119,7 +145,7 @@ void Init_System(void)
 
     CAMERA_Init(50);                    //摄像头初始化
 
-//    ADC_InitConfig(ADC7, 80000);        //龙邱母板AD7连接着电池
+    ADC_InitConfig(ADC7, 80000);        //龙邱母板AD7连接着电池
 
     ENC_InitConfig(ENC2_InPut_P33_7, ENC2_Dir_P33_6); //左轮编码器
     ENC_InitConfig(ENC4_InPut_P02_8, ENC4_Dir_P33_5); //右轮编码器
@@ -137,4 +163,9 @@ void Init_System(void)
 
     //读取E2PROM中的值
     E2PROM_Read_PID();
+
+    //初始化测距模块
+    VL53_Init();
 }
+
+

@@ -50,11 +50,11 @@
 #include "My_Key.h"
 #include "My_menu.h"
 #include "My_UART.h"
-#include "Image_Handle.h"
+#include "FuzzyPID.h"
 #include "LQ_ImageProcess.h"
-#include "My_Image_Handle.h"
 #include <LQ_MPU6050_DMP.h>
 #include <Element_handle.h>
+#include <LQ_I2C_VL53.h>
 
 
 //extern App_Cpu0 g_AppCpu0; // brief CPU 0 global data

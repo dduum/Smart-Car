@@ -29,7 +29,10 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <stdio.h>
 
 /* 选择屏幕 */
-#define OLED
+#define TFT
+
+uint16 Distance;
+uint16 Last_Distance;
 
 /**
   * @brief    测试VL53
@@ -142,3 +145,31 @@ void VL53_Read_nByte(unsigned char dev, unsigned char reg, unsigned char length,
     IIC_ReadMultByteFromSlave(dev<<1, reg, length, data);
 }
 
+void VL53_Init(void)
+{
+    unsigned char VL53_STAR = 0x02;    //0x02 连续测量模式    0x01 单次测量模式
+    /* 开始测距 */
+    VL53_Write_Byte(VL53ADDR, VL53L0X_REG_SYSRANGE_START, VL53_STAR);
+}
+
+void Read_VL53(void)
+{
+    unsigned char dis_buff[2];
+    /* 获取测量数据 */
+    VL53_Read_nByte(VL53ADDR, VL53_REG_DIS, 2, dis_buff);
+
+    /* 转换数据 */
+    Distance = (dis_buff[0]<<8) | (dis_buff[1]);
+
+    /* 超过2M没有障碍 */
+//    if(Distance > 8000)
+//    {
+//        Distance = 0;
+//    }
+//
+    if(Distance == 20)
+    {
+        Distance = Last_Distance;
+    }
+    Last_Distance = Distance;
+}

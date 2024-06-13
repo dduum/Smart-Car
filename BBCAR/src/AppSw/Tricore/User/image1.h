@@ -31,6 +31,8 @@ extern unsigned char Image_Line[120][160];
 extern unsigned char Image_centralLine[];
 extern int threshold;
 extern int Servo_Loc_error;
+extern int image_error[];
+extern uint8 image_flag;
 
 int Image_SeedGrowing(void);
 void Image_printSeedline(void);

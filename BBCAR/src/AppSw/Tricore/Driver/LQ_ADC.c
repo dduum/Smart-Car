@@ -1,174 +1,174 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-ï¿½ï¿½Æ½    Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¿Æ¼ï¿½TC264DAï¿½ï¿½ï¿½Ä°ï¿½
-ï¿½ï¿½ï¿½ï¿½    Ð´ï¿½ï¿½ZYF/chiusir
-ï¿½ï¿½E-mail  ï¿½ï¿½chiusir@163.com
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½V1.1 ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Î»Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½È¨
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¡ï¿½2020ï¿½ï¿½10ï¿½ï¿½28ï¿½ï¿½
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Î¿ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ö·ï¿½ï¿½
-ï¿½ï¿½ï¿½ï¿½    Õ¾ï¿½ï¿½http://www.lqist.cn
-ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½Ì¡ï¿½http://longqiu.taobao.com
+¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
+¡¾±à    Ð´¡¿chiusir
+¡¾E-mail¡¿chiusir@163.com
+¡¾Èí¼þ°æ±¾¡¿V1.2 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
+¡¾×îºó¸üÐÂ¡¿2023Äê6ÔÂ6ÈÕ
+¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
+¡¾Íø    Õ¾¡¿http://www.lqist.cn
+¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
 ------------------------------------------------
-ï¿½ï¿½dev.env.ï¿½ï¿½AURIX Development Studio1.2.2ï¿½ï¿½ï¿½ï¿½ï¿½Ï°æ±¾
-ï¿½ï¿½Target ï¿½ï¿½ TC264DA/TC264D
-ï¿½ï¿½Crystalï¿½ï¿½ 20.000Mhz
-ï¿½ï¿½SYS PLLï¿½ï¿½ 200MHz
+¡¾dev.env.¡¿AURIX Development Studio1.6°æ±¾
+¡¾Target ¡¿ TC264DA/TC264D
+¡¾Crystal¡¿ 20.000Mhz
+¡¾SYS PLL¡¿ 200MHz
 ________________________________________________________________
-ï¿½ï¿½ï¿½ï¿½iLLD_1_0_1_11_0ï¿½×²ï¿½ï¿½ï¿½ï¿½,
+»ùÓÚiLLD_1_0_1_11_0µ×²ã³ÌÐò,
 
-Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½Ê±ï¿½ò£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¿Õ¸ï¿½ï¿½Ó¢ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½
-ï¿½ï¿½ï¿½ï¿½CIFÎªTC264DAï¿½ï¿½ï¿½ï¿½ï¿½â£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TC264D
-ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½EMEMï¿½ï¿½512Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ê¹ï¿½ï¿½TC264Dï¿½ï¿½×¢ï¿½Íµï¿½EMEM_InitConfig()ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\Libraries\iLLD\TC26B\Tricore\Cpu\CStart\IfxCpu_CStart0.cï¿½ï¿½164ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡ï¿½
+Ê¹ÓÃÀý³ÌµÄÊ±ºò£¬½¨Òé²ÉÓÃÃ»ÓÐ¿Õ¸ñµÄÓ¢ÎÄÂ·¾¶£¬
+³ýÁËCIFÎªTC264DA¶ÀÓÐÍâ£¬ÆäËüµÄ´úÂë¼æÈÝTC264D
+±¾¿âÄ¬ÈÏ³õÊ¼»¯ÁËEMEM£º512K£¬Èç¹ûÓÃ»§Ê¹ÓÃTC264D£¬×¢ÊÍµôEMEM_InitConfig()³õÊ¼»¯º¯Êý¡£
+¹¤³ÌÏÂ\Libraries\iLLD\TC26B\Tricore\Cpu\CStart\IfxCpu_CStart0.cµÚ164ÐÐ×óÓÒ¡£
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½8ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½×ªï¿½ï¿½8ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª8/10/12Î»ï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½ß¾ï¿½ï¿½ï¿½12Î»ï¿½ï¿½
-ADCï¿½Ë¿ï¿½ANï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ARMï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
+ÀíÂÛÓÐ8¸ö×ª»»Æ÷£¬¿ÉÍ¬²½×ª»»£»Ã¿¸ö×ª»»8¸öÍ¨µÀ£¬¾«¶ÈÎª8/10/12Î»¡£Ä¬ÈÏÎª×î¸ß¾«¶È12Î»¡£
+ADC¶Ë¿ÚAN¿ÉÒÔ×÷ÎªÊäÈë¿Ú£¬²»¿É×÷ÎªÊä³ö¿Ú£¬ÓëARMµ¥Æ¬»ú²»Í¬£¡
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
-#include <LQ_ADC.h>
+#include "LQ_ADC.h"
 
 /**
- * ADCï¿½Ä´ï¿½ï¿½ï¿½
+ * ADC¼Ä´æÆ÷
  */
 IfxVadc_Adc vadc;
 
 /**
- * ADC×ªï¿½ï¿½ï¿½á¹¹ï¿½ï¿½
+ * ADC×ª»»½á¹¹Ìå
  */
 Ifx_VADC_RES conversionResult;
 
 /**
- * ADC×ªï¿½ï¿½ï¿½ï¿½
+ * ADC×ª»»×é
  */
 IfxVadc_Adc_Group g_AdcGroup[3];
 
 /**
- * ADC×ªï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Ã½á¹¹ï¿½ï¿½
+ * ADC×ª»»Í¨µÀÅäÖÃ½á¹¹Ìå
  */
 IfxVadc_Adc_Channel g_AdcChannel[28];
 
 
 /*************************************************************************
-*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½void ADC_init(void)
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ADCï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½channel  ADCÍ¨ï¿½ï¿½
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½Freq_Hz  ADCÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½     ×¢ï¿½ï¿½ ADCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ Í¨ï¿½ï¿½0-13  16-25  35-49ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½É¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ADCÄ£ï¿½ï¿½Í¬Ê±ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ADCÊµï¿½Ê²ï¿½ï¿½ï¿½ï¿½ï¿½ = Freq_Hz / N
-*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½
-*  ï¿½Þ¸ï¿½Ê±ï¿½ä£º2020ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½
-*  ï¿½ï¿½    ×¢ï¿½ï¿½     ×¢ï¿½ï¿½ adcï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1000000
+*  º¯ÊýÃû³Æ£ºvoid ADC_init(void)
+*  ¹¦ÄÜËµÃ÷£ºADC³õÊ¼»¯º¯Êý
+*  ²ÎÊýËµÃ÷£ºchannel  ADCÍ¨µÀ
+*  ²ÎÊýËµÃ÷£ºFreq_Hz  ADCÍ¨µÀ²ÉÑùÆµÂÊ     ×¢Òâ ADCÓÐÈý¸öÄ£¿é Í¨µÀ0-13  16-25  35-49·Ö±ðÊôÓÚÕâÈý¸öÍ¨µÀ  ÕâÀïÊ¹ÓÃÉ¨Ãè²ÉÑù·½Ê½£¬Òò´ËÈç¹ûÒ»¸öADCÄ£¿éÍ¬Ê±³õÊ¼»¯ÁËN¸öÍ¨µÀ£¬ÔòADCÊµ¼Ê²ÉÓÃÂÊ = Freq_Hz / N
+*  º¯Êý·µ»Ø£ºÎÞ
+*  ÐÞ¸ÄÊ±¼ä£º2020Äê5ÔÂ10ÈÕ
+*  ±¸    ×¢£º     ×¢Òâ adc²ÉÑùÂÊ×î¸ß1000000
 *************************************************************************/
 void ADC_InitConfig(ADC_Channel_t channel, unsigned long Freq_Hz)
 {
-	//ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½
-	IfxVadc_Adc_Config adcConfig;
-	IfxVadc_Adc_initModuleConfig(&adcConfig, &MODULE_VADC);
+    //ÐÂ½¨ÅäÖÃ
+    IfxVadc_Adc_Config adcConfig;
+    IfxVadc_Adc_initModuleConfig(&adcConfig, &MODULE_VADC);
 
-	adcConfig.supplyVoltage = IfxVadc_LowSupplyVoltageSelect_3V;
+    adcConfig.supplyVoltage = IfxVadc_LowSupplyVoltageSelect_3V;
 
-	//ï¿½ï¿½Ê¼ï¿½ï¿½Ä£ï¿½ï¿½
-	IfxVadc_Adc_initModule(&vadc, &adcConfig);
+    //³õÊ¼»¯Ä£¿é
+    IfxVadc_Adc_initModule(&vadc, &adcConfig);
 
-	//ï¿½Â½ï¿½ADCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	IfxVadc_Adc_GroupConfig adcGroupConfig;
-	IfxVadc_Adc_initGroupConfig(&adcGroupConfig, &vadc);
+    //ÐÂ½¨ADC×éÅäÖÃ
+    IfxVadc_Adc_GroupConfig adcGroupConfig;
+    IfxVadc_Adc_initGroupConfig(&adcGroupConfig, &vadc);
 
-	if(Freq_Hz > 1000000)
-	{
-		Freq_Hz = 1000000;
-	}
+    if(Freq_Hz > 1000000)
+    {
+        Freq_Hz = 1000000;
+    }
 
-	/* ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ */
-	adcGroupConfig.inputClass[0].sampleTime = 1.0f/Freq_Hz;
-	adcGroupConfig.inputClass[1].sampleTime = 1.0f/Freq_Hz;
+    /* ÉèÖÃ²ÉÑùÊ±¼ä */
+    adcGroupConfig.inputClass[0].sampleTime = 1.0f/Freq_Hz;
+    adcGroupConfig.inputClass[1].sampleTime = 1.0f/Freq_Hz;
 
-	/* ï¿½ï¿½ï¿½Ã·Ö±ï¿½ï¿½ï¿½ 12Î» */
-	adcGroupConfig.inputClass[0].resolution = IfxVadc_ChannelResolution_12bit;
-	adcGroupConfig.inputClass[1].resolution = IfxVadc_ChannelResolution_12bit;
+    /* ÉèÖÃ·Ö±æÂÊ 12Î» */
+    adcGroupConfig.inputClass[0].resolution = IfxVadc_ChannelResolution_12bit;
+    adcGroupConfig.inputClass[1].resolution = IfxVadc_ChannelResolution_12bit;
 
-#pragma warning 547         // ï¿½ï¿½ï¿½Î¾ï¿½ï¿½ï¿½
-	//ï¿½Þ¸ï¿½ï¿½ï¿½
-	adcGroupConfig.groupId = ADC_GetGroup(channel);
-#pragma warning default     // ï¿½ò¿ª¾ï¿½ï¿½ï¿½
+#pragma warning 547         // ÆÁ±Î¾¯¸æ
+    //ÐÞ¸Ä×é
+    adcGroupConfig.groupId = ADC_GetGroup(channel);
+#pragma warning default     // ´ò¿ª¾¯¸æ
 
-	//ï¿½ï¿½ÒªËµï¿½ï¿½:Í¨ï¿½ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªmaster!
-	adcGroupConfig.master = adcGroupConfig.groupId;
+    //ÖØÒªËµÃ÷:Í¨³£ÓÃÍ¬Ò»¸ö×é×÷Îªmaster!
+    adcGroupConfig.master = adcGroupConfig.groupId;
 
-	//ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½Ù²ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ò´¥·ï¿½1ï¿½ï¿½4ï¿½ï¿½ï¿½ï¿½8Â·×ªï¿½ï¿½
-	adcGroupConfig.arbiter.requestSlotQueueEnabled          = FALSE;
+    //Æô¶¯È«²¿ÖÙ²ÃÇëÇóÔ´£¬Ã¿¸öÇëÇóÔ´¿ÉÒÔË³Ðò´¥·¢1£¬4»òÕß8Â·×ª»»
+    adcGroupConfig.arbiter.requestSlotQueueEnabled          = FALSE;
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½Ðµï¿½Ò»ï¿½ï¿½
-	adcGroupConfig.arbiter.requestSlotScanEnabled           = TRUE;
+    //ÆôÓÃÐòÁÐÄ£Ê½£¬±ØÐëÆôÓÃ3ÖÖÇëÇóÔ´ÖÐµÄÒ»ÖÖ
+    adcGroupConfig.arbiter.requestSlotScanEnabled           = TRUE;
 
-	//ï¿½ï¿½ï¿½ï¿½É¨ï¿½ï¿½Ä£Ê½
-	adcGroupConfig.arbiter.requestSlotBackgroundScanEnabled = FALSE;
+    //ÆôÓÃÉ¨ÃèÄ£Ê½
+    adcGroupConfig.arbiter.requestSlotBackgroundScanEnabled = FALSE;
 
-	//ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½É¨ï¿½ï¿½
-	//Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Îª "always" Ä£Ê½ (ï¿½Þ±ï¿½ï¿½Ø¼ï¿½ï¿½)
-	adcGroupConfig.queueRequest.triggerConfig.gatingMode          = IfxVadc_GatingMode_disabled;
-	adcGroupConfig.scanRequest.triggerConfig.gatingMode           = IfxVadc_GatingMode_always;
-	adcGroupConfig.backgroundScanRequest.triggerConfig.gatingMode = IfxVadc_GatingMode_disabled;
-	//ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½É¨ï¿½ï¿½Ä£Ê½
-	adcGroupConfig.scanRequest.autoscanEnabled = TRUE;
+    //ÆôÓÃ±³¾°É¨Ãè
+    //Ê¹ÄÜËùÓÐµÄÃÅÎª "always" Ä£Ê½ (ÎÞ±ßÑØ¼ì²â)
+    adcGroupConfig.queueRequest.triggerConfig.gatingMode          = IfxVadc_GatingMode_disabled;
+    adcGroupConfig.scanRequest.triggerConfig.gatingMode           = IfxVadc_GatingMode_always;
+    adcGroupConfig.backgroundScanRequest.triggerConfig.gatingMode = IfxVadc_GatingMode_disabled;
+    //Æô¶¯×Ô¶¯É¨ÃèÄ£Ê½
+    adcGroupConfig.scanRequest.autoscanEnabled = TRUE;
 
-	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
-	IfxVadc_Adc_initGroup(&g_AdcGroup[ADC_GetGroup(channel)], &adcGroupConfig);
+    //³õÊ¼»¯×é
+    IfxVadc_Adc_initGroup(&g_AdcGroup[ADC_GetGroup(channel)], &adcGroupConfig);
 
-	//ï¿½Â½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	IfxVadc_Adc_ChannelConfig adcChannelConfig;
+    //ÐÂ½¨Í¨µÀÅäÖÃ
+    IfxVadc_Adc_ChannelConfig adcChannelConfig;
 
-	IfxVadc_Adc_initChannelConfig(&adcChannelConfig, &g_AdcGroup[ADC_GetGroup(channel)]);//ï¿½ï¿½Ê¼ï¿½ï¿½
-	adcChannelConfig.channelId = (IfxVadc_ChannelId)(ADC_GetChannel(channel));           //Í¨ï¿½ï¿½IDÑ¡ï¿½ï¿½
-	adcChannelConfig.resultRegister = (IfxVadc_ChannelResult)(ADC_GetChannel(channel));  //ï¿½ï¿½Ó¦Í¨ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+    IfxVadc_Adc_initChannelConfig(&adcChannelConfig, &g_AdcGroup[ADC_GetGroup(channel)]);//³õÊ¼»¯
+    adcChannelConfig.channelId = (IfxVadc_ChannelId)(ADC_GetChannel(channel));           //Í¨µÀIDÑ¡Ôñ
+    adcChannelConfig.resultRegister = (IfxVadc_ChannelResult)(ADC_GetChannel(channel));  //¶ÔÓ¦Í¨µÀ×ª»»½á¹û½á´æÆ÷Ñ¡Ôñ
 
-	//Ê¹ï¿½ï¿½×¨ï¿½Ã½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Í¨ï¿½ï¿½
-	IfxVadc_Adc_initChannel(&g_AdcChannel[ADC_GetIndex(channel)], &adcChannelConfig);
-	//ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½É¨ï¿½ï¿½
-	unsigned channels = (1 << adcChannelConfig.channelId);
-	unsigned mask = channels;
-	IfxVadc_Adc_setScan(&g_AdcGroup[ADC_GetGroup(channel)], channels, mask);
+    //Ê¹ÓÃ×¨ÓÃ½á¹û¼Ä´æÆ÷³õÊ¼»¯Í¨µÀ
+    IfxVadc_Adc_initChannel(&g_AdcChannel[ADC_GetIndex(channel)], &adcChannelConfig);
+    //¼ÓÈë×Ô¶¯É¨Ãè
+    unsigned channels = (1 << adcChannelConfig.channelId);
+    unsigned mask = channels;
+    IfxVadc_Adc_setScan(&g_AdcGroup[ADC_GetGroup(channel)], channels, mask);
 
-	//ï¿½ï¿½Ê¼ï¿½Ô¶ï¿½É¨ï¿½ï¿½
-	IfxVadc_Adc_startScan(&g_AdcGroup[ADC_GetGroup(channel)]);
+    //¿ªÊ¼×Ô¶¯É¨Ãè
+    IfxVadc_Adc_startScan(&g_AdcGroup[ADC_GetGroup(channel)]);
 
 }
 
 /*************************************************************************
-*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½unsigned short ADC_Read(ADC_Channel_t  chn)
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ADCï¿½É¼ï¿½
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½chn    : ADCÍ¨ï¿½ï¿½
-*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ADCï¿½ï¿½Öµ
-*  ï¿½Þ¸ï¿½Ê±ï¿½ä£º2020ï¿½ï¿½3ï¿½ï¿½10ï¿½ï¿½
-*  ï¿½ï¿½    ×¢ï¿½ï¿½
+*  º¯ÊýÃû³Æ£ºunsigned short ADC_Read(ADC_Channel_t  chn)
+*  ¹¦ÄÜËµÃ÷£ºADC²É¼¯
+*  ²ÎÊýËµÃ÷£ºchn    : ADCÍ¨µÀ
+*  º¯Êý·µ»Ø£ºADCÊýÖµ
+*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
+*  ±¸    ×¢£º
 *************************************************************************/
 unsigned short ADC_Read(ADC_Channel_t  chn)
 {
-	//ï¿½È´ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½
-	do{
-		conversionResult = IfxVadc_Adc_getResult(&g_AdcChannel[ADC_GetIndex(chn)]);
-	} while( !conversionResult.B.VF );
+    //µÈ´ý×ª»»Íê³É
+    do{
+        conversionResult = IfxVadc_Adc_getResult(&g_AdcChannel[ADC_GetIndex(chn)]);
+    } while( !conversionResult.B.VF );
 
-	return 	conversionResult.B.RESULT;//ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½
+    return  conversionResult.B.RESULT;//·µ»Ø×ª»»½á¹û
 }
 
 /*************************************************************************
-*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½unsigned short ADC_Read(ADC_Channel_t  chn)
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ADCï¿½ï¿½Î²É¼ï¿½È¡Æ½ï¿½ï¿½Öµ
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½chn    : ADCÍ¨ï¿½ï¿½
-*  ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½count  : ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½
-*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ADCï¿½ï¿½Öµ
-*  ï¿½Þ¸ï¿½Ê±ï¿½ä£º2020ï¿½ï¿½3ï¿½ï¿½10ï¿½ï¿½
-*  ï¿½ï¿½    ×¢ï¿½ï¿½
+*  º¯ÊýÃû³Æ£ºunsigned short ADC_Read(ADC_Channel_t  chn)
+*  ¹¦ÄÜËµÃ÷£ºADC¶à´Î²É¼¯È¡Æ½¾ùÖµ
+*  ²ÎÊýËµÃ÷£ºchn    : ADCÍ¨µÀ
+*  ²ÎÊýËµÃ÷£ºcount  : ²É¼¯´ÎÊý
+*  º¯Êý·µ»Ø£ºADCÊýÖµ
+*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
+*  ±¸    ×¢£º
 *************************************************************************/
 unsigned short ADC_ReadAverage(ADC_Channel_t  chn, unsigned char count)
 {
-	unsigned short i = 0;
-	unsigned long sum = 0;
-	for(i = 0; i < count; i++)
-	{
-		sum += ADC_Read(chn);
-	}
-	return 	(unsigned short)(sum/count);//ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½
+    unsigned short i = 0;
+    unsigned long sum = 0;
+    for(i = 0; i < count; i++)
+    {
+        sum += ADC_Read(chn);
+    }
+    return  (unsigned short)(sum/count);//·µ»Ø×ª»»½á¹û
 }
 /////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////ï¿½ï¿½/////////////////////////////////////////////////
+//////////////////////////////////Íê/////////////////////////////////////////////////
 

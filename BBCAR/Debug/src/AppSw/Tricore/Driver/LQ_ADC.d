@@ -1,7 +1,7 @@
 src/AppSw/Tricore/Driver/LQ_ADC.o :	../src/AppSw/Tricore/Driver/LQ_ADC.c
 ../src/AppSw/Tricore/Driver/LQ_ADC.c :
-src/AppSw/Tricore/Driver/LQ_ADC.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_ADC.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_ADC.h :
+src/AppSw/Tricore/Driver/LQ_ADC.o :	../src/AppSw/Tricore/Driver/LQ_ADC.h
+../src/AppSw/Tricore/Driver/LQ_ADC.h :
 src/AppSw/Tricore/Driver/LQ_ADC.o :	d:/Softward/Infineon/AURIX-Studio-1.9.20/tools/Compilers/Tasking_1.1r8/ctc/include/stdint.h
 d:/Softward/Infineon/AURIX-Studio-1.9.20/tools/Compilers/Tasking_1.1r8/ctc/include/stdint.h :
 src/AppSw/Tricore/Driver/LQ_ADC.o :	d:/Softward/Infineon/AURIX-Studio-1.9.20/tools/Compilers/Tasking_1.1r8/ctc/include/typeinfo.h

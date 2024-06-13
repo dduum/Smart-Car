@@ -9,7 +9,6 @@ encoding//src/AppSw/Tricore/Driver/LQ_GPIO.c=UTF-8
 encoding//src/AppSw/Tricore/Driver/LQ_UART.c=UTF-8
 encoding//src/AppSw/Tricore/Driver/LQ_UART.h=UTF-8
 encoding//src/AppSw/Tricore/Main/Main.h=UTF-8
-encoding//src/AppSw/Tricore/User/Image_Handle.h=UTF-8
 encoding//src/AppSw/Tricore/User/LQ_PID.c=UTF-8
 encoding//src/AppSw/Tricore/User/LQ_PID.h=UTF-8
 encoding//src/AppSw/Tricore/User/My_Button.c=UTF-8

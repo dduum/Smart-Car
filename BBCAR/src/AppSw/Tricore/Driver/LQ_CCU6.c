@@ -27,6 +27,9 @@
 
 #include <LQ_CCU6.h>
 
+volatile sint16 LPulse_Tmp = 0;          // 速度全局变量
+volatile sint16 YPulse_Tmp = 0;          // 速度全局变量
+
 
 IFX_INTERRUPT(CCU60_CH0_IRQHandler, CCU60_VECTABNUM, CCU60_CH0_PRIORITY);
 IFX_INTERRUPT(CCU60_CH1_IRQHandler, CCU60_VECTABNUM, CCU60_CH1_PRIORITY);
@@ -63,23 +66,46 @@ void CCU60_CH0_IRQHandler (void)
     IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU60, IfxCcu6_InterruptSource_t12PeriodMatch);
 
     /* 用户代码 */
-    static int count20ms=0;
+    static int count40ms=0;
+    static int count100ms=0;
 
-    count20ms++;
-    Key_Control();
-
+    //20ms
     //获取编码器的值
     ECPULSE1 = ENC_GetCounter(ENC4_InPut_P02_8); // 左电机，小车前进为负值
     ECPULSE2 = -ENC_GetCounter(ENC2_InPut_P33_7);  // 右电机，小车前进为正值
 
+    LPulse_Tmp+=ECPULSE1;
+    YPulse_Tmp+=ECPULSE2;
+
+    Key_Control();
+
     Calcu_Pulse();                    //计算元素脉冲
     Servo_Control_Fuzzy();            //20ms控制一次方向环，模糊处理时间大约为100us
 
-    if(count20ms>=5)
+    //40ms测距以及陀螺仪
+    count40ms++;
+    if(count40ms>=2)
     {
-        count20ms=0;
-        Motor_Control();              //100ms控制一次速度环
+        count40ms=0;
+//        Read_VL53();    //VL53测距模块
+//        if(Distance<=200)
+//        {
+//            Motor_openFlag=0;
+//            Servo_openFlag=0;
+//            MotorCtrl(0,0);
+//            ATOM_PWM_InitConfig(ATOMSERVO1, Servo_Center_Mid, 100);
+//        }
+        LQ_DMP_Read();  //读取角度
     }
+
+    //100ms速度环
+    count100ms++;
+    if(count100ms>=5)
+    {
+        count100ms=0;
+        Motor_Control();
+    }
+
 }
 
 /*************************************************************************

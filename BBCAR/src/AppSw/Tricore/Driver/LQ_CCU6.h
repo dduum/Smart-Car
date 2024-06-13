@@ -46,13 +46,15 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include "My_Key.h"
 #include "My_UART.h"
-#include "My_Image_Handle.h"
 #include "My_Control_Code.h"
 #include "My_menu.h"
 
 extern volatile sint16 ECPULSE1;          //速度全局变量
 extern volatile sint16 ECPULSE2;          //速度全局变量
 extern volatile sint32 RAllPulse;         //速度全局变量
+
+extern volatile sint16 LPulse_Tmp;          // 速度全局变量
+extern volatile sint16 YPulse_Tmp;          // 速度全局变量
 
 /**
  * 	CCU6模块枚举

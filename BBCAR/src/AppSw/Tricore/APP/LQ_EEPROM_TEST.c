@@ -137,8 +137,8 @@ void Test_EEPROM(void)
 
 void E2PROM_Read_PID(void)
 {
-    float PID_Read[12];
-    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 12);
+    float PID_Read[16];
+    EEPROM_Read(0, 0, (unsigned long*)PID_Read, 16);
     Servo_Loc_PID.kp=PID_Read[0];
     Servo_Loc_PID.ki=PID_Read[1];
     Servo_Loc_PID.kd=PID_Read[2];
@@ -150,12 +150,18 @@ void E2PROM_Read_PID(void)
     Motor_Inc_PID2.kp=PID_Read[8];
     Motor_Inc_PID2.ki=PID_Read[9];
     Motor_Inc_PID2.kd=PID_Read[10];
-    Look_Line=PID_Read[11];
+    K_Dir=PID_Read[11];
+    Look_Line=PID_Read[12];
+    Image_kp=PID_Read[13];
+    Image_kd=PID_Read[14];
+
+
 }
 
 void E2PROM_Write_PID(void)
 {
-    float PID_Write[12];
+    float PID_Write[16];
+
     //²Á³ýÉÈÇø
     EEPROM_EraseSector(0);
 
@@ -170,9 +176,13 @@ void E2PROM_Write_PID(void)
     PID_Write[8]=Motor_Inc_PID2.kp;
     PID_Write[9]=Motor_Inc_PID2.ki;
     PID_Write[10]=Motor_Inc_PID2.kd;
-    PID_Write[11]=Look_Line;
+    PID_Write[11]=K_Dir;
+    PID_Write[12]=Look_Line;
+    PID_Write[13]=Image_kp;
+    PID_Write[14]=Image_kd;
 
-    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 12);
+
+    EEPROM_Write(0, 0, (unsigned long*)PID_Write, 16);
 }
 
 

@@ -47,7 +47,8 @@ void GPIO_KEY_Init(void)
 	  PIN_InitConfig(DSW0p, PIN_MODE_INPUT, 1);
 	  PIN_InitConfig(DSW1p, PIN_MODE_INPUT, 1);
 
-	  PIN_InitConfig(P15_8, PIN_MODE_INPUT, 1);   //光电开关测距IO
+	  PIN_InitConfig(P15_8, PIN_MODE_INPUT, 1);
+
 }
 /*************************************************************************
 *  鍑芥暟鍚嶇О锛歷oid Reed_Init(void)

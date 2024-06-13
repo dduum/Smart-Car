@@ -31,6 +31,7 @@ extern float groyz;
 extern pid_param_t Servo_Loc_PID;
 extern pid_param_t Motor_Inc_PID1;
 extern pid_param_t Motor_Inc_PID2;
+extern pid_param_t Motor_Inc_PID;
 
 void Set_PID(void);
 

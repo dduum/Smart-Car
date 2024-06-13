@@ -3,14 +3,17 @@
 pid_param_t Servo_Loc_PID;
 pid_param_t Motor_Inc_PID1;
 pid_param_t Motor_Inc_PID2;
+pid_param_t Motor_Inc_PID;
 
 void Set_PID(void)
 {
     PidInit(&Servo_Loc_PID);
     PidInit(&Motor_Inc_PID1);
     PidInit(&Motor_Inc_PID2);
+    PidInit(&Motor_Inc_PID);
     Pid_Value();
-    E2PROM_Write_PID();
+//    E2PROM_Write_PID();
+
 }
 
 void Pid_Value(void)
@@ -22,13 +25,21 @@ void Pid_Value(void)
     Servo_Loc_PID.kp2=0;
     Servo_Loc_PID.kd2=0;
     //电机速度环
-    Motor_Inc_PID1.kp=27.5;   //21  2.5 0.5   //2.5 8 2
-    Motor_Inc_PID1.ki=5.7;
-    Motor_Inc_PID1.kd=2.5;
+    //c车
+    //mini  1:27.5  5.7  2.5     2:20  4.5 1
+    Motor_Inc_PID1.kp=7.6;
+    Motor_Inc_PID1.ki=1.9;
+    Motor_Inc_PID1.kd=1;
 
-    Motor_Inc_PID2.kp=20;
-    Motor_Inc_PID2.ki=4.5;
-    Motor_Inc_PID2.kd=1;
+    Motor_Inc_PID2.kp=7.6;
+    Motor_Inc_PID2.ki=1.9;
+    Motor_Inc_PID2.kd=1;            //前两个PID对应速度环
+
+    Motor_Inc_PID.kp=7.10;
+    Motor_Inc_PID.ki=2.40;
+    Motor_Inc_PID.kd=0.80;
+
+    K_Dir=0;
 }
 
 /*************************************************************************

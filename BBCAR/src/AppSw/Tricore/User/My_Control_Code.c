@@ -8,11 +8,12 @@
 uint8 Key_Value=0;
 uint8 Select_SorM=0;
 uint8 Select_PID=0;
+float Motor_IncPID=0;
 float Motor_IncPID1=0;
 float Motor_IncPID2=0;
-float Motor_DirPId=0;
 float Current_Speed1=0;               //速度单位m/s
 float Current_Speed2=0;
+float Current_Speed=0;
 long int Current_Tmp_Speed1=0;        //速度单位m/s
 long int Current_Tmp_Speed2=0;        //速度单位m/s
 int Servo_duty=Servo_Center_Mid;
@@ -23,33 +24,43 @@ short Motor_duty2 = 0;
 uint8 Look_Line=95;
 int Target_Speed=0; //目标速度m/s,100即为1m/s
 
+
 int Last_err=0;//上一次图像误差
 int Last_last_err=0;//上上一次图像误差
 float Image_kp=5;
 float Image_kd=10;
+short Dir_out;
+float K_Dir=0;
+
+int Test_err;
+int Test_err_d;
 
 volatile sint16 LPulse = 0;          // 速度全局变量
 volatile sint16 YPulse = 0;          // 速度全局变量
 
 void Motor_Control(void)
 {
-    //控制电机是100ms
-    LPulse=ECPULSE1*5;
-    YPulse=ECPULSE2*5;   //ECPULSE1的值20ms读的，比较小，在100ms中断里面需要*5
 
+    //控制电机是100ms
+    LPulse=LPulse_Tmp;
+    YPulse=YPulse_Tmp;   //ECPULSE1的值20ms读的，比较小，在100ms中断里面需要*5
+
+    LPulse_Tmp=0;
+    YPulse_Tmp=0;        //清空计数五次的值
 
     //mini车 YPulse/1024.0*30/58*4.95*3.14(cm)/100(m)/0.1(t:ms)  单位m/s  在乘100扩大100倍，相当于Target=100即为1m/s  0.0911
     Current_Speed1=LPulse*7.8511/100;
     Current_Speed2=YPulse*7.8511/100;
+//    Current_Speed=(Current_Speed1+Current_Speed2)/2.0;
 
-    //C车    YPulse/1024.0*30/50*64(mm)/1000(m)/0.1    直径64mm
-    //Current_Speed1=LPulse*3.75/100;
-    //Current_Speed2=YPulse*3.75/100;
+//    //C车    YPulse/1024.0*30/50*64(mm)/1000(m)/0.1    直径64mm
+//    Current_Speed1=LPulse*3.75/100;
+//    Current_Speed2=YPulse*3.75/100;
+//
+//    Low_Pass_Filter((int)ECPULSE1*0.87, &Current_Speed1, &Current_Tmp_Speed1);
+//    Low_Pass_Filter((int)ECPULSE2*0.87, &Current_Speed2, &Current_Tmp_Speed2);  //滤波函数
 
-    //Low_Pass_Filter((int)ECPULSE1*0.87, &Current_Speed1, &Current_Tmp_Speed1);
-    //Low_Pass_Filter((int)ECPULSE2*0.87, &Current_Speed2, &Current_Tmp_Speed2);  //滤波函数
-
-    //速度环PID
+    //两个速度环PID分别控制两个电机
     if(Motor_openFlag)
     {
         Motor_IncPID1=PidIncCtrl(&Motor_Inc_PID1,(float)(Target_Speed - Current_Speed1));
@@ -57,13 +68,25 @@ void Motor_Control(void)
     }
 
     //电机限幅
-    if(Motor_IncPID1 > 4000)Motor_IncPID1 = 4000;else if(Motor_IncPID1 < -4000)Motor_IncPID1 = -4000;
-    if(Motor_Inc_PID1.out > 4000)Motor_Inc_PID1.out = 4000;else if(Motor_Inc_PID1.out < -4000)Motor_Inc_PID1.out = -4000;
+    if(Motor_IncPID1 > 4000)Motor_IncPID1 = 4000;else if(Motor_IncPID1 < 0)Motor_IncPID1 = 0;
+    if(Motor_Inc_PID1.out > 4000)Motor_Inc_PID1.out = 4000;else if(Motor_Inc_PID1.out < 0)Motor_Inc_PID1.out = 0;
 
-    if(Motor_IncPID2 > 4000)Motor_IncPID2 = 4000;else if(Motor_IncPID2 < -4000)Motor_IncPID2 = -4000;
-    if(Motor_Inc_PID2.out > 4000)Motor_Inc_PID2.out = 4000;else if(Motor_Inc_PID2.out < -4000)Motor_Inc_PID2.out = -4000;
+    if(Motor_IncPID2 > 4000)Motor_IncPID2 = 4000;else if(Motor_IncPID2 < 0)Motor_IncPID2 = 0;
+    if(Motor_Inc_PID2.out > 4000)Motor_Inc_PID2.out = 4000;else if(Motor_Inc_PID2.out < 0)Motor_Inc_PID2.out = 0;
+
+    //一个速度PID同时控制两个电机
+//    if(Motor_openFlag)
+//    {
+//        Motor_IncPID=PidIncCtrl(&Motor_Inc_PID,(float)(Target_Speed - Current_Speed));
+//    }
+//
+//    //电机限幅
+//    if(Motor_IncPID > 6000)Motor_IncPID = 6000;else if(Motor_IncPID < -6000)Motor_IncPID = -6000;
+//    if(Motor_Inc_PID.out > 6000)Motor_Inc_PID.out = 6000;else if(Motor_Inc_PID.out < -6000)Motor_Inc_PID.out = -6000;
+
 }
 
+float Tmp_FuzzyOut; //该变量没用，只是为了在串口中观看变量值
 
 void Servo_Control_Fuzzy(void)
 {
@@ -74,8 +97,8 @@ void Servo_Control_Fuzzy(void)
     int err_d=0;
     float e_max=30;
     float e_min=-30;
-    float ec_max=10;
-    float ec_min=-10;
+    float ec_max=4;
+    float ec_min=-4;
     float kp_max =Image_kp;
     float kp_min =-Image_kp;
     float ki_max = 0;
@@ -83,14 +106,15 @@ void Servo_Control_Fuzzy(void)
     float kd_max = Image_kd;
     float kd_min = -Image_kd;
 
-
     err=Servo_Loc_error;
+    Test_err=err;
     if(err>=e_max)
         err=e_max;
     else if(err<=e_min)
         err=e_min;
 
     err_d=err-Last_err;
+    Test_err_d=err_d;
 
     if(err_d>=ec_max)
         err=ec_max;
@@ -110,6 +134,7 @@ void Servo_Control_Fuzzy(void)
     if(Servo_openFlag==1)
     {
         ATOM_PWM_InitConfig(ATOMSERVO1, Servo_duty, 100);  //舵机频率为100HZ，初始值为1.5ms中值
+//        ATOM_PWM_InitConfig(ATOMSERVO1, Servo_Center_Mid, 100);
     }
     else
     {
@@ -121,15 +146,17 @@ void Servo_Control_Fuzzy(void)
 
     //当一副图像到来时,如果需要差速,在方向环中控制会更加灵活
     //速度控制部分
-    Motor_DirPId=(float)10*Servo_Loc_error;
-    //没加差速
-    Motor_DirPId=0.0;
+    //差速
+    Tmp_FuzzyOut=Fuzzy_out;  //该变量没用，只是为了在串口中观看变量值
+    Dir_out=(int)K_Dir*Fuzzy_out;
+//    Dir_out=0;
 
+    //两个速度PID同时控制两个电机
     //转向和电机驱动融合并限幅
-    Motor_duty1=(int)(Motor_IncPID1+Motor_DirPId);  //*0.94
-    Motor_duty2=(int)(Motor_IncPID2-Motor_DirPId);  //*1.06
-    if(Motor_duty1 > 4000)Motor_duty1 = 4000;else if(Motor_duty1 < -4000)Motor_duty1 = -4000;
-    if(Motor_duty2 > 4000)Motor_duty2 = 4000;else if(Motor_duty2 < -4000)Motor_duty2 = -4000;
+    Motor_duty1=(int)(Motor_IncPID1-Dir_out);           //*0.94
+    Motor_duty2=(int)(Motor_IncPID2+Dir_out);           //*1.06
+    if(Motor_duty1 > 4000)Motor_duty1 = 4000;else if(Motor_duty1 < 0)Motor_duty1 = 0;
+    if(Motor_duty2 > 4000)Motor_duty2 = 4000;else if(Motor_duty2 < 0)Motor_duty2 = 0;
 
     //给电机PWM信号
     if(Motor_openFlag==1)
@@ -153,6 +180,29 @@ void Servo_Control_Fuzzy(void)
         MotorCtrl(0,0);
     }
 
+    //一个速度PID同时控制两个电机
+//    Motor_duty1=(int)(Motor_IncPID*0.8634-Dir_out);           //大于1.8m/s:0.91758  小于1.8m/s:0.8634
+//    Motor_duty2=(int)(Motor_IncPID*1.20244+Dir_out);          //大于1.8m/s:1.12656  小于1.8m/s:1.20244
+//    if(Motor_duty1 > 6000)Motor_duty1 = 6000;else if(Motor_duty1 < -6000)Motor_duty1 = -6000;
+//    if(Motor_duty2 > 6000)Motor_duty2 = 6000;else if(Motor_duty2 < -6000)Motor_duty2 = -6000;
+//
+//    //给电机PWM信号
+//    if(Motor_openFlag==1)
+//    {
+//        MotorCtrl(Motor_duty2,Motor_duty1);  //该函数第一个形参是右轮M2，第二个形参是左轮M1
+//    }
+//    else
+//    {
+//        Motor_Inc_PID.out=0;
+//        Motor_Inc_PID.last_derivative=0;
+//        Motor_Inc_PID.last_error=0;
+//        Motor_IncPID=0;
+//        Motor_duty2=0;
+//        Motor_duty1=0;
+////            Current_Tmp_Speed1=0;  //低通滤波积分项清零
+////            Current_Tmp_Speed2=0;
+//        MotorCtrl(0,0);
+//    }
 }
 
 void Servo_Control_PD(void)
@@ -186,13 +236,10 @@ void Servo_Control_PD(void)
 
     //当一副图像到来时,如果需要差速,在方向环中控制会更加灵活
     //速度控制部分
-    Motor_DirPId=(float)10*Servo_Loc_error;
-    //没加差速
-    Motor_DirPId=0.0;
 
     //转向和电机驱动融合并限幅
-    Motor_duty1=(int)(Motor_IncPID1+Motor_DirPId);  //*0.94
-    Motor_duty2=(int)(Motor_IncPID2-Motor_DirPId);  //*1.06
+    Motor_duty1=(int)(Motor_IncPID1);  //*0.94
+    Motor_duty2=(int)(Motor_IncPID2);  //*1.06
     if(Motor_duty1 > 6000)Motor_duty1 = 6000;else if(Motor_duty1 < -6000)Motor_duty1 = -6000;
     if(Motor_duty2 > 6000)Motor_duty2 = 6000;else if(Motor_duty2 < -6000)Motor_duty2 = -6000;
 
@@ -213,7 +260,6 @@ void Servo_Control_PD(void)
 //            Current_Tmp_Speed2=0;
         MotorCtrl(0,0);
     }
-
 }
 
 
@@ -275,6 +321,9 @@ void Modify_PID(void)
                     Look_Line++;
                     E2PROM_Write_PID();
                     break;
+                case 2:
+                    K_Dir+=0.5;
+                    break;
             }
             if(Target_Speed>=400)
                 Target_Speed=400;
@@ -314,13 +363,16 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID1.kp+=0.5;
+                    Motor_Inc_PID1.kp+=0.01;
+//                    Motor_Inc_PID.kp+=0.01;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID1.ki+=0.1;
+                    Motor_Inc_PID1.ki+=0.01;
+//                    Motor_Inc_PID.ki+=0.01;
                     break;
                 case 2:  //D
                     Motor_Inc_PID1.kd+=0.1;
+//                    Motor_Inc_PID.kd+=0.1;
                     break;
             }
         }
@@ -329,10 +381,10 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID2.kp+=0.5;
+                    Motor_Inc_PID2.kp+=0.01;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID2.ki+=0.1;
+                    Motor_Inc_PID2.ki+=0.01;
                     break;
                 case 2:  //D
                     Motor_Inc_PID2.kd+=0.1;
@@ -354,6 +406,9 @@ void Modify_PID(void)
                 case 1:  //I
                     Look_Line--;
                     E2PROM_Write_PID();
+                    break;
+                case 2:
+                    K_Dir-=0.5;
                     break;
             }
             if(Target_Speed<=0)
@@ -394,13 +449,16 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID1.kp-=0.5;
+                    Motor_Inc_PID1.kp-=0.01;
+//                    Motor_Inc_PID.kp-=0.01;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID1.ki-=0.1;
+                    Motor_Inc_PID1.ki-=0.01;
+//                    Motor_Inc_PID.ki-=0.01;
                     break;
                 case 2:  //D
                     Motor_Inc_PID1.kd-=0.1;
+//                    Motor_Inc_PID.kd-=0.1;
                     break;
             }
         }
@@ -409,10 +467,10 @@ void Modify_PID(void)
             switch(Select_PID)
             {
                 case 0:  //P
-                    Motor_Inc_PID2.kp-=0.5;
+                    Motor_Inc_PID2.kp-=0.01;
                     break;
                 case 1:  //I
-                    Motor_Inc_PID2.ki-=0.1;
+                    Motor_Inc_PID2.ki-=0.01;
                     break;
                 case 2:  //D
                     Motor_Inc_PID2.kd-=0.1;

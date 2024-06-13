@@ -11,6 +11,9 @@ int Right_num=Array_Length;
 int dir_left[4];//左边线生长信息
 int dir_right[4];//右边线生长信息
 int Servo_Loc_error=0;
+int image_error[6];
+uint8 image_flag;
+
 
 //方向数组左边为X，右边为Y
 int dir_front[4][2]=   {{0,-1},
@@ -446,8 +449,12 @@ int Calc_ERROR(void)
     //常规误差
     for(int i=0;i<5;i++)
     {
-        Err+=LCDW/2-Image_centralLine[Look_Line-Image_upLine];
+        int error=85-Image_centralLine[Look_Line-i-Image_upLine];
+        image_error[i]=error;
+        Err+=error;
     }
     Err = Err/5;
+    image_error[5]=Err;
+    image_flag=1;
     return Err;
 }

@@ -894,6 +894,8 @@ src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_Tom_Servo.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_I2C_VL53.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_I2C_VL53.h :
+src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
+d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_TFT18.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_RDA5807.h
@@ -980,28 +982,20 @@ src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_MotorServo.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Image_Handle.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image1.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image1.h :
+src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/FuzzyPID.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/FuzzyPID.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_ImageProcess.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_MPU6050_DMP.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_MPU6050_DMP.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Element_handle.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Element_handle.h :
+src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_I2C_VL53.h
+d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_I2C_VL53.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPT12_ENC.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/Driver/LQ_GPT12_ENC.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Image_Handle.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/My_Button.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/APP/LQ_CAMERA.h
@@ -1010,9 +1004,5 @@ src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/LQ_MotorServo.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h
 d:/Project/AURIX/BBBCAR-V3/Libraries/iLLD/TC26B/Tricore/Cpu/Std/Platform_Types.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/image_Handle.h :
-src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/FuzzyPID.h
-d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/FuzzyPID.h :
 src/AppSw/Tricore/User/My_Control_Code.o :	d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Element_handle.h
 d:/Project/AURIX/BBBCAR-V3/src/AppSw/Tricore/User/Element_handle.h :

@@ -33,9 +33,9 @@ typedef struct
 
     float gradSums[7];
     float KpgradSums[7];   //输出增量kp总的隶属度
-    float KigradSums[7];  //输出增量ki总的隶属度
+    float KigradSums[7];   //输出增量ki总的隶属度
     float KdgradSums[7];   //输出增量kd总的隶属度
-    float output;               //模糊PID输出
+    float output;          //模糊PID输出
     float kp_error;
     float kd_error;
 }Fuzzy_param_t;

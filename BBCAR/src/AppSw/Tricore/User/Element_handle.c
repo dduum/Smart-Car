@@ -9,6 +9,8 @@
 Image_element Element1;
 Image_Identify Identify1;
 Pulse_Param_t ALLPULSE;
+float Angle_in;//进圆环时的角度
+float Angle_delta;//角度变化值
 
 /*************************************************************************
 *  函数名称：void Image_IdentifyProcess(Image_Identify * Ide)
